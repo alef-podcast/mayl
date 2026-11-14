@@ -484,7 +484,7 @@ textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical
 /* الرسالة */
 .letter{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:8px 28px 28px 28px;padding:26px 22px 22px;box-shadow:var(--shadow)}
 .letter .salute{font-size:19px;font-weight:800}
-.letter .intro{font-size:16.5px;line-height:1.95;margin-top:6px}
+.letter .l-intro{font-size:16.5px;line-height:1.95;margin-top:6px}
 .letter .sign{margin-top:18px;font-size:15px;font-weight:700;line-height:1.9}
 .lq{display:block;width:100%;text-align:start;border:0;background:none;padding:14px 0;border-top:1px dashed var(--border);color:var(--ink)}
 .lq q{quotes:none;font-size:18px;line-height:1.9;font-weight:500;display:block}
@@ -538,6 +538,85 @@ html[data-theme=dark] .week{background:rgba(242,194,90,.12)}
 html[data-theme=dark] .tag.honey{color:var(--ink)}
 html[data-theme=dark] :focus-visible{outline-color:var(--honey)}
 @media (prefers-reduced-motion:reduce){body{transition:none}}
+
+/* ================= شاشة الترحيب ================= */
+html.intro-open,html.intro-open body{overflow:hidden}
+.intro{position:fixed;top:0;right:0;bottom:0;left:0;z-index:100;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;overflow:hidden;animation:fade .45s ease both;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.intro:focus{outline:none}
+.intro.out{animation:iOut .45s ease forwards;pointer-events:none}
+@keyframes iOut{to{opacity:0;transform:scale(1.04)}}
+.i-bg{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden;pointer-events:none}
+@supports (overflow:clip){.intro,.i-bg,.scene,.i-stage{overflow:clip}}
+.i-bg i{position:absolute;display:block;border-radius:50%;filter:blur(46px);opacity:.7;animation:iDrift 15s ease-in-out infinite alternate}
+.i-bg i:nth-child(1){width:340px;height:340px;background:var(--lavender);top:-110px;right:-110px}
+.i-bg i:nth-child(2){width:280px;height:280px;background:var(--peach);bottom:6%;left:-120px;animation-duration:18s;opacity:.55}
+.i-bg i:nth-child(3){width:200px;height:200px;background:var(--honey);top:42%;right:12%;animation-duration:21s;opacity:.28}
+@keyframes iDrift{to{transform:translate(-50px,60px) scale(1.18)}}
+.i-top{position:relative;z-index:3;padding:calc(var(--safe-t) + 12px) 16px 0;max-width:640px;width:100%;margin:0 auto}
+.i-bars{display:flex;gap:5px}
+.i-bars span{flex:1;height:4px;border-radius:4px;background:rgba(47,36,56,.13);overflow:hidden}
+.i-bars b{display:block;height:100%;width:0;background:var(--ink);border-radius:4px}
+.i-ctrl{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.i-brand{font-weight:800;font-size:18px}
+.i-btns{display:flex;gap:8px;align-items:center}
+.i-btns .icon-btn{width:42px;height:42px}
+.i-stage{position:relative;z-index:2;flex:1;display:grid;min-height:0;cursor:pointer}
+.scene{grid-area:1/1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8px 24px 12px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s;overflow:hidden}
+.scene.on{opacity:1;visibility:visible}
+.scene h2{font-size:clamp(23px,6.4vw,34px);font-weight:800;line-height:1.6;margin-top:26px}
+.kicker{font-size:14px;font-weight:800;color:var(--muted);display:inline-flex;gap:8px;align-items:center}
+.kicker::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--honey)}
+.scene.on .a{animation:iRise .8s cubic-bezier(.2,.8,.2,1) both}
+.scene.on .a1{animation-delay:.1s}.scene.on .a2{animation-delay:.5s}.scene.on .a3{animation-delay:1s}.scene.on .a4{animation-delay:1.4s}.scene.on .a5{animation-delay:1.6s}
+@keyframes iRise{from{opacity:0;transform:translateY(18px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+.intro.paused *,.intro.paused *::before,.intro.paused *::after{animation-play-state:paused!important}
+.i-logo{width:min(80vw,360px);height:auto;overflow:visible}
+.i-logo text{font-family:var(--font);font-weight:800;font-size:132px;fill:transparent;stroke:var(--ink);stroke-width:2;stroke-dasharray:1100;stroke-dashoffset:1100}
+.i-logo .ul{fill:none;stroke:var(--honey);stroke-width:9;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200}
+.scene.on .i-logo text{animation:iDraw 1.7s ease forwards,iFill .9s 1.2s ease forwards}
+.scene.on .i-logo .ul{animation:iDraw .8s 1.7s ease forwards}
+@keyframes iDraw{to{stroke-dashoffset:0}}
+@keyframes iFill{to{fill:var(--ink);stroke-width:0}}
+.s-logo p{font-size:21px;line-height:1.85;font-weight:500;margin-top:4px}
+.scene.on.s-logo p{animation-delay:1.9s}
+.i-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:8px 26px 26px 26px;padding:20px;box-shadow:var(--shadow-lift);width:min(100%,430px);text-align:start;margin-top:18px}
+.i-typed{font-size:18px;line-height:2;min-height:112px}
+.i-typed::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--ink);vertical-align:middle;margin-inline-start:3px;animation:iBlink 1s steps(1) infinite}
+@keyframes iBlink{50%{opacity:0}}
+.i-count{font-size:13px;color:var(--muted);margin-top:8px;font-variant-numeric:tabular-nums}
+.i-bar{height:4px;border-radius:4px;background:var(--border);margin-top:6px;overflow:hidden}
+.i-bar i{display:block;height:100%;width:0;background:var(--honey)}
+.i-read{font-size:18.5px;line-height:2.15;padding-bottom:30px}
+.i-s{cursor:pointer;border-radius:6px;padding:2px 1px;transition:background-size .8s cubic-bezier(.2,.8,.2,1);background:linear-gradient(100deg,rgba(255,232,140,0) .5%,#FFF0AA 2%,#FFE68A 55%,#FFF0AA 97%,rgba(255,232,140,0) 99.5%) 100% 92%/0% 62% no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.i-s.hit{background-size:100% 62%}
+.i-s:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.i-src{font-size:13px;color:var(--muted);margin-top:8px}
+.i-pop{position:absolute;left:16px;bottom:-20px;display:flex;align-items:center;gap:8px;background:var(--honey);color:#2F2438;border-radius:999px;padding:9px 16px;font-weight:800;font-size:14px;box-shadow:var(--shadow-lift);opacity:0;transform:translateY(10px) scale(.9);transition:opacity .35s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.i-pop.show{opacity:1;transform:none}
+.i-pop.show svg{animation:beat .6s .12s}
+.i-voices{display:flex;flex-direction:column;gap:12px;width:min(100%,400px);margin-top:20px}
+.i-v{display:flex;align-items:center;gap:12px;background:var(--tint);border-radius:24px 24px 24px 8px;padding:12px 14px;text-align:start}
+.i-v b{display:block;font-size:16px}
+.i-v:nth-child(2){margin-inline-start:30px}
+.i-v:nth-child(3){margin-inline-end:24px}
+.scene.on .i-v{animation:iRise .8s var(--dl) both,iFloat 4.5s calc(var(--dl) + .8s) ease-in-out infinite alternate}
+@keyframes iFloat{from{transform:none}to{transform:translateY(-5px)}}
+.i-dots{display:flex;gap:9px;margin-top:24px}
+.i-dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--ink);display:block}
+.scene.on .i-dots i{animation:iDot .4s calc(.6s + var(--k) * .26s) both}
+@keyframes iDot{from{background:transparent;transform:scale(.6)}60%{transform:scale(1.3)}to{background:var(--honey);transform:none}}
+.i-welcome{margin-top:22px;background:var(--sage);border-radius:20px;padding:12px 18px;font-weight:800;font-size:16.5px;opacity:0}
+.scene.on .i-welcome{animation:iRise .8s 3.5s both}
+.i-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px;max-width:440px}
+.i-go{margin-top:26px;min-width:230px}
+.i-foot{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 16px calc(var(--safe-b) + 18px);max-width:640px;width:100%;margin:0 auto}
+.i-hint{flex:1;text-align:center;font-size:12.5px;color:var(--muted)}
+html[data-theme=dark] .i-bars span{background:rgba(241,234,227,.16)}
+html[data-theme=dark] .i-s{background-image:linear-gradient(100deg,rgba(242,194,90,0) .5%,rgba(242,194,90,.3) 2%,rgba(242,194,90,.4) 55%,rgba(242,194,90,.3) 97%,rgba(242,194,90,0) 99.5%)}
+html[data-theme=dark] .i-bg i{opacity:.45}
+@media (max-width:380px){.i-dots{gap:6px}.i-dots i{width:18px;height:18px}.i-typed{font-size:17px}}
+@media (max-height:640px){.scene h2{margin-top:14px;font-size:22px}.i-typed{min-height:80px}}
+@media (prefers-reduced-motion:reduce){.i-logo text{fill:var(--ink);stroke-dashoffset:0;stroke-width:0}.i-logo .ul{stroke-dashoffset:0}.i-dots i{background:var(--honey)}.i-welcome{opacity:1}.i-typed::after{display:none}}
 </style>
 </head>
 <body>
@@ -782,6 +861,8 @@ const IC = {
   spark:'<path d="M12 3.5 13.8 10.2 20.5 12 13.8 13.8 12 20.5 10.2 13.8 3.5 12 10.2 10.2z"/>',
   logout:'<path d="M14 5h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/>',
   edit:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/>',
+  pause:'<path d="M9 6v12M15 6v12"/>',
+  play:'<path d="M8 5.5v13l11-6.5z"/>',
   moon:'<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>',
 };
@@ -1307,7 +1388,7 @@ function vNewsletter() {
     <div class="letter"><span class="ribbon" aria-hidden="true"></span>
       <p class="muted" style="font-size:13px">${fmtDay(Date.now())}</p>
       <p class="salute" style="margin-top:6px">مرحبًا،</p>
-      <p class="intro">هذا ما بقي معنا من الأسبوع. جمل قصيرة توقّف عندها كثيرون، وأصحابها ينتظرون من يقرأ لهم أكثر. خذها على مهل، ومع قهوتك إن أمكن.</p>
+      <p class="l-intro">هذا ما بقي معنا من الأسبوع. جمل قصيرة توقّف عندها كثيرون، وأصحابها ينتظرون من يقرأ لهم أكثر. خذها على مهل، ومع قهوتك إن أمكن.</p>
       <div class="week" style="margin-top:18px"><h4 style="margin:0 0 8px;font-size:13px;color:var(--muted)">جملة الأسبوع</h4><button class="lq" style="border:0;padding:0" data-act="open" data-id="${ft.id}" data-sid="${fs.sid}"><q style="font-size:19px;font-weight:700">${esc(fs.text)}</q><small><b>${esc(person(ft.author).name)}</b> · ${esc(person(ft.author).tagline || '')} — <span style="text-decoration:underline">اقرأ النص</span></small></button></div>
       ${qs.map(x => `<button class="lq" data-act="open" data-id="${x.t.id}" data-sid="${x.sid}"><q>${esc(x.text.replace(/\n/g, ' / '))}</q><small><b>${esc(x.a.name)}</b> — من «${esc(x.t.title)}» · <span style="text-decoration:underline">إلى النص</span></small></button>`).join('')}
       ${voice ? `<div class="sample-mini" style="margin-top:16px"><b>صوت جديد هذا الأسبوع: ${esc(voice.name)}</b><p>«${esc(voice.bio)}»</p><button class="link" data-act="profile" data-id="${voice.id}">${isApproved(voice) ? 'ادخل ركنه' : 'اقرأ عينته، وساعده على الوصول'}</button></div>` : ''}
@@ -1565,7 +1646,7 @@ function openStates() {
     ${DEMO_ROLES.map(r => roleBtn(r.id, r.id === 'guest' ? r.t : person(r.id).name + ' — ' + (r.id === 'huda' ? 'قارئة' : isApproved(person(r.id)) ? verb(person(r.id), 'كاتب', 'كاتبة') : verb(person(r.id), 'مرشح', 'مرشحة')))).join('')}
     ${extra.length ? `<p style="font-weight:700;margin-top:16px;font-size:14px">حسابات أنشأتها</p>${extra.map(p => roleBtn(p.id, p.name)).join('')}` : ''}
     <div class="demo-note" style="margin-top:16px">البيانات محفوظة ${store.ok ? 'في هذا المتصفح فقط (localStorage)' : 'في الذاكرة فقط — ستُفقد عند إعادة التحميل'}. هذا محاكاة: لا يمثل حماية إنتاجية ولا توثيق بريد فعليًا، ولا يمنع التكرار بين الأجهزة.</div>
-    <div class="btn-row"><button class="btn btn-ghost" data-act="reset">${ui.resetArm ? 'اضغط مرة أخرى للتأكيد' : 'إعادة ضبط البيانات'}</button></div>`);
+    <div class="btn-row"><button class="btn btn-ghost" data-act="replay-intro">أعِد عرض الترحيب</button><button class="btn btn-ghost" data-act="reset">${ui.resetArm ? 'اضغط مرة أخرى للتأكيد' : 'إعادة ضبط البيانات'}</button></div>`);
 }
 function switchTo(id) {
   S.current = id; save(); closeSheet(); ui.buf = {}; ui.nlForm = null;
@@ -1626,6 +1707,7 @@ document.addEventListener('click', e => {
       const ts = myLikes()[sid]; setLike(sid, false); refreshSoft();
       toast('أُزيلت من مقتبساتك', 'تراجع', () => { S.likes[S.current][sid] = ts; save(); refreshSoft(); }); break; }
     case 'states': openStates(); break;
+    case 'replay-intro': closeSheet(); openIntro(); break;
     case 'theme': setTheme(isDark() ? 'light' : 'dark'); break;
     case 'switch': switchTo(v); break;
     case 'switch-write': switchTo(v); tab('write'); break;
@@ -1789,7 +1871,183 @@ function segment(body) {
 window.addEventListener('resize', () => { if (popEl && ui.sel) { const el = $(`.s[data-sid="${ui.sel}"]`); el && positionPop(el); } });
 window.addEventListener('scroll', () => { const sb = $('.subbar'); if (sb) sb.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
 
+
+/* ================= شاشة الترحيب (تظهر مرة واحدة) ================= */
+const INTRO_KEY = 'mayl-intro-v1';
+const INTRO_DUR = [4200, 6200, 7200, 5600, 6400, Infinity];
+const IN = { el: null, i: 0, elapsed: 0, last: 0, paused: false, held: false, timers: [], hold: null, cat: 'الكل', touched: false, down: null };
+function introSeen() { try { return localStorage.getItem(INTRO_KEY) === '1'; } catch (e) { return false; } }
+function markIntro() { try { localStorage.setItem(INTRO_KEY, '1'); } catch (e) {} }
+function introLines() {
+  const t = textById('t1'); if (!t) return [];
+  const ss = sentences(t); return [ss[4], ss[9], ss[7]].filter(Boolean);
+}
+function introHtml() {
+  const vs = ['layan', 'dana', 'yousef'].map(person).filter(Boolean);
+  const lines = introLines(); const t1 = textById('t1'); const author = t1 ? person(t1.author) : null;
+  return `<div class="intro" role="dialog" aria-modal="true" aria-label="ترحيب بـ${BRAND}">
+  <div class="i-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="i-top"><div class="i-bars" aria-hidden="true">${INTRO_DUR.map(() => '<span><b></b></span>').join('')}</div>
+    <div class="i-ctrl"><span class="i-brand">${BRAND}</span><span class="i-btns">
+      <button class="icon-btn i-pause" data-i="pause" aria-label="إيقاف مؤقت">${ic('pause', 18)}</button>
+      <button class="pill-sm i-skip" data-i="skip">إلى الرئيسية ${ic('fwd', 16)}</button></span></div></div>
+  <div class="i-stage">
+    <section class="scene s-logo">
+      <svg class="i-logo" viewBox="0 0 320 200" role="img" aria-label="${BRAND}"><text x="160" y="128" text-anchor="middle">${BRAND}</text><path class="ul" d="M78 168 Q160 154 242 168"/></svg>
+      <p class="a a2">مساحة للنصوص القصيرة،<br>وللجمل التي تبقى معك.</p>
+    </section>
+    <section class="scene s-limit">
+      <p class="kicker a a1">قصير بما يكفي ليُقرأ كاملًا</p>
+      <div class="i-card a a2"><div class="i-typed" id="iTyped"></div>
+        <div class="i-count"><span id="iCount">٠</span> / ١٠٠٠ حرف</div><div class="i-bar"><i id="iBar"></i></div></div>
+      <h2 class="a a3">كل نص أقل من ألف حرف،<br>ونص واحد فقط كل أسبوع.</h2>
+    </section>
+    <section class="scene s-line">
+      <p class="kicker a a1">الجملة هي قلب ${BRAND}</p>
+      <div class="i-card i-read a a2">${lines.map(l => `<span class="i-s" role="button" tabindex="0" data-sid="${l.sid}">${esc(l.text)}</span> `).join('')}
+        ${author ? `<div class="i-src">— ${esc(author.name)}، «${esc(t1.title)}»</div>` : ''}
+        <div class="i-pop" aria-live="polite">${ic('heart', 18, true)}<span>اضغط على جملة</span></div></div>
+      <h2 class="a a3">اضغط على الجملة التي تلمسك،<br>فتُحفظ في «مقتبساتي» باسم كاتبها.</h2>
+    </section>
+    <section class="scene s-voices">
+      <p class="kicker a a1">أصوات قد تشعر بالقرب منها</p>
+      <div class="i-voices">${vs.map((p, k) => `<div class="i-v" style="--tint:${tintOf(p)};--dl:${(.45 + k * .3).toFixed(2)}s">${blob(p, 'sm')}<div><b>${esc(p.name)}</b><span class="tl">${esc(p.tagline || '')}</span></div></div>`).join('')}</div>
+      <h2 class="a a5">نبرات مختلفة،<br>ولكل كاتب ركنه.</h2>
+    </section>
+    <section class="scene s-welcome">
+      <p class="kicker a a1">لكل صوت جديد بداية</p>
+      <div class="i-dots" aria-hidden="true">${Array.from({ length: NEEDED }, (_, k) => `<i style="--k:${k}"></i>`).join('')}</div>
+      <div class="i-welcome">«أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.»</div>
+      <h2 class="a a3">حين يرحّب به عشرة قرّاء،<br>تُفتح له مساحة النشر.</h2>
+    </section>
+    <section class="scene s-end">
+      <h2 class="a a1" style="margin-top:0">ماذا تحب أن تقرأ أولًا؟</h2>
+      <div class="i-chips a a2" role="group" aria-label="اختر ما تبدأ به">${['الكل', ...CATS].map(c => `<button class="chip" data-i="cat" data-v="${c}" aria-pressed="${c === 'الكل'}">${c === 'الكل' ? 'من كل شيء' : esc(c)}</button>`).join('')}</div>
+      <button class="btn btn-primary i-go a a3" data-i="go">ادخل ${BRAND}</button>
+      <p class="muted a a4" style="margin-top:12px;font-size:14px">يمكنك تغيير ذلك في أي وقت.</p>
+    </section>
+  </div>
+  <div class="i-foot"><button class="icon-btn" data-i="prev" aria-label="المشهد السابق">${ic('back', 20)}</button>
+    <span class="i-hint" id="iHint" aria-live="polite"></span>
+    <button class="icon-btn" data-i="next" aria-label="المشهد التالي">${ic('fwd', 20)}</button></div>
+</div>`;
+}
+function clearIntroTimers() { IN.timers.forEach(t => { clearTimeout(t); clearInterval(t); }); IN.timers = []; }
+function goScene(i) {
+  if (!IN.el) return;
+  i = Math.max(0, Math.min(INTRO_DUR.length - 1, i));
+  clearIntroTimers(); IN.i = i; IN.elapsed = 0;
+  $$('.scene', IN.el).forEach((sc, k) => { sc.classList.remove('on'); sc.setAttribute('aria-hidden', String(k !== i)); if (k === i) { void sc.offsetWidth; sc.classList.add('on'); } });
+  $$('.i-bars b', IN.el).forEach((b, k) => { b.style.width = k < i ? '100%' : '0%'; });
+  $('[data-i=prev]', IN.el).style.visibility = i === 0 ? 'hidden' : '';
+  $('[data-i=next]', IN.el).style.visibility = i === INTRO_DUR.length - 1 ? 'hidden' : '';
+  const rm = reduceMotion(); const last = i === INTRO_DUR.length - 1;
+  $('#iHint').textContent = last ? '' : (rm ? 'استخدم الأسهم للتنقل' : 'اضغط يسارًا للتالي · مطوّلًا للإيقاف');
+  const h = $('.scene.on h2', IN.el) || $('.scene.on p', IN.el); if (h) announce(h.textContent);
+  if (i === 1) typeScene(rm);
+  if (i === 2) {
+    IN.touched = false; const pop = $('.i-pop', IN.el); pop.classList.remove('show');
+    $$('.i-s', IN.el).forEach(x => x.classList.toggle('hit', isLiked(x.dataset.sid)));
+    IN.timers.push(setTimeout(() => { if (!IN.touched && !$('.i-s.hit', IN.el)) { const m = $$('.i-s', IN.el)[1]; m && m.classList.add('hit', 'ghost'); showPop(me() ? 'اضغط على جملة لتحتفظ بها' : 'جرّب: اضغط على جملة'); } }, rm ? 0 : 2600));
+  }
+  if (last && kbNav) IN.timers.push(setTimeout(() => { const g = $('.i-go', IN.el); g && g.focus({ preventScroll: true }); }, 350));
+}
+function typeScene(rm) {
+  const full = 'كانت جدتي تفتح نافذة المطبخ قبل أن تشعل النار، كأنها تستأذن الصباح. تقول إن البيت الذي لا يتنفس ينسى أصحابه.';
+  const el = $('#iTyped'), cnt = $('#iCount'), bar = $('#iBar'); const target = 742;
+  let k = rm ? full.length : 0;
+  const draw = () => { el.textContent = full.slice(0, k); const pr = k / full.length; cnt.textContent = ar(Math.round(target * pr)); bar.style.width = (target * pr / 10) + '%'; };
+  draw(); if (rm) return;
+  const id = setInterval(() => { if (IN.paused) return; k = Math.min(full.length, k + 1); draw(); if (k >= full.length) clearInterval(id); }, 36);
+  IN.timers.push(id);
+}
+function showPop(txt) { const pop = $('.i-pop', IN.el); $('span', pop).textContent = txt; pop.classList.remove('show'); void pop.offsetWidth; pop.classList.add('show'); }
+function introLine(sp) {
+  IN.touched = true; $$('.i-s.ghost', IN.el).forEach(x => x.classList.remove('hit', 'ghost'));
+  if (!me()) { sp.classList.add('hit'); showPop('سجّل دخولك لاحقًا لتحتفظ بها'); return; }
+  const on = !isLiked(sp.dataset.sid); setLike(sp.dataset.sid, on); sp.classList.toggle('hit', on);
+  showPop(on ? 'صارت ضمن مقتبساتك' : 'أُزيلت من مقتبساتك');
+  IN.elapsed = Math.min(IN.elapsed, INTRO_DUR[2] - 3200);
+}
+function setIntroPause(p) {
+  IN.paused = p; if (!IN.el) return; IN.el.classList.toggle('paused', p);
+  const b = $('.i-pause', IN.el); b.innerHTML = ic(p ? 'play' : 'pause', 18); b.setAttribute('aria-label', p ? 'متابعة' : 'إيقاف مؤقت');
+}
+function introTick(ts) {
+  if (!IN.el) return;
+  const dt = IN.last ? Math.min(100, ts - IN.last) : 0; IN.last = ts;
+  const D = INTRO_DUR[IN.i];
+  if (!IN.paused && !reduceMotion()) IN.elapsed += dt;
+  const b = $$('.i-bars b', IN.el)[IN.i];
+  if (b) b.style.width = isFinite(D) ? (reduceMotion() ? 0 : Math.min(100, IN.elapsed / D * 100)) + '%' : '100%';
+  if (isFinite(D) && IN.elapsed >= D) goScene(IN.i + 1);
+  IN.raf = requestAnimationFrame(introTick);
+}
+function openIntro() {
+  if (IN.el) return;
+  closePop(); closeSheet(); $$('.toast').forEach(t => t.remove());
+  const w = document.createElement('div'); w.innerHTML = introHtml(); IN.el = w.firstElementChild; document.body.appendChild(IN.el);
+  document.documentElement.classList.add('intro-open'); $('#app').setAttribute('aria-hidden', 'true'); $('#nav').setAttribute('aria-hidden', 'true');
+  IN.paused = false; IN.last = 0; IN.cat = 'الكل'; IN.el.classList.remove('paused');
+  IN.el.addEventListener('click', introClick);
+  const stage = $('.i-stage', IN.el);
+  stage.addEventListener('pointerdown', e => {
+    if (e.target.closest('button,.i-s,.i-chips')) return;
+    IN.down = { x: e.clientX }; IN.held = false;
+    IN.hold = setTimeout(() => { IN.held = true; setIntroPause(true); }, 240);
+  });
+  stage.addEventListener('pointerup', e => {
+    clearTimeout(IN.hold); if (!IN.down) return; const d = IN.down; IN.down = null;
+    if (IN.held) { IN.held = false; setIntroPause(false); return; }
+    const r = stage.getBoundingClientRect();
+    if (d.x < r.left + r.width / 2) goScene(IN.i + 1); else goScene(IN.i - 1);
+  });
+  stage.addEventListener('pointercancel', () => { clearTimeout(IN.hold); if (IN.held) setIntroPause(false); IN.held = false; IN.down = null; });
+  goScene(0); IN.raf = requestAnimationFrame(introTick);
+  setTimeout(() => { if (!IN.el) return; if (kbNav) $('.i-skip', IN.el).focus({ preventScroll: true }); else { IN.el.setAttribute('tabindex', '-1'); IN.el.focus({ preventScroll: true }); } }, 50);
+}
+function introClick(e) {
+  const sp = e.target.closest('.i-s'); if (sp) { introLine(sp); return; }
+  const a = e.target.closest('[data-i]'); if (!a) return;
+  switch (a.dataset.i) {
+    case 'skip': closeIntro(); break;
+    case 'go': closeIntro(); break;
+    case 'pause': setIntroPause(!IN.paused); break;
+    case 'next': goScene(IN.i + 1); break;
+    case 'prev': goScene(IN.i - 1); break;
+    case 'cat': IN.cat = a.dataset.v; $$('[data-i=cat]', IN.el).forEach(c => c.setAttribute('aria-pressed', String(c === a))); break;
+  }
+}
+function closeIntro() {
+  if (!IN.el) return;
+  markIntro(); cancelAnimationFrame(IN.raf); clearIntroTimers();
+  const el = IN.el; IN.el = null; el.classList.add('out');
+  setTimeout(() => el.remove(), reduceMotion() ? 0 : 450);
+  document.documentElement.classList.remove('intro-open'); $('#app').removeAttribute('aria-hidden'); $('#nav').removeAttribute('aria-hidden');
+  ui.homeCat = IN.cat; hist.length = 0; view = { name: 'home', p: {} }; render(true);
+  if (IN.cat !== 'الكل') toast('نبدأ بـ«' + IN.cat + '». غيّرها متى شئت');
+}
+document.addEventListener('keydown', e => {
+  if (!IN.el) return;
+  const k = e.key;
+  if (k === 'Escape') { e.preventDefault(); closeIntro(); }
+  else if (k === 'ArrowLeft') { e.preventDefault(); goScene(IN.i + 1); }
+  else if (k === 'ArrowRight') { e.preventDefault(); goScene(IN.i - 1); }
+  else if (k === ' ' && !e.target.closest('button,.i-s')) { e.preventDefault(); setIntroPause(!IN.paused); }
+  else if ((k === 'Enter' || k === ' ') && e.target.classList.contains('i-s')) { e.preventDefault(); introLine(e.target); }
+  else if (k === 'Tab') {
+    const f = $$('button,[tabindex="0"]', IN.el).filter(x => x.offsetParent !== null && x.style.visibility !== 'hidden' && !x.closest('.scene:not(.on)'));
+    if (f.length) { const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    return;
+  } else return;
+  e.stopImmediatePropagation();
+}, true);
+document.addEventListener('visibilitychange', () => { if (IN.el && document.hidden) setIntroPause(true); });
+
 render(true);
+if (!introSeen()) openIntro();
 </script>
 </body>
 </html>
