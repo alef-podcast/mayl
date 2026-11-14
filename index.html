@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F4EE">
+<title>مَيل — نموذج تفاعلي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F4EE; --surface:#FFFEFB; --ink:#2F2438; --muted:#716674;
+  --honey:#F5C75B; --lavender:#DCD1EF; --peach:#F2B6A0; --sage:#DDE8D2;
+  --highlight:#FFF0AA; --border:#E8E0D9;
+  /* درجات مساندة مشتقة من اللوحة */
+  --honey-soft:#FBE8B6; --lav-soft:#EFEAF8; --peach-soft:#FADFD4; --sage-soft:#EDF3E8;
+  --r-xl:30px; --r-lg:24px; --r-md:18px; --r-sm:14px;
+  --shadow:0 1px 2px rgba(47,36,56,.04),0 10px 28px -16px rgba(47,36,56,.22);
+  --shadow-lift:0 2px 4px rgba(47,36,56,.06),0 18px 40px -18px rgba(47,36,56,.32);
+  --font:'Tajawal',system-ui,-apple-system,'Segoe UI','Noto Sans Arabic','Geeza Pro',Tahoma,sans-serif;
+  --safe-b:env(safe-area-inset-bottom,0px); --safe-t:env(safe-area-inset-top,0px);
+  --nav-h:70px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;background:var(--paper);scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--paper);line-height:1.6;font-size:16px;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+@supports (overflow:clip){body{overflow-x:clip}}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-appearance:none;appearance:none}
+input,textarea,select{font:inherit;color:inherit}
+img,svg{display:block}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:12px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.muted{color:var(--muted)}
+.ic{flex:none}
+
+/* ===== الهيكل ===== */
+.app{max-width:1120px;margin:0 auto;padding:calc(var(--safe-t) + 6px) 18px calc(var(--nav-h) + 44px + var(--safe-b))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;border:0;background:none;padding:4px 0}
+.brand-mark{width:34px;height:34px;border-radius:12px;background:var(--honey);display:grid;place-items:center}
+.top-actions{display:flex;gap:8px;align-items:center}
+.pill-sm{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:13.5px;font-weight:500;color:var(--ink)}
+.subbar{position:sticky;top:0;z-index:20;background:var(--paper);display:flex;align-items:center;gap:10px;min-height:60px;margin:0 -18px;padding:calc(var(--safe-t) + 4px) 18px 4px;border-bottom:1px solid transparent}
+.subbar.scrolled{border-bottom-color:var(--border)}
+.subbar .title{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.icon-btn{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;padding:0}
+.view{animation:rise .32s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.section{margin-top:30px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.sec-head h2{font-size:19px;font-weight:800}
+.link{border:0;background:none;padding:6px 2px;font-weight:700;font-size:14px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--honey);text-decoration-thickness:3px;text-underline-offset:5px}
+
+/* ===== أزرار ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:999px;border:1px solid transparent;font-weight:700;font-size:16px;line-height:1.2;text-align:center;transition:transform .15s ease,box-shadow .15s ease,background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--honey);color:var(--ink);box-shadow:0 8px 18px -10px rgba(186,135,20,.7)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ghost{background:var(--surface);border-color:var(--border)}
+.btn-soft{background:var(--lav-soft);border-color:#E3DAF2}
+.btn-sm{min-height:42px;padding:0 16px;font-size:14.5px}
+.btn-block{width:100%}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.5;cursor:not-allowed;box-shadow:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-row .btn{flex:1 1 auto}
+
+/* ===== شرائح ===== */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 6px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 17px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-weight:500;font-size:15px;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--honey);border-color:var(--ink);font-weight:700}
+.chip .ck{display:none}
+.chip[aria-pressed=true] .ck{display:block}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:999px;background:var(--lav-soft);font-size:12.5px;font-weight:700;white-space:nowrap}
+.tag.sage{background:var(--sage)} .tag.peach{background:var(--peach-soft)} .tag.honey{background:var(--honey-soft)}
+
+/* ===== صورة رمزية ===== */
+.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:var(--ink);border:1px solid rgba(47,36,56,.08)}
+.av.lg{width:76px;height:76px;font-size:30px;border-radius:26px}
+.av.sm{width:30px;height:30px;font-size:13px}
+.who{display:flex;align-items:center;gap:10px;min-width:0}
+.who .nm{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who .meta{font-size:13px;color:var(--muted)}
+
+/* ===== الرئيسية ===== */
+.hello h1{font-size:27px;font-weight:800;line-height:1.35}
+.hello p{color:var(--muted);margin-top:4px;font-size:15.5px}
+.feature{position:relative;margin-top:20px;background:var(--honey);border-radius:var(--r-xl);padding:22px 20px 20px;overflow:hidden;isolation:isolate}
+.feature::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,254,251,.28);top:-90px;left:-70px;z-index:-1}
+.feature::after{content:"";position:absolute;width:120px;height:120px;border-radius:44% 56% 60% 40%/50% 45% 55% 50%;background:rgba(242,182,160,.45);bottom:-46px;right:-30px;z-index:-1}
+.feature .eyebrow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700}
+.scallop{width:62px;height:62px;flex:none;display:grid;place-items:center;position:relative}
+.scallop svg{position:absolute;top:0;right:0;bottom:0;left:0}
+.scallop span{position:relative;font-size:11px;font-weight:800;line-height:1.15;text-align:center}
+.feature blockquote{margin:6px 0 0;font-size:23px;line-height:1.75;font-weight:700}
+.feature .by{margin-top:12px;font-size:14px;font-weight:500}
+.feature .btn-row{margin-top:16px}
+.feature .btn-ghost{background:rgba(255,254,251,.85);border-color:rgba(47,36,56,.12)}
+
+.grid{display:grid;gap:14px}
+.tcard{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 18px 14px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+@media (hover:hover){.tcard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}}
+.tcard .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tcard h3{font-size:18.5px;font-weight:800;margin-top:12px;line-height:1.45}
+.tcard .ex{margin-top:6px;font-size:16px;line-height:1.85;color:#4A3F52;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tcard .ex.poem{white-space:pre-line}
+.tcard .foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--muted)}
+.tcard .open{white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:6px;border:0;background:var(--paper);border-radius:999px;min-height:38px;padding:0 14px;font-weight:700;font-size:14px;color:var(--ink)}
+.tcard.mine{border-color:var(--honey);box-shadow:0 0 0 2px var(--honey-soft),var(--shadow)}
+
+.nl-card{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:20px;background:linear-gradient(135deg,#E6DCF5 0%,#F6E9F1 52%,#F8D3C3 100%);border:1px solid #E7DDF0}
+.nl-card::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(255,254,251,.75),rgba(255,254,251,0) 70%);top:-50px;left:-40px;pointer-events:none}
+.nl-card h3{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+.nl-card p{margin-top:4px;font-size:15px}
+.nl-card .btn{margin-top:14px;position:relative;z-index:1}
+
+.hscroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:4px 18px 10px;scroll-snap-type:x proximity}
+.hscroll::-webkit-scrollbar{display:none}
+.voice{flex:0 0 250px;scroll-snap-align:start;background:var(--peach-soft);border-radius:var(--r-lg);padding:16px;border:1px solid #F3D3C6;display:flex;flex-direction:column;gap:10px}
+.voice .snip{font-size:15px;line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* تقدم التأييد */
+.prog{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dots{display:flex;gap:5px;direction:rtl}
+.dots i{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;display:block}
+.dots i.on{background:var(--honey)}
+.prog b{font-size:14.5px}
+
+/* اقتباسات ملونة (عضوية) */
+.qorg{flex:0 0 260px;scroll-snap-align:start;border-radius:28px 28px 28px 10px;padding:18px 18px 14px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;cursor:pointer;border:1px solid rgba(47,36,56,.06);text-align:start}
+.qorg:nth-child(3n+1){background:var(--lavender)} .qorg:nth-child(3n+2){background:var(--peach-soft)} .qorg:nth-child(3n){background:var(--sage)}
+.qorg p{font-size:17px;line-height:1.8;font-weight:700}
+.qorg .who .meta{color:#5d5262}
+
+/* ===== البحث ===== */
+.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:0 16px;min-height:52px;box-shadow:var(--shadow)}
+.search input{flex:1;border:0;background:none;min-height:50px;outline:none;font-size:16px;min-width:0}
+.search:focus-within{border-color:var(--ink)}
+.empty{text-align:center;padding:34px 16px;color:var(--muted)}
+.empty h3{color:var(--ink);font-size:18px;margin-bottom:6px}
+
+/* ===== القراءة ===== */
+.reader{max-width:680px;margin:0 auto}
+.reader-head{padding-top:10px}
+.reader-head h1{font-size:28px;font-weight:800;line-height:1.4;margin-top:12px}
+.reader-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+.reader-meta .who{cursor:pointer;border:0;background:none;padding:0;text-align:start}
+.legend{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:18px;font-size:13.5px;color:var(--muted)}
+.legend .s-demo{color:var(--ink);background:var(--highlight);padding:1px 8px;border-radius:6px;text-decoration:underline dotted 1.5px;text-underline-offset:5px}
+.paper{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:26px 22px;margin-top:14px;box-shadow:var(--shadow)}
+.read-body{font-size:19px;line-height:2.15;font-weight:400}
+.read-body p+p{margin-top:1em}
+.s{border-radius:7px;padding:3px 1px;cursor:pointer;transition:background .2s ease,box-shadow .2s ease;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+@media (hover:hover){.s:hover{background:var(--lav-soft)}}
+.s.hot{background:var(--highlight);text-decoration:underline dotted 1.6px;text-decoration-color:rgba(47,36,56,.5);text-underline-offset:8px}
+.s.sel{background:var(--lavender);box-shadow:inset 0 -3px 0 var(--ink);text-decoration:none}
+.s:focus-visible{outline:none;box-shadow:inset 0 -3px 0 var(--ink),0 0 0 2px var(--ink)}
+.s .hm{font-size:.62em;vertical-align:super;margin-inline-start:3px;color:#8A6A12}
+.s .mm{display:inline-block;vertical-align:middle;margin-inline-start:4px;transform:translateY(-1px)}
+.s .mm svg{display:inline-block}
+.s.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,30%{background:var(--honey)}100%{background:var(--lavender)}}
+.reader-foot{margin-top:22px;display:flex;flex-direction:column;gap:14px}
+.sample-box{background:var(--surface);border:1px dashed #CFC3D6;border-radius:var(--r-lg);padding:20px 18px;margin-top:12px}
+.sample-box .read-body{font-size:18px;line-height:2}
+
+/* شريط الجملة */
+.pop{position:absolute;z-index:40;display:flex;align-items:center;gap:6px;padding:6px;background:var(--surface);border:1px solid var(--border);border-radius:999px;box-shadow:0 12px 34px -12px rgba(47,36,56,.45);animation:popin .18s ease both;max-width:calc(100% - 20px)}
+@keyframes popin{from{opacity:0;transform:translateY(4px) scale(.97)}to{opacity:1;transform:none}}
+.pop button{display:inline-flex;align-items:center;gap:6px;min-height:44px;border-radius:999px;border:0;padding:0 14px;font-weight:700;font-size:14.5px;background:transparent;white-space:nowrap}
+.pop .like{background:var(--paper)}
+.pop .like.on{background:var(--honey)}
+.pop .cnt{font-weight:500;color:var(--muted);font-size:13px}
+.pop .like.on .cnt{color:var(--ink)}
+.pop .x{width:44px;padding:0;justify-content:center;color:var(--muted)}
+.pop .hottag{font-size:12px;font-weight:700;padding:0 8px;color:#6D5410}
+
+/* ===== المقتبسات ===== */
+.folders{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:14px 18px 8px}
+.folders::-webkit-scrollbar{display:none}
+.folder{flex:0 0 128px;height:108px;position:relative;border:0;background:none;padding:0;text-align:start;transition:transform .2s ease}
+.folder .bk{position:absolute;top:12px;right:0;bottom:0;left:0;border-radius:14px 14px 18px 18px;background:var(--fc);filter:brightness(.94)}
+.folder .bk::before{content:"";position:absolute;top:-11px;right:0;width:56px;height:20px;border-radius:10px 10px 0 0;background:inherit}
+.folder .pp{position:absolute;top:8px;width:56%;height:56px;background:var(--surface);border:1px solid var(--border);border-radius:7px;box-shadow:0 2px 6px rgba(47,36,56,.08);background-image:repeating-linear-gradient(to bottom,transparent 0 9px,#EDE6EF 9px 10px);background-position:0 12px;background-size:76% 100%;background-repeat:no-repeat}
+.folder .pp.a{right:14px;transform:rotate(-6deg)} .folder .pp.b{right:40px;transform:rotate(5deg);top:12px}
+.folder .fr{position:absolute;top:38px;right:0;bottom:0;left:0;border-radius:16px 16px 18px 18px;background:var(--fc);padding:8px 12px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 -1px 0 rgba(255,255,255,.5) inset}
+.folder .fn{font-weight:800;font-size:15px;display:flex;align-items:center;gap:4px}
+.folder .fc{font-size:12.5px;opacity:.75}
+.folder[aria-pressed=true]{transform:translateY(-3px)}
+.folder[aria-pressed=true] .fr{box-shadow:inset 0 0 0 2px var(--ink)}
+.qlist{display:grid;gap:22px;margin-top:16px}
+.qcard{position:relative}
+.qcard::before{content:"";position:absolute;top:8px;right:10px;bottom:-9px;left:10px;border-radius:22px;background:var(--lav-soft);border:1px solid var(--border);transform:rotate(-1.6deg);z-index:0}
+.qcard:nth-child(3n+2)::before{background:var(--peach-soft);transform:rotate(1.4deg)}
+.qcard:nth-child(3n)::before{background:var(--sage-soft);transform:rotate(-1deg)}
+.qcard .sheet-paper{position:relative;z-index:1;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:20px 18px 12px;box-shadow:var(--shadow)}
+.qcard .qm{position:absolute;top:-14px;right:16px;width:36px;height:36px;border-radius:12px;background:var(--honey);display:grid;place-items:center;font-size:26px;font-weight:800;line-height:1;padding-top:10px}
+.qcard blockquote{margin:6px 0 0;font-size:18.5px;line-height:1.95;font-weight:500;white-space:pre-line}
+.qcard .src{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13.5px;color:var(--muted)}
+.qcard .src b{color:var(--ink)}
+.qcard .acts{display:flex;align-items:center;gap:6px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--border)}
+.qcard .acts .grow{flex:1}
+.qcard .acts .btn{min-height:40px;padding:0 14px;font-size:14px}
+.qcard .acts .icon-btn{width:40px;height:40px}
+.empty-art{width:150px;height:110px;margin:0 auto 14px;position:relative}
+.empty-art i{position:absolute;width:96px;height:72px;border-radius:14px;border:1px solid var(--border);display:block}
+.empty-art i:nth-child(1){background:var(--lavender);right:16px;top:22px;transform:rotate(-8deg)}
+.empty-art i:nth-child(2){background:var(--peach-soft);right:36px;top:16px;transform:rotate(5deg)}
+.empty-art i:nth-child(3){background:var(--surface);right:26px;top:28px;background-image:repeating-linear-gradient(to bottom,transparent 0 11px,#EDE6EF 11px 12px);background-position:12px 16px;background-size:70% 60%;background-repeat:no-repeat}
+
+/* ===== حساب / ملف ===== */
+.profile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:22px 20px;box-shadow:var(--shadow)}
+.profile .top{display:flex;gap:14px;align-items:center}
+.profile h1{font-size:23px;font-weight:800;line-height:1.35}
+.profile .bio{margin-top:14px;font-size:16px;line-height:1.85}
+.profile .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.status{margin-top:14px;border-radius:var(--r-lg);padding:16px;display:flex;flex-direction:column;gap:10px}
+.status.wait{background:var(--lav-soft)} .status.ok{background:var(--sage)} .status.later{background:var(--honey-soft)}
+.status h3{font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:8px}
+.status p{font-size:14.5px}
+.list{display:grid;gap:10px}
+.row-card{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;width:100%;text-align:start}
+.row-card .grow{flex:1;min-width:0}
+.row-card .t{font-weight:700;font-size:15.5px}
+.row-card .d{font-size:13.5px;color:var(--muted)}
+.kv{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);font-size:15px}
+.kv:last-child{border-bottom:0}
+.three{display:grid;gap:10px;margin-top:14px}
+.three div{background:var(--paper);border-radius:var(--r-sm);padding:12px 14px;font-size:14px;line-height:1.7}
+.three b{display:block;font-size:15px}
+
+/* ===== المحرر ===== */
+.editor{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:18px;box-shadow:var(--shadow);margin-top:14px}
+.editor input.ttl{width:100%;border:0;border-bottom:1px solid var(--border);background:none;font-size:21px;font-weight:800;padding:8px 2px 12px;outline:none}
+.editor textarea{width:100%;min-height:260px;border:0;background:none;resize:vertical;font-size:19px;line-height:2;padding:12px 2px;outline:none}
+.editor input.ttl:focus,.editor textarea:focus{background:linear-gradient(var(--paper),var(--paper)) bottom/100% 0 no-repeat}
+.counter{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;margin-top:6px;flex-wrap:wrap}
+.counter .num{font-weight:800;font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:9px;background:var(--paper);overflow:hidden;margin-top:8px;border:1px solid var(--border)}
+.bar i{display:block;height:100%;background:var(--honey);border-radius:9px;transition:width .2s}
+.bar.over i{background:repeating-linear-gradient(45deg,var(--peach) 0 6px,#E79C82 6px 12px)}
+.over-msg{display:flex;gap:8px;align-items:center;background:var(--peach-soft);border-radius:12px;padding:8px 12px;font-weight:700;font-size:14px;margin-top:10px}
+.dirty{font-size:13px;color:var(--muted)}
+
+/* ===== النشرة ===== */
+.nl-hero{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:26px 22px;background:linear-gradient(140deg,#E3D8F4 0%,#F4E6F0 55%,#F7CDBB 100%)}
+.nl-hero::before{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,254,251,.85),rgba(255,254,251,0) 68%);top:-90px;left:-60px}
+.nl-hero > *{position:relative}
+.nl-hero h1{font-size:26px;font-weight:800;line-height:1.4;margin-top:8px}
+.nl-hero p{margin-top:6px;font-size:16px}
+.issue{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow)}
+.issue-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--paper)}
+.issue-body{padding:20px}
+.issue h4{margin:0 0 10px;font-size:13px;letter-spacing:0;color:var(--muted);font-weight:700}
+.iq{display:block;width:100%;text-align:start;border:0;background:none;padding:12px 0;border-bottom:1px dashed var(--border);font-size:17px;line-height:1.85}
+.iq:last-child{border-bottom:0}
+.iq small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.iq .go{font-weight:700;text-decoration:underline;text-decoration-color:var(--honey);text-decoration-thickness:2px;text-underline-offset:4px}
+.week{background:var(--highlight);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:18px}
+
+/* ===== النماذج والنوافذ ===== */
+.field{display:block;margin-top:14px}
+.field > span{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+.input{width:100%;min-height:52px;border:1px solid var(--border);border-radius:16px;background:#fff;padding:0 16px;outline:none;font-size:16px}
+textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical}
+.input:focus{border-color:var(--ink)}
+.input.email{direction:ltr;text-align:left}
+.input.code{direction:ltr;text-align:center;letter-spacing:10px;font-size:24px;font-weight:800}
+.check{display:flex;gap:12px;align-items:flex-start;margin-top:16px;font-size:14.5px;line-height:1.75;cursor:pointer}
+.check input{width:22px;height:22px;margin:3px 0 0;accent-color:var(--ink);flex:none}
+.msg{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:11px 14px;font-size:14.5px;line-height:1.7;margin-top:12px}
+.msg.err{background:var(--peach-soft)} .msg.ok{background:var(--sage)} .msg.info{background:var(--lav-soft)}
+.msg .ic{margin-top:2px}
+.demo-note{border:1.5px dashed #BFAFD2;background:var(--lav-soft);border-radius:14px;padding:10px 14px;font-size:14px;margin-top:12px;line-height:1.75}
+.overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;background:rgba(47,36,56,.34);display:flex;align-items:flex-end;justify-content:center;animation:fade .2s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{width:min(100%,560px);max-height:90vh;max-height:90dvh;overflow:auto;background:var(--surface);border-radius:28px 28px 0 0;padding:8px 20px calc(24px + var(--safe-b));animation:up .26s cubic-bezier(.2,.8,.2,1) both;overscroll-behavior:contain}
+@keyframes up{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--border);margin:6px auto 12px}
+.sheet-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sheet-h h2{font-size:20px;font-weight:800;line-height:1.45}
+.sheet-h p{font-size:14.5px;color:var(--muted);margin-top:4px}
+.sheet .btn-row{margin-top:18px}
+.steps{display:flex;gap:6px;margin:4px 0 2px}
+.steps i{height:5px;flex:1;border-radius:9px;background:var(--border)}
+.steps i.on{background:var(--ink)}
+.role{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:12px 14px;border:1px solid var(--border);border-radius:18px;background:var(--surface);margin-top:8px}
+.role[aria-current=true]{background:var(--honey-soft);border-color:var(--ink)}
+.role .grow{flex:1;min-width:0}
+.role .t{font-weight:800;font-size:15px}
+.role .d{font-size:13px;color:var(--muted)}
+.success-burst{width:64px;height:64px;border-radius:22px;background:var(--sage);display:grid;place-items:center;margin-bottom:10px}
+
+/* ===== التنقل السفلي ===== */
+.nav{position:fixed;z-index:30;bottom:calc(10px + var(--safe-b));left:50%;transform:translateX(-50%);width:min(calc(100% - 20px),520px);height:var(--nav-h);background:var(--surface);border:1px solid var(--border);border-radius:28px;box-shadow:0 14px 34px -16px rgba(47,36,56,.35);display:grid;grid-template-columns:repeat(5,1fr);padding:6px;gap:2px}
+.nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11.5px;font-weight:500;color:var(--muted);border-radius:22px;padding:0}
+.nav button[aria-current=page]{color:var(--ink);font-weight:800;background:var(--lav-soft)}
+.nav .wr{width:42px;height:42px;border-radius:50%;background:var(--honey);display:grid;place-items:center;color:var(--ink);margin-top:-2px;box-shadow:0 6px 14px -6px rgba(186,135,20,.8)}
+.nav button.w[aria-current=page]{background:none}
+.nav button.w[aria-current=page] .wr{box-shadow:0 0 0 2px var(--ink)}
+.toast{position:fixed;z-index:80;left:50%;bottom:calc(var(--nav-h) + 24px + var(--safe-b));transform:translateX(-50%);background:var(--ink);color:var(--paper);border-radius:999px;padding:11px 12px 11px 18px;display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:500;box-shadow:var(--shadow-lift);max-width:calc(100% - 28px);width:max-content;animation:toastin .25s ease both}
+@keyframes toastin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.toast .ta{border:0;background:var(--honey);color:var(--ink);border-radius:999px;min-height:34px;padding:0 14px;font-weight:800;font-size:13.5px;white-space:nowrap}
+.toast .tx{padding-inline-start:6px}
+
+/* ===== سطح المكتب ===== */
+@media (min-width:760px){
+  .app{padding-left:32px;padding-right:32px}
+  .chips,.hscroll,.folders{margin:0 -32px;padding-left:32px;padding-right:32px}
+  .subbar{margin:0 -32px;padding-left:32px;padding-right:32px}
+  .grid.two{grid-template-columns:1fr 1fr}
+  .hello h1{font-size:32px}
+  .read-body{font-size:20px}
+  .paper{padding:36px 40px}
+  .three{grid-template-columns:repeat(3,1fr)}
+  .qlist{grid-template-columns:1fr 1fr;gap:26px}
+}
+@media (min-width:1000px){
+  .home-split{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+  .home-split .side{position:sticky;top:16px}
+  .home-split .grid.two{grid-template-columns:1fr}
+  .feature blockquote{font-size:26px}
+}
+@media (max-width:380px){
+  .app{padding-left:14px;padding-right:14px}
+  .chips,.hscroll,.folders{margin:0 -14px;padding-left:14px;padding-right:14px}
+  .subbar{margin:0 -14px;padding-left:14px;padding-right:14px}
+  .nav button{font-size:10.5px}
+  .pill-sm .lbl{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ================= الجولة الثانية: دفء وحضور ================= */
+.hello2{margin-top:2px}
+.hello2 .hi{font-size:14.5px;color:var(--muted);font-weight:500}
+.hello2 h1{font-size:23px;font-weight:800;line-height:1.5;margin-top:2px}
+.page-h{font-size:26px;font-weight:800;margin-top:6px}
+.page-sub{color:var(--muted);margin-top:2px;font-size:15px;line-height:1.8}
+.eyebrow{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#5B4E63;position:relative;z-index:1}
+.eyebrow::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--honey);flex:none}
+.tl{display:block;font-size:13.5px;color:var(--muted);font-weight:500;line-height:1.55}
+.by-line{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;text-align:start;min-width:0;color:var(--ink)}
+.by-line b{font-size:15px;font-weight:800;display:block}
+.by-line > span{min-width:0}
+.by-line.big{margin-top:16px;padding:10px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--border);width:100%}
+.by-line.big > span:not(.av){flex:1}
+.mark{background:linear-gradient(100deg,rgba(255,232,140,0) .5%,#FFF0AA 2%,#FFE68A 55%,#FFF0AA 97%,rgba(255,232,140,0) 99.5%) 0 90%/100% 58% no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .12em;border-radius:.25em .6em .35em .5em}
+.feed{display:flex;flex-direction:column;gap:26px;margin-top:16px}
+.b-full{background:var(--surface);border:1px solid var(--border);border-radius:28px 28px 28px 8px;padding:20px 20px 16px;box-shadow:var(--shadow)}
+.b-full h3{font-size:21px;font-weight:800;margin:14px 0 4px;line-height:1.45}
+.read-body.sm{font-size:18px;line-height:2.05}
+.b-full .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--border);font-size:13px;flex-wrap:wrap}
+.b-full.poemish{background:var(--lav-soft);border-color:#E6DEF3;margin-inline-start:28px;border-radius:28px 8px 28px 28px}
+.qwrap{position:relative;padding:0 0 12px 16px}
+.qwrap::before{content:"";position:absolute;top:16px;bottom:0;left:0;right:26px;border-radius:10px 30px 30px 30px;background:var(--lavender)}
+.b-quote{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:10px 30px 30px 30px;padding:24px 20px 20px;box-shadow:var(--shadow-lift)}
+.b-quote blockquote{margin:12px 0 14px;font-size:23px;line-height:1.85;font-weight:700}
+.ribbon{position:absolute;top:-1px;left:24px;width:20px;height:46px;background:var(--peach);clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%);z-index:2}
+.tcard .mood{margin:-18px -18px 14px;height:112px;border-radius:24px 24px 0 0;overflow:hidden}
+.mood svg{width:100%;height:100%}
+.mood.banner{height:148px;border-radius:28px;overflow:hidden;margin-top:6px}
+.tcard h3{margin-top:10px}
+.b-writer{position:relative;background:var(--tint,var(--peach-soft));border-radius:34px 34px 34px 10px;padding:22px 20px 20px;overflow:hidden}
+.b-writer::after,.corner::after,.about::after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:rgba(255,254,251,.34);top:-60px;left:-50px;pointer-events:none}
+.w-top{display:flex;align-items:center;gap:14px;margin-top:12px;position:relative;z-index:1;min-width:0}
+.w-top > div{min-width:0}
+.w-top h3{font-size:21px;font-weight:800;line-height:1.35}
+.blob{flex:none;width:58px;height:58px;display:grid;place-items:center;font-size:24px;font-weight:800;color:var(--ink);border-radius:46% 54% 42% 58%/55% 45% 55% 45%;box-shadow:0 0 0 4px rgba(255,254,251,.45)}
+.blob.lg{width:86px;height:86px;font-size:38px}
+.blob.sm{width:46px;height:46px;font-size:19px}
+.voice-bio{font-size:18px;line-height:1.9;font-weight:500;margin-top:14px;position:relative;z-index:1}
+.b-writer .tags,.corner .tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:12px;position:relative;z-index:1}
+.b-writer .tag,.corner .tag{background:rgba(255,254,251,.75)}
+.w-line{display:block;width:100%;text-align:start;border:0;background:var(--surface);border-radius:20px;padding:14px 16px;margin-top:14px;font-size:17px;line-height:1.95;font-weight:500;position:relative;z-index:1;color:var(--ink)}
+.w-line small{display:block;font-size:13px;color:var(--muted);margin-top:4px;font-weight:500}
+.w-line.big{font-size:20px;border:1px solid var(--border);box-shadow:var(--shadow);margin-top:10px}
+.b-writer .btn,.corner .btn,.about .btn{position:relative;z-index:1}
+.b-writer > .btn,.corner > .btn{margin-top:14px}
+.b-voice{background:var(--surface);border:1.5px dashed #D6C8DE;border-radius:28px;padding:20px}
+.sample-mini{background:var(--paper);border-radius:18px;padding:14px 16px;margin-top:14px;font-size:16px;line-height:1.9}
+.sample-mini b{display:block;font-size:14.5px;margin-bottom:4px}
+.sample-mini p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.b-voice .prog{margin-top:14px}
+.wp{font-size:14px;color:var(--muted);margin-top:6px}
+.b-letter{position:relative;background:linear-gradient(150deg,#ECE3F7 0%,#F7ECEF 55%,#F9DACB 100%);border-radius:26px;padding:22px 20px 20px;overflow:hidden}
+.b-letter h3{font-size:20px;font-weight:800;margin-top:10px;padding-left:64px}
+.b-letter p{margin-top:6px;font-size:15.5px;line-height:1.85}
+.stamp{position:absolute;top:16px;left:16px;width:52px;height:60px;background:var(--surface);border-radius:4px;display:grid;place-items:center;color:#C9846C;outline:2px dashed var(--peach);outline-offset:-6px;transform:rotate(5deg)}
+.feed-end{text-align:center;padding:22px 12px 4px}
+.feed-end h3{font-size:18px;font-weight:800}
+.feed-end p{color:var(--muted);margin-top:4px}
+.feed-end .btn{margin-top:14px}
+.empty-art.small{transform:scale(.8);margin-bottom:0}
+.side{display:none}
+@media (min-width:1000px){.side{display:block}.home-split{grid-template-columns:1.5fr 1fr}}
+.voice{background:var(--tint,var(--peach-soft));border-color:transparent;border-radius:28px 28px 28px 10px}
+.voice .snip{font-size:15px}
+
+/* القراءة */
+.paper{position:relative}
+.paper .ribbon{left:30px}
+.reader .paper{padding-top:52px}
+.sample-box{padding-top:46px}
+.letter{padding-top:52px}
+.legend{flex-wrap:nowrap;align-items:flex-start}.legend .s-demo{flex:none}
+.paper-foot{margin-top:18px;padding-top:12px;border-top:1px dashed var(--border);font-size:13px;color:var(--muted)}
+.about{position:relative;overflow:hidden;background:var(--tint);border-radius:30px 30px 30px 10px;padding:20px}
+.s.hot{text-decoration:none;background:linear-gradient(100deg,rgba(255,232,140,0) .4%,#FFF0AA 1.6%,#FFE68A 55%,#FFF0AA 98%,rgba(255,232,140,0) 99.6%) 0 92%/100% 62% no-repeat}
+.s.sel{background:var(--lavender);box-shadow:inset 0 -3px 0 var(--ink)}
+.legend .s-demo{text-decoration:none;background:linear-gradient(100deg,rgba(255,232,140,0) 1%,#FFF0AA 4%,#FFE68A 55%,#FFF0AA 96%,rgba(255,232,140,0) 99%) 0 90%/100% 62% no-repeat;padding:0 6px}
+.sample-box{position:relative}
+
+/* شريط الجملة */
+.pop{flex-direction:column;align-items:stretch;border-radius:22px;padding:6px 6px 4px;gap:0}
+.pop-row{display:flex;align-items:center;gap:4px}
+.pop .like{background:var(--paper)}
+.pop .like.on{background:var(--honey)}
+.pop .like.beat svg{animation:beat .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes beat{0%{transform:scale(1)}35%{transform:scale(1.4)}65%{transform:scale(.9)}100%{transform:scale(1)}}
+.pop-meta{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);padding:2px 10px 2px 4px}
+.pop-meta .hottag{padding:0;color:#8A6A12}
+.pop .info{min-height:32px;width:32px;padding:0;justify-content:center;color:var(--muted)}
+.pop-note{font-size:12.5px;line-height:1.7;background:var(--paper);border-radius:12px;padding:6px 10px;margin:2px 4px 4px;max-width:290px}
+
+/* الركن */
+.corner{position:relative;background:var(--tint);border-radius:34px 34px 34px 12px;padding:30px 20px 22px;margin-top:12px;overflow:hidden}
+.corner h1{font-size:28px;font-weight:800;line-height:1.3}
+.corner-label{margin-top:20px;font-size:13px;font-weight:800;color:#5B4E63;position:relative;z-index:1}
+.corner .voice-bio{font-size:20px;margin-top:4px}
+.tape{position:absolute;top:-6px;right:50%;width:84px;height:24px;margin-right:-42px;background:rgba(255,254,251,.62);border:1px solid rgba(47,36,56,.06);transform:rotate(-3deg);z-index:2}
+
+/* مقتبساتي */
+.keep{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:6px 22px 22px 22px;padding:26px 20px 12px;box-shadow:var(--shadow);transition:box-shadow .3s}
+.keep:nth-child(2n){border-radius:22px 6px 22px 22px}
+.keep .tape{top:-11px;background:rgba(220,209,239,.85)}
+.keep:nth-child(3n+2) .tape{background:rgba(242,182,160,.6);transform:rotate(2deg)}
+.keep:nth-child(3n) .tape{background:rgba(221,232,210,.95)}
+.keep blockquote{margin:0;font-size:19px;line-height:1.95;font-weight:500;white-space:pre-line}
+.from{display:flex;align-items:center;gap:10px;width:100%;margin-top:14px;padding:10px 12px;border:0;border-radius:16px;background:var(--paper);text-align:start;color:var(--ink)}
+.from > span:not(.av){flex:1;min-width:0}
+.from b{display:block;font-size:14.5px}
+.keep .acts{display:flex;align-items:center;gap:6px;margin-top:10px}
+.keep .when{font-size:12.5px;color:var(--muted)}
+.keep .grow{flex:1}
+.keep .icon-btn{width:40px;height:40px}
+.keep.glow{box-shadow:0 0 0 3px var(--honey),var(--shadow-lift)}
+.q-tools{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.q-tools .search{flex:1 1 220px}
+.qlist{gap:30px;margin-top:24px}
+.folder .fr{justify-content:center}
+
+/* الكتابة */
+.prompt-h{font-size:24px;font-weight:800;line-height:1.55;margin-top:8px}
+.inspire{display:flex;gap:12px;align-items:flex-start;background:var(--lav-soft);border-radius:22px;padding:14px 16px;margin-top:14px;flex-wrap:wrap}
+.inspire .grow{flex:1 1 180px}
+.inspire small{font-size:12.5px;color:var(--muted);font-weight:700}
+.inspire p{font-size:17px;font-weight:700;line-height:1.7;margin-top:2px}
+.ins-ic{width:34px;height:34px;border-radius:12px;background:var(--surface);display:grid;place-items:center;flex:none}
+.ins-acts{display:flex;gap:6px;align-items:center}
+.editor.roomy{padding:22px 20px;border-radius:30px}
+.editor.roomy textarea{min-height:340px;font-size:19px;line-height:2.1}
+.counter.quiet{justify-content:flex-start;gap:12px;color:var(--muted);font-size:13px;margin-top:8px;flex-wrap:nowrap}
+.counter.quiet .num{font-weight:500;color:var(--muted);white-space:nowrap}
+.counter.quiet .bar{flex:1;height:4px;margin:0;border:0;background:var(--border)}
+.counter.quiet .bar i{background:#D9CDE2}
+.counter.near .num,.counter.over .num{color:var(--ink);font-weight:800}
+.counter.near .bar i{background:var(--honey)}
+.counter.over .bar i{background:repeating-linear-gradient(45deg,var(--peach) 0 6px,#E79C82 6px 12px)}
+.near-msg{display:flex;gap:8px;align-items:center;background:var(--honey-soft);border-radius:12px;padding:8px 12px;font-size:13.5px;font-weight:700;margin-top:10px}
+
+/* الرسالة */
+.letter{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:8px 28px 28px 28px;padding:26px 22px 22px;box-shadow:var(--shadow)}
+.letter .salute{font-size:19px;font-weight:800}
+.letter .intro{font-size:16.5px;line-height:1.95;margin-top:6px}
+.letter .sign{margin-top:18px;font-size:15px;font-weight:700;line-height:1.9}
+.lq{display:block;width:100%;text-align:start;border:0;background:none;padding:14px 0;border-top:1px dashed var(--border);color:var(--ink)}
+.lq q{quotes:none;font-size:18px;line-height:1.9;font-weight:500;display:block}
+.lq q::before{content:"«"} .lq q::after{content:"»"}
+.lq small{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
+.lq small b{color:var(--ink)}
+@media (max-width:380px){.b-full.poemish{margin-inline-start:12px}.qwrap{padding-left:10px}.b-quote blockquote{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <main id="main" tabindex="-1"><div style="padding:40px 8px;text-align:center;line-height:1.9">
+    <h1 style="font-size:22px;margin-bottom:8px">مَيل — نموذج تفاعلي</h1>
+    <p>إذا كنت ترى هذه الرسالة، فالتطبيق الذي فتح الملف يعرضه كمعاينة ثابتة ولا يشغّل التفاعل.</p>
+    <p style="margin-top:8px">افتح الملف في Safari أو Chrome، أو افتح رابط المعاينة المنشور.</p></div></main>
+</div>
+<nav class="nav" id="nav" aria-label="التنقل الرئيسي"></nav>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   «مَيل» — نموذج تفاعلي محلي بالكامل
+   لا خوادم، لا رسائل فعلية. التخزين: localStorage مع بديل في الذاكرة.
+   ========================================================= */
+const BRAND = 'مَيل';           // الاسم المؤقت — غيّريه هنا فقط
+const DEMO_CODE = '123456';
+const LIMIT = 1000, NEEDED = 10, DAY = 864e5, WEEK = 7 * DAY;
+const CATS = ['أدب', 'شعر', 'تأملات', 'اقتصاد', 'أفكار'];
+const KEY = 'mayl-proto-v2';
+const DEMO_HOST = 'https://mayl.example';
+
+/* ---------- المحتوى التجريبي (أصلي وخيالي) ----------
+   ¶ = فقرة جديدة، ★ = جملة شائعة (بيانات عرض فقط)، \n داخل الجملة = سطر شعر */
+const SEED_TEXTS = [
+ {id:'t6', author:'layan', cat:'أدب', title:'رسالة لم تُرسل', days:9, mood:'page', feature:true, pick:true, segs:[
+  'كتبتُ لكِ رسالة طويلة ثم حذفتها، لأن الكلمات بدت أكبر من المسافة بيننا.',
+  'ثم كتبتُ سطرًا واحدًا: «كيف حالك؟»، وحذفته أيضًا لأنه بدا أصغر من كل شيء.','¶',
+  'بين الرسالة الطويلة والسطر الواحد، عشتُ أسبوعًا كاملًا.',
+  '★تعلّمتُ فيه أن بعض الصداقات لا تنتهي، بل تتوقف عند فاصلة وتنتظر من يكمل الجملة.','¶',
+  'إن قرأتِ هذا، فاعتبريه الفاصلة.']},
+ {id:'t1', author:'sara', cat:'أدب', title:'نافذة المطبخ', days:1, mood:'window', segs:[
+  'كانت جدتي تفتح نافذة المطبخ قبل أن تشعل النار، كأنها تستأذن الصباح.',
+  'تقول إن البيت الذي لا يتنفس ينسى أصحابه.',
+  'لم أفهمها يومًا؛ كنت أظن أن النافذة للرائحة فقط، للهيل والخبز ودخان الحطب الخفيف.','¶',
+  'بعد رحيلها بقيت النافذة مغلقة شهورًا.',
+  'لم يمنعنا أحد من فتحها، لكن أحدًا منا لم يجرؤ.',
+  'كنا نخاف أن يدخل الهواء فيأخذ ما تبقى منها في الزوايا.','¶',
+  'في صباحٍ عادي، فتحتُها دون تفكير.',
+  'دخل الضوء أولًا، ثم صوت الجيران، ثم رائحة مطر قديم.',
+  'وقفتُ طويلًا، ولم يحدث شيء مما خفناه.',
+  '★عرفتُ حينها أن الذين نحبهم لا يسكنون الهواء المحبوس، بل يسكنون عادتنا الصغيرة في فتح النوافذ.']},
+ {id:'t5', author:'majed', cat:'أفكار', title:'الأسئلة التي لا نطرحها', days:2, segs:[
+  'نتعلم في المدرسة كيف نجيب، ولا نتعلم كيف نسأل.',
+  'ولهذا نكبر ونحن نحسن الدفاع عن الأجوبة أكثر مما نحسن اختبارها.','¶',
+  '★في الاجتماعات، أكثر سؤال يغيّر النقاش ليس أذكاها، بل أبسطها: «لماذا نفعل هذا أصلًا؟»',
+  'هذا السؤال محرج لأنه يكشف أننا مشينا طويلًا دون أن نتأكد من الطريق.','¶',
+  'أظن أن الشجاعة الفكرية تبدأ من جملة صغيرة: «لا أعرف، لكن دعونا نفهم».']},
+ {id:'t2', author:'yousef', cat:'شعر', title:'ما يتركه المطر', days:3, poem:true, pick:true, segs:[
+  'لم يكن المطرُ غريبًا عن مدينتنا،\nكان فقط يتأخر',
+  'كما يتأخر الأصدقاء الطيبون\nثم يجيئون بلا موعد.','¶',
+  '★على زجاج السيارة\nترك المطرُ خرائطَ صغيرة\nلا تؤدي إلى أي مكان،\nلكنها تشبه الطريق إليك.','¶',
+  'وحين توقّف،\nلم يتوقف تمامًا:',
+  'بقي في رائحة التراب،\nوفي صوت أمي وهي تقول:\n«افتحوا الشبابيك، جاء الخير».']},
+ {id:'t3', author:'dana', cat:'تأملات', title:'في مديح البطء', days:4, mood:'leaves', segs:[
+  '★نحن لا نتعب من كثرة ما نفعل، بل من سرعة الانتقال بين ما نفعل.',
+  'نقفز من رسالة إلى اجتماع، ومن اجتماع إلى خبر، ولا نترك للأشياء وقتًا كي تنتهي داخلنا.','¶',
+  'جرّبتُ هذا الأسبوع أن أُنهي الفكرة قبل أن أبدأ غيرها.',
+  'أن أشرب القهوة وهي ساخنة، لا بعد أن أتذكرها.',
+  'أن أقرأ الصفحة مرة واحدة، لكن بعينين حاضرتين.','¶',
+  'لم يصبح يومي أطول، لكنه صار أوضح.',
+  'البطء ليس كسلًا مؤجلًا، إنه انتباهٌ يأخذ حقه كاملًا.']},
+ {id:'t4', author:'omar', cat:'اقتصاد', title:'كوب القهوة يشرح التضخم', days:6, segs:[
+  'لا تحتاج إلى نشرة اقتصادية لتعرف أن شيئًا تغيّر؛ يكفي أن تنظر إلى ثمن كوب القهوة الذي اعتدت عليه.','¶',
+  'التضخم لا يصل دفعة واحدة.',
+  'يصل على هيئة كوب أصغر بالسعر نفسه، أو حبوب أقل جودة، أو عرض يختفي بهدوء.',
+  '★ولهذا لا نشعر به في الأرقام بقدر ما نشعر به في العادات.','¶',
+  'المقهى أيضًا يدفع أكثر: إيجار، وحليب، وأجور، وشحن.',
+  'والسؤال الحقيقي ليس لماذا ارتفع السعر، بل من يستطيع أن يتحمّل الفرق، ومن يُجبر على التنازل عن عادته الصغيرة.','¶',
+  'راقب عاداتك الصغيرة؛ فهي أصدق مؤشر اقتصادي تملكه.']},
+ {id:'t7', author:'noura', cat:'شعر', title:'مدينة في الحقيبة', days:12, poem:true, pick:true, segs:[
+  'حملتُ مدينتي في حقيبة صغيرة:\nضحكةَ بائع الفول،\nوظلَّ النخلة عند الباب،\nوأسماءً لا تُترجم.','¶',
+  'في المطار سألوني:\nهل معك ما تودّ الإفصاح عنه؟',
+  '★قلت: معي حنينٌ خفيف،\nلا يزن شيئًا،\nلكنه لا يمرّ من أي جهاز.','¶',
+  'ومن يومها\nوأنا أفتح الحقيبة كل مساء\nكي أتأكد أن البحر ما زال في مكانه.']},
+ {id:'t8', author:'hind', cat:'اقتصاد', title:'ما الذي يُباع حين يكون التطبيق مجانيًا؟', days:15, segs:[
+  'حين يكون التطبيق مجانيًا، فالسلعة غالبًا ليست التطبيق.',
+  'السلعة هي الدقائق التي تقضيها فيه، والانتباه الذي يتنقل بين إعلان وآخر.','¶',
+  '★الانتباه مورد نادر مثل الماء والوقت، لكننا ننفقه كأنه لا ينفد.',
+  'ولهذا تتنافس الشركات على لحظاتك الصغيرة: قبل النوم، وفي طابور الانتظار، وعند أول ملل.','¶',
+  'لا أدعو إلى الهروب من التقنية، بل إلى معاملة الانتباه كما نعامل المال: نعرف أين ذهب، ونسأل هل كان يستحق.']},
+];
+
+const SEED_PEOPLE = [
+ {id:'huda', name:'هدى العتيبي', g:'f', email:'huda@example.com', member:true, tint:'var(--lav-soft)',
+  tagline:'قارئة طريق، تجمع الجمل في جيبها',
+  bio:'أقرأ في السيارة وفي طوابير الانتظار، وأحتفظ بالجمل التي تشبهني كأنها صور صغيرة.', interests:['أدب','تأملات']},
+ {id:'rim', name:'ريم السالم', g:'f', email:'rim@example.com', member:true, tint:'var(--sage)',
+  tagline:'معلمة علوم تراقب ما ينمو ببطء',
+  bio:'أراقب الأشياء التي تنمو ببطء: طلابي، ونبتة الليمون في الحوش، وأنا. أكتب لأتذكر أن الصبر ليس انتظارًا فارغًا.', interests:['تأملات','أدب'],
+  sample:{title:'لسنا مستعجلين', cat:'تأملات', body:'زرع أبي ليمونة صغيرة قبل خمس سنوات، ولم تثمر إلا هذا الشتاء. كان يمرّ بها كل صباح ويقول: «لسنا مستعجلين». فهمتُ متأخرة أن بعض الأشياء لا تنمو حين نراقبها، بل حين نثق بها.'}},
+ {id:'salem', name:'سالم الدوسري', g:'m', email:'salem@example.com', member:true, tint:'var(--honey-soft)',
+  tagline:'مهندس طرق ودفتر مليء بالمسافرين',
+  bio:'منذ عشر سنوات وأنا أوقف السيارة عند كل محطة غريبة وأسأل أصحابها عن حكاياتهم. هذا الدفتر صار أثقل من الحقيبة.', interests:['أدب','أفكار'],
+  sample:{title:'المحطة الأخيرة', cat:'أدب', body:'في آخر محطة قبل الصحراء، يبيع رجل عجوز الماء والخرائط القديمة. لا أحد يشتري الخرائط، لكنه يرتّبها كل يوم كأن مسافرًا سيحتاجها. سألته مرة: لماذا تحتفظ بها؟ قال: الطرق تتغير، لكن الناس يحبون أن يعرفوا من أين جاؤوا.'}},
+ {id:'layan', name:'ليان الشهري', g:'f', email:'layan@example.com', member:true, approved:true, lastPubDays:9, tint:'var(--lavender)',
+  tagline:'تكتب الرسائل التي لا ترسلها',
+  bio:'أحب الفواصل أكثر من النقاط. أكتب رسائل قصيرة لأشخاص لا أعرف عناوينهم الآن، وأتركها هنا لعلها تصل بطريقة ما.', interests:['أدب','شعر']},
+ {id:'majed', name:'ماجد القحطاني', g:'m', email:'majed@example.com', member:true, approved:true, lastPubDays:2, tint:'var(--sage)',
+  tagline:'مدير منتجات نهارًا، مُتعِب أسئلة مساءً',
+  bio:'أقضي يومي في الاجتماعات، وأقضي ليلي أفكر لماذا عقدناها أصلًا. أكتب لأفهم، لا لأقنع أحدًا.', interests:['أفكار','اقتصاد']},
+ {id:'sara', name:'سارة المطيري', g:'f', approved:true, lastPubDays:1, tint:'var(--peach-soft)',
+  tagline:'قصص البيوت والجدات والأواني',
+  bio:'كبرتُ في بيت فيه نافذة تطل على الحوش وجدة لا تطفئ الموقد. أكتب عن الروائح التي تعيدنا إلى البيت حتى ونحن بعيدون.', interests:['أدب']},
+ {id:'yousef', name:'يوسف الزهراني', g:'m', approved:true, lastPubDays:3, tint:'var(--lav-soft)',
+  tagline:'شعر قصير في دفتر السيارة',
+  bio:'أحب المطر حتى حين يفسد مشاويري. أكتب الأسطر عند الإشارات الحمراء، وأكملها حين أصل.', interests:['شعر']},
+ {id:'dana', name:'دانة العمري', g:'f', approved:true, lastPubDays:4, tint:'var(--sage)',
+  tagline:'مصممة تتعلم البطء',
+  bio:'صممتُ تطبيقات تُسرع كل شيء، ثم اكتشفت أنني نسيت كيف أمشي ببطء. هنا أترك ما ألاحظه حين أتوقف عن الركض.', interests:['تأملات','أفكار']},
+ {id:'omar', name:'عمر باوزير', g:'m', approved:true, lastPubDays:6, tint:'var(--honey-soft)',
+  tagline:'يشرح الاقتصاد على طاولة المقهى',
+  bio:'الأرقام عندي حكايات صغيرة. أشرحها لأصدقائي على طاولة المقهى، وغالبًا أدفع الحساب في النهاية.', interests:['اقتصاد']},
+ {id:'noura', name:'نورة البقمي', g:'f', approved:true, lastPubDays:12, tint:'var(--peach-soft)',
+  tagline:'مترجمة تحمل مدينتين في حقيبة',
+  bio:'أترجم نهارًا، وأكتب ليلًا عن الكلمات التي لا تعبر الحدود. عندي مدينتان، وكل واحدة تغار من الأخرى.', interests:['شعر']},
+ {id:'hind', name:'هند الغامدي', g:'f', approved:true, lastPubDays:15, tint:'var(--lavender)',
+  tagline:'تسأل أين ذهب انتباهنا',
+  bio:'أدرس كيف تشتري التطبيقات انتباهنا، وأحاول استرداد بعضه كل يوم. لا أملك حلًا، لكن عندي أسئلة جيدة.', interests:['اقتصاد','أفكار']},
+];
+const SEED_ENDORSE = {
+  rim:['amal@example.com','fahad@example.com','lama@example.com','nasser@example.com','joud@example.com','tariq@example.com','huda@example.com'],
+  salem:['bader@example.com','haya@example.com','khalid@example.com','mona@example.com','ziad@example.com','afnan@example.com','saad@example.com','wafa@example.com','yara@example.com'],
+};
+const DEMO_ROLES = [
+  {id:'guest', t:'زائر', d:'بدون حساب — يقرأ ويؤيد ويشترك في النشرة'},
+  {id:'huda', t:'هدى — قارئة', d:'عضوة بإيميل موثق، تقرأ وتحفظ المقتبسات'},
+  {id:'rim', t:'ريم — مرشحة', d:'بانتظار تأييد القرّاء'},
+  {id:'salem', t:'سالم — مرشح', d:'بانتظار تأييد القرّاء'},
+  {id:'layan', t:'ليان — كاتبة معتمدة', d:'تستطيع النشر هذا الأسبوع'},
+  {id:'majed', t:'ماجد — كاتب', d:'نشر نصّه هذا الأسبوع'},
+];
+
+/* ---------- التخزين ---------- */
+const store = (() => {
+  let ok = true, mem = null;
+  try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch (e) { ok = false; }
+  return {
+    get ok() { return ok; },
+    load() { if (!ok) return mem; try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } },
+    save(s) { mem = s; if (!ok) return; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { ok = false; } },
+    clear() { mem = null; if (ok) try { localStorage.removeItem(KEY); } catch (e) {} }
+  };
+})();
+
+function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return Math.abs(h); }
+
+function seed() {
+  const now = Date.now();
+  const people = {};
+  SEED_PEOPLE.forEach(p => {
+    const c = JSON.parse(JSON.stringify(p));
+    if (c.lastPubDays != null) { c.lastPub = now - c.lastPubDays * DAY - 3 * 3600e3; delete c.lastPubDays; }
+    people[c.id] = c;
+  });
+  const texts = SEED_TEXTS.map(t => {
+    const segs = [], hot = [];
+    let i = 0;
+    t.segs.forEach(s => {
+      if (s === '¶' || s === '↵') { segs.push(s); return; }
+      if (s.startsWith('★')) { hot.push(i); s = s.slice(1); }
+      segs.push(s); i++;
+    });
+    const base = [];
+    for (let k = 0; k < i; k++) { const h = hash(t.id + k); base.push(hot.includes(k) ? 96 + h % 140 : 3 + h % 31); }
+    return { id: t.id, author: t.author, cat: t.cat, title: t.title, mood: t.mood || null, poem: !!t.poem, pick: !!t.pick, feature: !!t.feature,
+             createdAt: now - t.days * DAY - 3 * 3600e3, segs, hot, base };
+  });
+  return {
+    v: 2, seededAt: now, current: 'huda', people, texts,
+    endorse: JSON.parse(JSON.stringify(SEED_ENDORSE)),
+    verified: ['huda@example.com','rim@example.com','salem@example.com','layan@example.com','majed@example.com'],
+    likes: { huda: { 't3-0': now - 2 * DAY, 't7-2': now - 5 * DAY } },
+    drafts: { rim: { title: '', body: 'أحيانًا لا يحتاج الصباح إلى خطة، بل إلى نافذة مفتوحة وكوب شاي', cat: 'تأملات', savedAt: now - DAY } },
+    subs: {}, nlDevice: null
+  };
+}
+
+let S = store.load();
+if (!S || S.v !== 2) { S = seed(); store.save(S); }
+const save = () => store.save(S);
+
+/* ---------- حالة الواجهة (غير محفوظة) ---------- */
+let view = { name: 'home', p: {} };
+const hist = [];
+const ui = { homeCat: 'الكل', discCat: 'الكل', discQ: '', qFolder: 'الكل', qQ: '', sel: null, pending: null,
+             buf: {}, sheet: null, lastFocus: null, resetArm: false, prompt: 0, promptHidden: false, popInfo: false };
+
+/* ---------- أدوات ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const ar = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+const normEmail = e => String(e || '').trim().toLowerCase();
+const validEmail = e => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+const graph = (typeof Intl !== 'undefined' && Intl.Segmenter) ? new Intl.Segmenter('ar', { granularity: 'grapheme' }) : null;
+function glen(s) { if (!s) return 0; if (graph) { let n = 0; for (const _ of graph.segment(s)) n++; return n; } return Array.from(s).length; }
+function plural(n, one, two, few, many) {
+  if (n === 1) return one; if (n === 2) return two;
+  if (n >= 3 && n <= 10) return ar(n) + ' ' + few; return ar(n) + ' ' + many;
+}
+const endorseWord = n => plural(n, 'تأييد واحد', 'تأييدان', 'تأييدات', 'تأييدًا');
+const likeWord = n => n === 0 ? 'لا إعجابات بعد' : plural(n, 'إعجاب واحد', 'إعجابان', 'إعجابات', 'إعجابًا');
+function fmtDay(ts) {
+  try { return new Intl.DateTimeFormat('ar-u-ca-gregory-nu-arab', { weekday: 'long', day: 'numeric', month: 'long' }).format(ts); }
+  catch (e) { const d = new Date(ts); return ar(d.getDate()) + '/' + ar(d.getMonth() + 1); }
+}
+function fmtTime(ts) {
+  try { return new Intl.DateTimeFormat('ar-u-nu-arab', { hour: 'numeric', minute: '2-digit' }).format(ts); } catch (e) { return ''; }
+}
+function rel(ts) {
+  const d = Math.floor((Date.now() - ts) / DAY);
+  if (d <= 0) return 'اليوم'; if (d === 1) return 'أمس'; if (d === 2) return 'قبل يومين';
+  if (d <= 10) return 'قبل ' + ar(d) + ' أيام'; return 'قبل ' + ar(d) + ' يومًا';
+}
+const reduceMotion = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const IC = {
+  home:'<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>',
+  disc:'<circle cx="12" cy="12" r="8.5"/><path d="m15.6 8.4-2.1 5.1-5.1 2.1 2.1-5.1z"/>',
+  pen:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="m14 7 3 3"/>',
+  quote:'<path d="M6 4h12a1 1 0 0 1 1 1v15l-7-4-7 4V5a1 1 0 0 1 1-1z"/>',
+  user:'<circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.2 7.5-5.2s6.3 1.6 7.5 5.2"/>',
+  heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>',
+  copy:'<rect x="8" y="8" width="11" height="11" rx="2.5"/><path d="M5 15V6a1 1 0 0 1 1-1h9"/>',
+  search:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
+  back:'<path d="m9 5 7 7-7 7"/>',
+  fwd:'<path d="m15 5-7 7 7 7"/>',
+  x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  share:'<path d="M12 15V4m0 0L8 8m4-4 4 4"/><path d="M5 12v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>',
+  mail:'<rect x="3.5" y="5.5" width="17" height="13" rx="3"/><path d="m4.5 7.5 7.5 6 7.5-6"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',
+  trash:'<path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/>',
+  eye:'<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/>',
+  sliders:'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  info:'<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/>',
+  alert:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5.5M12 16.2h.01"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  spark:'<path d="M12 3.5 13.8 10.2 20.5 12 13.8 13.8 12 20.5 10.2 13.8 3.5 12 10.2 10.2z"/>',
+  logout:'<path d="M14 5h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/>',
+  edit:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/>',
+};
+function ic(n, size = 22, fill = false) {
+  return `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+}
+const AVC = ['var(--lavender)', 'var(--peach)', 'var(--sage)', 'var(--honey-soft)', 'var(--lav-soft)'];
+function av(p, cls = '') {
+  if (!p) return `<span class="av ${cls}" style="background:var(--paper)">${ic('user', 18)}</span>`;
+  return `<span class="av ${cls}" style="background:${AVC[hash(p.id) % AVC.length]}" aria-hidden="true">${esc(p.name.trim()[0])}</span>`;
+}
+
+/* ---------- المشتقات ---------- */
+const me = () => S.current === 'guest' ? null : S.people[S.current] || null;
+const person = id => S.people[id];
+const textById = id => S.texts.find(t => t.id === id);
+const endorsements = id => S.endorse[id] || [];
+const isApproved = p => !!(p && (p.approved || endorsements(p.id).length >= NEEDED));
+const nextPubAt = p => p && p.lastPub ? p.lastPub + WEEK : 0;
+const canPublishNow = p => isApproved(p) && Date.now() >= nextPubAt(p);
+const verb = (p, m, f) => p && p.g === 'f' ? f : m;
+function sentences(t) {
+  const out = []; let i = 0;
+  t.segs.forEach(s => { if (s !== '¶' && s !== '↵') { out.push({ sid: t.id + '-' + i, i, text: s }); i++; } });
+  return out;
+}
+function bySid(sid) {
+  const k = sid.lastIndexOf('-'); const t = textById(sid.slice(0, k)); if (!t) return null;
+  const i = +sid.slice(k + 1); const s = sentences(t)[i]; if (!s) return null;
+  return { t, i, text: s.text, hot: t.hot.includes(i) };
+}
+const myLikes = () => (me() && S.likes[S.current]) || {};
+const isLiked = sid => !!myLikes()[sid];
+function likeCount(sid) {
+  const k = sid.lastIndexOf('-'); const t = textById(sid.slice(0, k)); const i = +sid.slice(k + 1);
+  let n = (t && t.base[i]) || 0;
+  for (const acc in S.likes) if (S.likes[acc][sid]) n++;
+  return n;
+}
+const plain = t => sentences(t).map(s => s.text).join(' ');
+function readTime(t) { const w = plain(t).split(/\s+/).length + (t.title || '').split(/\s+/).length; return w < 110 ? 'أقل من دقيقة' : 'دقيقة قراءة'; }
+function excerpt(t) {
+  if (t.poem) { const ss = sentences(t); return ss[0].text + (ss[1] ? '\n' + ss[1].text : ''); }
+  let out = ''; for (const s of sentences(t)) { if (out && out.length + s.text.length > 170) break; out += (out ? ' ' : '') + s.text; }
+  return out.length > 190 ? out.slice(0, 185) + '…' : out;
+}
+const sortedTexts = () => [...S.texts].sort((a, b) => b.createdAt - a.createdAt);
+const candidates = () => Object.values(S.people).filter(p => p.member && p.sample);
+const subOf = email => S.subs[normEmail(email)];
+
+/* ---------- التنقل ---------- */
+const TABS = [
+  { id: 'home', t: 'الرئيسية', i: 'home' }, { id: 'discover', t: 'اكتشف', i: 'disc' },
+  { id: 'write', t: 'اكتب', i: 'pen' }, { id: 'quotes', t: 'مقتبساتي', i: 'quote' }, { id: 'me', t: 'حسابي', i: 'user' }];
+function tab(name) { hist.length = 0; view = { name, p: {} }; render(true); }
+function go(name, p = {}) { hist.push(view); view = { name, p }; render(true); }
+function back() { view = hist.pop() || { name: 'home', p: {} }; render(true); }
+function activeTab() {
+  const n = view.name; if (TABS.some(t => t.id === n)) return n;
+  for (let i = hist.length - 1; i >= 0; i--) if (TABS.some(t => t.id === hist[i].name)) return hist[i].name;
+  return 'home';
+}
+function renderNav() {
+  const a = activeTab();
+  $('#nav').innerHTML = TABS.map(t => t.id === 'write'
+    ? `<button class="w" data-act="tab" data-v="write" ${a === 'write' ? 'aria-current="page"' : ''}><span class="wr">${ic('pen', 21)}</span><span>${t.t}</span></button>`
+    : `<button data-act="tab" data-v="${t.id}" ${a === t.id ? 'aria-current="page"' : ''}>${ic(t.i, 22, a === t.id && t.id !== 'disc')}<span>${t.t}</span></button>`).join('');
+}
+
+/* ---------- عناصر مشتركة ---------- */
+function topbar() {
+  return `<header class="topbar">
+    <button class="brand" data-act="tab" data-v="home" aria-label="${BRAND} — الرئيسية">
+      <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F2438" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 8h14M5 16h9"/><path d="M8 12h11" stroke-dasharray="1.5 3"/></svg></span>
+      <span>${BRAND}</span></button>
+    <div class="top-actions">
+      <button class="pill-sm" data-act="states" aria-label="تجربة الحالات">${ic('sliders', 18)}<span class="lbl">تجربة الحالات</span></button>
+    </div></header>`;
+}
+function subbar(title, extra = '') {
+  return `<div class="subbar"><button class="icon-btn" data-act="back" aria-label="رجوع">${ic('back', 20)}</button><div class="title">${esc(title)}</div>${extra}</div>`;
+}
+function textCard(t) {
+  const a = person(t.author); const mine = me() && t.author === me().id;
+  return `<article class="tcard${mine ? ' mine' : ''}" data-act="open" data-id="${t.id}">
+    ${t.mood ? `<div class="mood">${moodSvg(t.mood)}</div>` : ''}
+    <div class="row"><span class="by-line">${av(a, 'sm')}<span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span></span></div>
+    <h3>${esc(t.title || 'بلا عنوان')}</h3>
+    <p class="ex${t.poem ? ' poem' : ''}">${esc(excerpt(t))}</p>
+    <div class="foot"><span>${esc(t.cat)} · ${rel(t.createdAt)}${mine ? ' · نصّك' : ''}</span>
+      <button class="open" data-act="open" data-id="${t.id}">أكمل القراءة ${ic('fwd', 16)}</button></div></article>`;
+}
+function progress(n) {
+  const k = Math.min(n, NEEDED);
+  return `<div class="prog"><span class="dots" aria-hidden="true">${Array.from({ length: NEEDED }, (_, i) => `<i class="${i < k ? 'on' : ''}"></i>`).join('')}</span>
+    <b>${ar(k)} من ${ar(NEEDED)}</b><span class="sr">تأييدات</span></div>`;
+}
+function nlInvite(compact) {
+  return `<div class="nl-card"><h3>${ic('mail', 20)} النشرة الأسبوعية</h3>
+   <p>كل أسبوع، كلمات تستحق وقتك. مقتبسات مختارة تقودك إلى نصوصها كاملة — لا تحتاج حسابًا.</p>
+   <button class="btn btn-ghost btn-sm" data-act="go" data-v="newsletter">${compact ? 'اعرف أكثر' : 'تصفّح النشرة واشترك'}</button></div>`;
+}
+function voiceCard(p) {
+  const n = endorsements(p.id).length; const ok = isApproved(p);
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${blob(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="snip">${esc(p.sample.body)}</p>
+    ${ok ? `<span class="tag sage">${ic('check', 14)} انضم${verb(p, '', 'ت')} حديثًا</span>` : progress(n)}
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">${ok ? 'ادخل ' + verb(p, 'ركنه', 'ركنها') : 'ساعد هذا الصوت على الوصول'}</button></div>`;
+}
+function hotQuotes(filterCat, q) {
+  const out = [];
+  sortedTexts().forEach(t => t.hot.forEach(i => {
+    const s = sentences(t)[i]; const a = person(t.author);
+    if (filterCat && filterCat !== 'الكل' && t.cat !== filterCat) return;
+    if (q && !(s.text + a.name + t.title).toLowerCase().includes(q)) return;
+    out.push({ sid: s.sid, text: s.text, t, a });
+  }));
+  return out;
+}
+function qorg(x) {
+  return `<button class="qorg" data-act="open" data-id="${x.t.id}" data-sid="${x.sid}">
+    <p>«${esc(x.text.replace(/\n/g, ' / '))}»</p>
+    <span class="who">${av(x.a, 'sm')}<span><span class="nm" style="font-size:14px">${esc(x.a.name)}</span><br><span class="meta">${esc(x.t.title)} · ${likeWord(likeCount(x.sid))}</span></span></span></button>`;
+}
+
+
+/* ---------- الجولة الثانية: حضور الكتّاب والورق ---------- */
+const tintOf = p => (p && p.tint) || AVC[hash((p && p.id) || 'x') % AVC.length];
+const readersWord = n => plural(n, 'قارئ واحد', 'قارئان', 'قرّاء', 'قارئًا');
+const daysWord = d => d <= 1 ? 'يوم واحد' : d === 2 ? 'يومين' : d <= 10 ? ar(d) + ' أيام' : ar(d) + ' يومًا';
+const blob = (p, cls = '', onTint = true) => `<span class="blob ${cls}" style="background:${!p ? 'var(--paper)' : onTint ? 'var(--surface)' : tintOf(p)}" aria-hidden="true">${p ? esc(p.name.trim()[0]) : ''}</span>`;
+const PROMPTS = ['ما الشيء الصغير الذي لاحظته هذا الأسبوع ولم يلاحظه أحد؟', 'جملة سمعتها ولم تغادرك؟', 'مكان تعود إليه في ذاكرتك أكثر مما تزوره؟', 'رسالة لم ترسلها بعد — لمن كانت؟', 'ما الذي تغيّر فيك هذا العام دون أن تنتبه؟', 'عادة يومية تحمل معنى أكبر مما تبدو؟', 'سؤال تتمنى لو يسألك إياه أحد؟', 'شيء اشتريته وكان ثمنه أكبر من سعره؟'];
+function moodSvg(k) {
+  const M = {
+    window: `<svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ضوء نافذة على جدار المطبخ"><rect width="400" height="170" fill="#F4ECDF"/><rect y="128" width="400" height="42" fill="#EBDFCB"/><path d="M236 118 L328 118 L400 170 L268 170Z" fill="#FFF0AA" opacity=".7"/><path d="M168 24 L214 24 L246 170 L150 170Z" fill="#FFF6D2" opacity=".55"/><rect x="236" y="14" width="92" height="104" rx="6" fill="#DCD1EF"/><circle cx="262" cy="44" r="11" fill="#FFF0AA"/><path d="M236 92c26-10 58-12 92-2v28h-92z" fill="#CFC2E6"/><rect x="236" y="14" width="92" height="104" rx="6" fill="none" stroke="#FFFEFB" stroke-width="7"/><path d="M282 14v104M236 66h92" stroke="#FFFEFB" stroke-width="5"/><path d="M70 128c2-24 16-36 16-36s12 16 6 36z" fill="#C5D7B6"/><path d="M84 128c6-18 22-26 22-26s2 16-8 26z" fill="#D6E3C9"/><rect x="60" y="124" width="46" height="24" rx="6" fill="#F2B6A0"/></svg>`,
+    page: `<svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" role="img" aria-label="صفحة كتاب مفتوح وورقة مجففة"><rect width="400" height="170" fill="#EFEAF8"/><path d="M60 44 Q130 28 200 48 L200 162 Q130 144 60 156Z" fill="#FFFEFB"/><path d="M340 44 Q270 28 200 48 L200 162 Q270 144 340 156Z" fill="#FBF6EC"/><path d="M200 48V162" stroke="#E8E0D9" stroke-width="2"/><g stroke="#E3DAE8" stroke-width="3" stroke-linecap="round"><path d="M84 66h92M84 80h86M84 94h92M84 108h64M224 66h92M224 80h74M224 94h92M224 122h80"/></g><path d="M226 108h82" stroke="#FFE68A" stroke-width="11" stroke-linecap="round"/><path d="M228 108h76" stroke="#D9CDE2" stroke-width="3" stroke-linecap="round"/><path d="M286 30v40l8-7 8 7V30z" fill="#F2B6A0"/><path d="M96 138c20-22 46-24 62-14-18 4-38 10-62 14z" fill="#C5D7B6"/><path d="M96 138c22-8 42-12 62-14" stroke="#AFC69D" stroke-width="1.5" fill="none"/></svg>`,
+    leaves: `<svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ظل أغصان على جدار دافئ"><rect width="400" height="170" fill="#FADFD4"/><path d="M0 0H400V170Z" fill="#FFF0AA" opacity=".35"/><g fill="#E6B6A2" opacity=".6"><path d="M30 -6C90 46 150 92 250 176" stroke="#E6B6A2" stroke-width="4" fill="none"/><ellipse cx="70" cy="34" rx="24" ry="9" transform="rotate(38 70 34)"/><ellipse cx="96" cy="48" rx="22" ry="8" transform="rotate(-20 96 48)"/><ellipse cx="128" cy="74" rx="26" ry="9" transform="rotate(42 128 74)"/><ellipse cx="160" cy="92" rx="22" ry="8" transform="rotate(-15 160 92)"/><ellipse cx="196" cy="124" rx="26" ry="9" transform="rotate(40 196 124)"/><path d="M300 -10C300 50 330 100 410 130" stroke="#E6B6A2" stroke-width="3" fill="none"/><ellipse cx="306" cy="30" rx="20" ry="7" transform="rotate(70 306 30)"/><ellipse cx="322" cy="66" rx="22" ry="8" transform="rotate(20 322 66)"/><ellipse cx="358" cy="102" rx="22" ry="8" transform="rotate(55 358 102)"/></g></svg>`
+  };
+  return M[k] || '';
+}
+function sentencesHtml(t) {
+  let html = '<p>'; let i = 0;
+  t.segs.forEach(seg => {
+    if (seg === '¶') { html += '</p><p>'; return; }
+    if (seg === '↵') { html += '<br>'; return; }
+    const k = i++; const sid = t.id + '-' + k; const hot = t.hot.includes(k); const mine = isLiked(sid);
+    html += `<span class="s${hot ? ' hot' : ''}${mine ? ' mine' : ''}" data-sid="${sid}" tabindex="0" role="button" aria-haspopup="true">${esc(seg).replace(/\n/g, '<br>')}${hot ? '<span class="hm" aria-hidden="true">✦</span><span class="sr"> (جملة توقّف عندها كثيرون)</span>' : ''}${mine ? `<span class="mm" aria-hidden="true">${ic('heart', 13, true)}</span><span class="sr"> (في مقتبساتك)</span>` : ''}</span>${t.poem ? '<br>' : ' '}`;
+  });
+  return html + '</p>';
+}
+function fullBlock(t, label, poemish) {
+  const a = person(t.author);
+  return `<article class="b-full${poemish ? ' poemish' : ''}">
+    ${label ? `<div class="eyebrow">${label}</div>` : ''}
+    <button class="by-line" style="margin-top:12px" data-act="profile" data-id="${a.id}">${av(a)}<span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span></button>
+    <h3>${esc(t.title || 'بلا عنوان')}</h3>
+    <div class="read-body sm">${sentencesHtml(t)}</div>
+    <div class="foot"><span class="muted">${esc(t.cat)} · ${rel(t.createdAt)}</span><button class="link" data-act="open" data-id="${t.id}">افتح النص</button></div>
+  </article>`;
+}
+function quoteBlock() {
+  const ft = S.texts.find(t => t.feature) || S.texts[0]; const fi = ft.hot[0] ?? 0; const fs = sentences(ft)[fi]; const fa = person(ft.author);
+  const liked = isLiked(fs.sid);
+  return `<div class="qwrap"><section class="b-quote" aria-label="جملة بقيت معنا هذا الأسبوع"><span class="ribbon" aria-hidden="true"></span>
+    <div class="eyebrow">جملة بقيت معنا هذا الأسبوع</div>
+    <blockquote><span class="mark">${esc(fs.text)}</span></blockquote>
+    <button class="by-line" data-act="profile" data-id="${fa.id}">${av(fa, 'sm')}<span><b>${esc(fa.name)}</b><span class="tl">من «${esc(ft.title)}» · ${likeLine(likeCount(fs.sid))}</span></span></button>
+    <div class="btn-row" style="margin-top:16px"><button class="btn btn-primary" data-act="open" data-id="${ft.id}" data-sid="${fs.sid}">اقرأها في سياقها</button>
+      <button class="btn btn-ghost" data-act="like-direct" data-sid="${fs.sid}" aria-pressed="${liked}">${ic('heart', 19, liked)} ${liked ? 'في مقتبساتك' : 'احتفظ بها'}</button></div>
+  </section></div>`;
+}
+const likeLine = n => n ? 'توقّف عندها ' + readersWord(n) : 'لم يتوقف عندها أحد بعد';
+function writerBlock(p, label) {
+  const t = sortedTexts().find(x => x.author === p.id); const hi = t ? (t.hot[0] ?? 0) : 0; const line = t ? sentences(t)[hi] : null;
+  return `<section class="b-writer" style="--tint:${tintOf(p)}">
+    <div class="eyebrow">${label}</div>
+    <div class="w-top">${blob(p)}<div><h3>${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="voice-bio">«${esc(p.bio)}»</p>
+    <div class="tags"><span class="tl" style="display:inline">${verb(p, 'يكتب عن', 'تكتب عن')}</span>${(p.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('')}</div>
+    ${line ? `<button class="w-line" data-act="open" data-id="${t.id}" data-sid="${line.sid}"><span class="mark">${esc(line.text.replace(/\n/g, ' / '))}</span><small>من «${esc(t.title)}» — اقرأ النص</small></button>` : ''}
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">ادخل ركن ${esc(p.name.split(' ')[0])}</button>
+  </section>`;
+}
+function voiceBlock(p) {
+  const n = endorsements(p.id).length;
+  return `<section class="b-voice"><div class="eyebrow">ساعد هذا الصوت على الوصول</div>
+    <div class="w-top">${blob(p, 'sm', false)}<div><h3 style="font-size:19px">${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="voice-bio" style="font-size:16.5px">«${esc(p.bio)}»</p>
+    <div class="sample-mini"><b>${verb(p, 'من عينة كتابته', 'من عينة كتابتها')}: «${esc(p.sample.title)}»</b><p>${esc(p.sample.body)}</p></div>
+    ${progress(n)}<p class="wp">رحّب ${readersWord(n)} بهذا الصوت حتى الآن. التأييد ترحيب، لا تقييم.</p>
+    <button class="btn btn-ghost btn-sm" style="margin-top:12px" data-act="profile" data-id="${p.id}">اقرأ العينة كاملة</button></section>`;
+}
+function letterBlock() {
+  return `<section class="b-letter"><span class="stamp" aria-hidden="true">${ic('heart', 20)}</span><div class="eyebrow">رسالة الأسبوع</div>
+    <h3>كل أسبوع، كلمات تستحق وقتك</h3>
+    <p>نجمع ما توقّف عنده القرّاء في رسالة واحدة هادئة: جمل، وأسماء كتّابها، وطريق إلى نصوصهم. لا تحتاج حسابًا، وتلغيها متى شئت.</p>
+    <button class="btn btn-ghost btn-sm" style="margin-top:14px" data-act="go" data-v="newsletter">اقرأ عيّنة من الرسالة</button></section>`;
+}
+function feedEnd() {
+  return `<div class="feed-end"><div class="empty-art small" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h3>هذا ما اخترناه لك اليوم</h3><p>خذ نفسًا. وحين تريد المزيد، النصوص والأصوات كلها بانتظارك.</p>
+    <button class="btn btn-ghost" data-act="tab" data-v="discover">استكشف المزيد</button></div>`;
+}
+function writerMini(p) {
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${blob(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="snip">${esc(p.bio)}</p><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">ادخل ${verb(p, 'ركنه', 'ركنها')}</button></div>`;
+}
+
+/* ================= الشاشات ================= */
+function vHome() {
+  const m = me(); const h = new Date().getHours();
+  const greet = h < 12 ? 'صباح الخير' : 'مساء الخير';
+  const name = m ? m.name.split(' ')[0] : '';
+  const ft = S.texts.find(t => t.feature) || S.texts[0];
+  let feed = '';
+  if (ui.homeCat === 'الكل') {
+    const R = sortedTexts().filter(t => t.id !== ft.id);
+    const fresh = R.find(t => !t.poem && plain(t).length < 470) || R[0];
+    let rest = R.filter(t => t !== fresh);
+    const wt = rest.find(t => t.author !== fresh.author && !t.poem && !t.mood) || rest.find(t => !t.poem) || null;
+    const writer = wt ? person(wt.author) : null;
+    rest = rest.filter(t => t !== wt);
+    const prose = rest.filter(t => !t.poem); const poem = rest.find(t => t.poem);
+    const voice = candidates().find(p => !isApproved(p));
+    feed = [
+      fullBlock(fresh, fresh.author === (m && m.id) ? 'نصّك، كما يراه القرّاء' : 'كُتب حديثًا — يُقرأ في دقيقة'),
+      quoteBlock(),
+      prose[0] ? textCard(prose[0]) : '',
+      writer ? writerBlock(writer, 'أصوات قد تشعر بالقرب منها') : '',
+      poem ? fullBlock(poem, 'شعر قصير، يُقرأ كاملًا', true) : '',
+      voice ? voiceBlock(voice) : '',
+      prose[1] ? textCard(prose[1]) : '',
+      letterBlock(),
+      feedEnd()].join('');
+  } else {
+    const list = sortedTexts().filter(t => t.cat === ui.homeCat);
+    feed = list.length ? list.map((t, i) => i === 0 && plain(t).length < 520 ? fullBlock(t, 'من «' + esc(ui.homeCat) + '»', t.poem) : textCard(t)).join('') + feedEnd()
+      : `<div class="empty"><h3>لا نصوص في «${esc(ui.homeCat)}» حاليًا</h3><p>جرّب اهتمامًا آخر.</p></div>`;
+  }
+  const writers = Object.values(S.people).filter(p => S.texts.some(t => t.author === p.id)).slice(0, 5);
+  return `${topbar()}
+  <section class="hello2"><p class="hi">${greet}${name ? '، ' + esc(name) : ''}</p><h1>خذ وقتك، واقرأ شيئًا يشبهك.</h1></section>
+  <div class="chips" style="margin-top:12px" role="group" aria-label="ماذا تحب أن تقرأ الآن؟">${['الكل', ...CATS].map(c => `<button class="chip" data-act="homecat" data-v="${c}" aria-pressed="${ui.homeCat === c}">${c === 'الكل' ? 'من كل شيء' : esc(c)}</button>`).join('')}</div>
+  <div class="home-split"><div class="feed">${feed}</div>
+  <aside class="side"><section class="section"><div class="sec-head"><h2>أصوات قد تشعر بالقرب منها</h2></div><div class="list">
+    ${writers.map(p => `<button class="row-card" data-act="profile" data-id="${p.id}" style="background:${tintOf(p)};border-color:transparent">${blob(p, 'sm')}<span class="grow"><span class="t">${esc(p.name)}</span><br><span class="d">${esc(p.tagline || '')}</span></span>${ic('fwd', 18)}</button>`).join('')}
+  </div></section></aside></div>`;
+}
+function vDiscover() {
+  return `${topbar()}
+  <h1 style="font-size:26px;font-weight:800;margin-top:6px">اكتشف</h1>
+  <p class="muted" style="margin-top:2px">نصوص، وأصوات، وجمل قد تشعر بالقرب منها.</p>
+  <div class="search" style="margin-top:14px">${ic('search', 20)}<label class="sr" for="dq">ابحث</label>
+    <input id="dq" type="search" placeholder="ابحث عن نص، كاتب، أو جملة…" value="${esc(ui.discQ)}" data-in="discq" autocomplete="off"></div>
+  <div class="chips" style="margin-top:12px" role="group" aria-label="تصفية حسب التخصص">${['الكل', ...CATS].map(c => `<button class="chip" data-act="disccat" data-v="${c}" aria-pressed="${ui.discCat === c}">${esc(c)}</button>`).join('')}</div>
+  <div id="disc-results">${discResults()}</div>`;
+}
+function discResults() {
+  const q = ui.discQ.trim().toLowerCase(); const cat = ui.discCat;
+  const texts = sortedTexts().filter(t => (cat === 'الكل' || t.cat === cat) &&
+    (!q || (t.title + ' ' + plain(t) + ' ' + person(t.author).name + ' ' + t.cat).toLowerCase().includes(q)));
+  const quotes = hotQuotes(cat, q);
+  const voices = candidates().filter(p => (cat === 'الكل' || p.sample.cat === cat) && (!q || (p.name + p.bio + p.sample.body).toLowerCase().includes(q)));
+  const writers = Object.values(S.people).filter(p => S.texts.some(t => t.author === p.id) && (cat === 'الكل' || (p.interests || []).includes(cat)) && (!q || (p.name + p.bio + (p.tagline || '')).toLowerCase().includes(q)));
+  const nothing = !texts.length && !quotes.length && !voices.length && !writers.length;
+  if (nothing) return `<div class="empty"><h3>لم نجد شيئًا${q ? ' لـ «' + esc(ui.discQ.trim()) + '»' : ''}</h3><p>جرّب كلمة أخرى، أو اسم كاتب، أو تخصصًا مختلفًا.</p>
+    <button class="btn btn-ghost btn-sm" data-act="disc-clear" style="margin-top:12px">مسح البحث والفلاتر</button></div>`;
+  const label = q || cat !== 'الكل' ? `<p class="muted" style="margin-top:14px;font-size:14px" role="status">${texts.length ? plural(texts.length, 'نص واحد', 'نصّان', 'نصوص', 'نصًا') : 'لا نصوص'}${cat !== 'الكل' ? ' في «' + esc(cat) + '»' : ''}</p>` : '';
+  return `${label}
+  ${writers.length ? `<section class="section"><div class="sec-head"><h2>أصوات قد تشعر بالقرب منها</h2></div><div class="hscroll">${writers.map(writerMini).join('')}</div></section>` : ''}
+  ${quotes.length ? `<section class="section"><div class="sec-head"><h2>جمل توقّف عندها القرّاء</h2></div><div class="hscroll">${quotes.map(qorg).join('')}</div></section>` : ''}
+  ${voices.length ? `<section class="section"><div class="sec-head"><h2>أصوات جديدة تنتظر الترحيب</h2></div><div class="hscroll">${voices.map(voiceCard).join('')}</div></section>` : ''}
+  ${texts.length ? `<section class="section"><div class="sec-head"><h2>${q || cat !== 'الكل' ? 'النصوص' : 'كل النصوص'}</h2></div><div class="grid two">${texts.map(textCard).join('')}</div></section>` : ''}`;
+}
+function vRead() {
+  const t = textById(view.p.id);
+  if (!t) return `${subbar('نص')}<div class="empty"><h3>هذا النص غير موجود</h3></div>`;
+  const a = person(t.author); const first = a.name.split(' ')[0];
+  const more = sortedTexts().filter(x => x.author === t.author && x.id !== t.id);
+  return `${subbar(t.title || 'بلا عنوان', `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/t/${t.id}" aria-label="نسخ رابط النص">${ic('share', 19)}</button>`)}
+  <article class="reader">
+    ${t.mood ? `<div class="mood banner">${moodSvg(t.mood)}</div>` : ''}
+    <header class="reader-head"><span class="tag">${esc(t.cat)}</span>
+      <h1>${esc(t.title || 'بلا عنوان')}</h1>
+      <button class="by-line big" data-act="profile" data-id="${a.id}">${av(a)}<span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span>${ic('fwd', 18)}</button>
+      <div class="legend"><span class="s-demo">✦ مظلّلة</span><span>جمل توقّف عندها كثيرون. اضغط أي جملة لتحتفظ بها.</span></div>
+    </header>
+    <div class="paper"><span class="ribbon" aria-hidden="true"></span><div class="read-body" lang="ar">${sentencesHtml(t)}</div>
+      <div class="paper-foot">${esc(t.cat)} · ${readTime(t)} · ${rel(t.createdAt)}</div></div>
+    <div class="reader-foot">
+      <section class="about" style="--tint:${tintOf(a)}"><div class="eyebrow">عن ${esc(first)}، ${verb(a, 'بصوته', 'بصوتها')}</div>
+        <div class="w-top">${blob(a, 'sm')}<div><h3 style="font-size:19px">${esc(a.name)}</h3><span class="tl">${esc(a.tagline || '')}</span></div></div>
+        <p class="voice-bio" style="font-size:17px">«${esc(a.bio)}»</p>
+        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${a.id}">ادخل ${verb(a, 'ركنه', 'ركنها')}</button>${more.length ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${more[0].id}">${verb(a, 'نصّه', 'نصّها')}: «${esc(more[0].title)}»</button>` : ''}</div></section>
+      ${letterBlock()}
+    </div>
+  </article>`;
+}
+function quoteItems() { return Object.entries(myLikes()).sort((a, b) => b[1] - a[1]).map(([sid, ts]) => ({ sid, ts, x: bySid(sid) })).filter(o => o.x); }
+function vQuotes() {
+  const m = me();
+  const emptyArt = `<div class="empty-art" aria-hidden="true"><i></i><i></i><i></i></div>`;
+  if (!m) return `${topbar()}<h1 class="page-h">مقتبساتي</h1>
+    <div class="empty" style="margin-top:20px">${emptyArt}<h3>ستجد هنا الكلمات التي أحببت الاحتفاظ بها</h3><p>مقتبساتك تخص حسابك وحدك. سجّل دخولك لتبدأ رفّك الخاص.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:16px"><button class="btn btn-primary" data-act="login">دخول أو إنشاء حساب</button></div></div>`;
+  const all = quoteItems();
+  const cats = ['الكل', ...CATS.filter(c => all.some(o => o.x.t.cat === c))];
+  if (!cats.includes(ui.qFolder)) ui.qFolder = 'الكل';
+  const FC = ['var(--honey-soft)', 'var(--lavender)', 'var(--peach-soft)', 'var(--sage)', 'var(--lav-soft)', 'var(--peach)'];
+  return `${topbar()}
+  <h1 class="page-h">مقتبساتي</h1><p class="page-sub">الكلمات التي احتفظت بها، في مكان واحد تعود إليه.</p>
+  ${all.length ? `
+  <div class="folders" role="group" aria-label="رفوف المقتبسات">${cats.map((c, i) => `<button class="folder" style="--fc:${FC[i % FC.length]}" data-act="qfolder" data-v="${c}" aria-pressed="${ui.qFolder === c}"><span class="bk"></span><span class="pp b"></span><span class="pp a"></span><span class="fr"><span class="fn">${ui.qFolder === c ? ic('check', 15) : ''}${c === 'الكل' ? 'كل الأوراق' : esc(c)}</span></span></button>`).join('')}</div>
+  <div class="q-tools"><div class="search">${ic('search', 20)}<label class="sr" for="qq">ابحث في مقتبساتك</label><input id="qq" type="search" placeholder="كلمة، أو اسم كاتب…" value="${esc(ui.qQ)}" data-in="qq" autocomplete="off"></div>
+    <button class="btn btn-soft btn-sm" data-act="q-random" style="min-height:52px">${ic('spark', 18)} ورقة للإلهام</button></div>
+  <div id="q-results">${quoteResults(all)}</div>` : `
+  <div class="empty" style="margin-top:24px">${emptyArt}
+    <h3>ستجد هنا الكلمات التي أحببت الاحتفاظ بها</h3><p>حين تلمسك جملة في نص، اضغط عليها ثم على القلب.<br>ستصل إلى هنا مع اسم كاتبها وطريق إلى نصّها.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:16px"><button class="btn btn-primary" data-act="tab" data-v="home">ابحث عن جملتك الأولى</button></div></div>`}`;
+}
+function quoteResults(all) {
+  all = all || quoteItems();
+  const q = ui.qQ.trim().toLowerCase();
+  const list = all.filter(o => (ui.qFolder === 'الكل' || o.x.t.cat === ui.qFolder) && (!q || (o.x.text + person(o.x.t.author).name + o.x.t.title).toLowerCase().includes(q)));
+  if (!list.length) return `<div class="empty"><h3>لا أوراق مطابقة</h3><p>جرّب كلمة أخرى أو رفًا آخر.</p></div>`;
+  return `<div class="qlist">${list.map(o => { const a = person(o.x.t.author); return `<div class="keep" data-ksid="${o.sid}"><span class="tape" aria-hidden="true"></span>
+    <blockquote>${esc(o.x.text)}</blockquote>
+    <button class="from" data-act="open" data-id="${o.x.t.id}" data-sid="${o.sid}">${av(a, 'sm')}<span><b>${esc(a.name)}</b><span class="tl">من «${esc(o.x.t.title || 'بلا عنوان')}» — العودة إلى النص</span></span>${ic('fwd', 18)}</button>
+    <div class="acts"><span class="when">احتفظت بها ${rel(o.ts)}</span><span class="grow"></span>
+      <button class="icon-btn" data-act="copy-q" data-sid="${o.sid}" aria-label="نسخ المقتبس">${ic('copy', 18)}</button>
+      <button class="icon-btn" data-act="unsave" data-sid="${o.sid}" aria-label="إزالة من مقتبساتي">${ic('trash', 18)}</button></div></div>`; }).join('')}</div>`;
+}
+function statusBlock(p, own) {
+  const n = endorsements(p.id).length;
+  if (!p.member) return '';
+  if (!isApproved(p)) {
+    const left = NEEDED - n;
+    return `<div class="status wait"><h3>${ic('clock', 20)} ${own ? 'مساحتك تنتظر ترحيب القرّاء' : 'صوت جديد ينتظر الترحيب'}</h3>${progress(n)}
+      <p>${own ? (n ? 'رحّب بك ' + readersWord(n) + ' حتى الآن. ' : '') + 'بقي ' + endorseWord(left) + ' لتُفتح مساحة النشر. شارك ركنك مع من يعرف كتابتك.' : 'رحّب ' + readersWord(n) + ' بهذا الصوت حتى الآن. حين يكتمل ' + ar(NEEDED) + ' تُفتح ' + verb(p, 'مساحته', 'مساحتها') + ' للكتابة. التأييد ترحيب، لا تقييم.'}</p></div>`;
+  }
+  if (canPublishNow(p)) return `<div class="status ok"><h3>${ic('check', 20)} ${own ? (p.justApproved ? 'أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.' : 'صفحتك البيضاء لهذا الأسبوع جاهزة') : verb(p, 'يكتب معنا', 'تكتب معنا')}</h3>
+      ${own ? `<p>نص واحد كل أسبوع، حتى ${ar(LIMIT)} حرف. خذ وقتك.</p><div class="btn-row"><button class="btn btn-primary btn-sm" data-act="tab" data-v="write">${ic('pen', 18)} افتح المحرر</button></div>` : ''}</div>`;
+  const nx = nextPubAt(p); const d = Math.ceil((nx - Date.now()) / DAY);
+  return `<div class="status later"><h3>${ic('clock', 20)} ${own ? 'نصّك لهذا الأسبوع وصل إلى القرّاء' : verb(p, 'يكتب معنا', 'تكتب معنا')}</h3>
+    ${own ? `<p>موعدك القادم مع الصفحة البيضاء <b>${fmtDay(nx)}</b>، بعد ${daysWord(d)}. حتى ذلك الحين، مسوداتك بانتظارك.</p>` : ''}</div>`;
+}
+function vProfile() {
+  const p = person(view.p.id); if (!p) return subbar('ركن') + '<div class="empty"><h3>هذه الصفحة غير موجودة</h3></div>';
+  const m = me(); const own = m && m.id === p.id; const appr = isApproved(p); const first = p.name.split(' ')[0];
+  const texts = sortedTexts().filter(t => t.author === p.id);
+  const myEmail = m && normEmail(m.email);
+  const already = myEmail && endorsements(p.id).includes(myEmail);
+  const top = texts.find(t => t.hot.length); const line = top ? sentences(top)[top.hot[0]] : null;
+  const cta = verb(p, 'أؤيد انضمامه', 'أؤيد انضمامها');
+  return `${subbar(own ? 'ركني' : 'ركن ' + first, `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}" aria-label="نسخ رابط الركن">${ic('share', 19)}</button>`)}
+  <div class="reader">
+  <section class="corner" style="--tint:${tintOf(p)}"><span class="tape" aria-hidden="true"></span>
+    <div class="w-top">${blob(p, 'lg')}<div style="min-width:0"><h1>${esc(p.name)}</h1><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="corner-label">${own ? 'بصوتك' : verb(p, 'بصوته', 'بصوتها')}</p>
+    <p class="voice-bio">«${esc(p.bio || '…')}»</p>
+    <div class="tags"><span class="tl" style="display:inline;font-weight:800">${own ? 'تكتب عن' : verb(p, 'يكتب عن', 'تكتب عن')}</span>${(p.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('')}</div>
+    ${own ? `<button class="btn btn-ghost btn-sm" data-act="edit-profile">${ic('edit', 17)} عدّل نبذتك</button>` : ''}
+  </section>
+  ${line ? `<section class="section"><div class="eyebrow">جملة من ${own ? 'ركنك' : verb(p, 'ركنه', 'ركنها')}</div>
+    <button class="w-line big" data-act="open" data-id="${top.id}" data-sid="${line.sid}"><span class="mark">${esc(line.text)}</span><small>من «${esc(top.title)}» · ${likeLine(likeCount(line.sid))}</small></button></section>` : ''}
+  ${p.sample ? `<section class="section"><div class="sec-head"><h2>عينة كتابة</h2><span class="tag peach">للتعارف والترحيب</span></div>
+    <div class="sample-box"><span class="ribbon" aria-hidden="true"></span><h3 style="font-size:19px;font-weight:800;margin-bottom:6px">${esc(p.sample.title)}</h3><p class="read-body">${esc(p.sample.body)}</p>
+    <p class="muted" style="font-size:13px;margin-top:10px">العينة للتعارف فقط؛ ليست منشورًا عامًا ولا تُحتسب ضمن نص الأسبوع.</p></div></section>` : ''}
+  ${p.member && !appr ? `<section class="section"><div class="eyebrow">ساعد هذا الصوت على الوصول</div>${statusBlock(p, own)}
+    ${own ? `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}">${ic('share', 19)} شارك ركنك</button></div>
+        <p class="muted" style="font-size:13px;margin-top:8px">الترحيب يأتي من قرّائك؛ لا يمكنك تأييد نفسك.</p>`
+      : `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary btn-block" data-act="endorse" data-id="${p.id}">${ic('heart', 19)} ${cta}</button></div>
+        ${already ? `<p class="msg info">${ic('info', 18)}<span>سبق أن رحّبت${verb(m, '', 'ِ')} بـ${esc(first)} بإيميلك الموثق. يمكنك الترحيب بإيميل آخر تملكه.</span></p>` : `<p class="muted" style="font-size:13px;margin-top:8px">التأييد لا ينشئ حسابًا ولا يشترك بك في أي بريد.</p>`}`}</section>` : ''}
+  ${own && appr ? `<section class="section">${statusBlock(p, true)}</section>` : ''}
+  ${texts.length ? `<section class="section"><div class="sec-head"><h2>${own ? 'نصوصي' : 'نصوص ' + verb(p, 'كتبها', 'كتبتها')}</h2></div><div class="grid">${texts.map(textCard).join('')}</div></section>` : ''}
+  <section class="section">${letterBlock()}</section></div>`;
+}
+function vMe() {
+  const m = me();
+  if (!m) return `${topbar()}
+  <section class="profile" style="margin-top:6px"><div class="top">${av(null, 'lg')}<div><h1>أهلًا بك</h1><div class="muted" style="font-size:14px">أنت تتصفح كزائر</div></div></div>
+    <p class="bio">في ${BRAND} ثلاثة أشياء منفصلة، اختر منها ما تريد فقط:</p>
+    <div class="three"><div><b>حساب قارئ</b>تحفظ الجمل في «مقتبساتي» وتبني صفحة كاتب لاحقًا.</div>
+      <div><b>تأييد كاتب</b>بإيميل موثق فقط، بلا حساب ولا اشتراك.</div><div><b>النشرة الأسبوعية</b>اشتراك اختياري بالبريد، يُلغى متى شئت.</div></div>
+    <div class="btn-row" style="margin-top:16px"><button class="btn btn-primary" data-act="signup">إنشاء حساب</button><button class="btn btn-ghost" data-act="login">دخول تجريبي</button></div>
+    <div class="btn-row" style="margin-top:8px"><button class="btn btn-soft" data-act="go" data-v="newsletter">${ic('mail', 18)} النشرة — بدون حساب</button></div></section>`;
+  const appr = isApproved(m); const myTexts = sortedTexts().filter(t => t.author === m.id);
+  const d = S.drafts[m.id]; const sub = subOf(m.email); const quotesN = Object.keys(myLikes()).length;
+  const endorsedBy = Object.keys(S.endorse).filter(w => w !== m.id && S.endorse[w].includes(normEmail(m.email))).map(person).filter(Boolean);
+  const roleLbl = appr ? verb(m, 'كاتب معتمد', 'كاتبة معتمدة') : (m.sample || endorsements(m.id).length ? verb(m, 'مرشح', 'مرشحة') + ' للكتابة' : verb(m, 'قارئ', 'قارئة'));
+  return `${topbar()}
+  <section class="profile" style="margin-top:6px"><div class="top">${av(m, 'lg')}<div style="flex:1;min-width:0"><h1>${esc(m.name)}</h1><div class="muted" style="font-size:14px">${roleLbl}</div></div>
+    <button class="icon-btn" data-act="edit-profile" aria-label="تعديل النبذة والاهتمامات">${ic('edit', 19)}</button></div>
+    <p class="bio">${esc(m.bio || 'لم تُضف نبذة بعد.')}</p>
+    <div class="tags">${(m.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('') || '<span class="muted" style="font-size:14px">بلا اهتمامات محددة</span>'}</div>
+    ${statusBlock(m, true)}
+    ${!appr ? `<div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${m.id}">ركني</button><button class="btn btn-ghost btn-sm" data-act="copy-link" data-v="${DEMO_HOST}/@${m.id}">${ic('share', 17)} نسخ رابطها</button></div>` : ''}
+  </section>
+  ${myTexts.length ? `<section class="section"><div class="sec-head"><h2>نصّي المنشور</h2></div><div class="grid">${myTexts.slice(0, 2).map(textCard).join('')}</div></section>` : ''}
+  <section class="section"><div class="sec-head"><h2>المسودات</h2></div>
+    ${d && (d.body || d.title) ? `<button class="row-card" data-act="tab" data-v="write">${ic('pen', 20)}<span class="grow"><span class="t">${esc(d.title || 'مسودة بلا عنوان')}</span><br><span class="d">${esc((d.body || '').slice(0, 60))}… · حُفظت ${rel(d.savedAt)}</span></span>${ic('fwd', 18)}</button>`
+      : `<div class="row-card"><span class="grow"><span class="d">لا مسودات محفوظة.</span></span><button class="btn btn-ghost btn-sm" data-act="tab" data-v="write">ابدأ مسودة</button></div>`}</section>
+  <section class="section"><div class="list">
+    <button class="row-card" data-act="tab" data-v="quotes">${ic('quote', 20)}<span class="grow"><span class="t">مقتبساتي</span><br><span class="d">${quotesN ? plural(quotesN, 'جملة واحدة', 'جملتان', 'جمل', 'جملة') + ' محفوظة' : 'لا جمل محفوظة بعد'}</span></span>${ic('fwd', 18)}</button>
+    ${endorsedBy.length ? `<div class="row-card">${ic('heart', 20)}<span class="grow"><span class="t">كتّاب أيّدتهم بإيميلك</span><br><span class="d">${endorsedBy.map(p => esc(p.name)).join('، ')}</span></span></div>` : ''}
+  </div></section>
+  <section class="section"><div class="sec-head"><h2>البريد والتفضيلات</h2></div>
+    <div class="profile" style="padding:6px 18px">
+      <div class="kv"><span>الإيميل</span><span><span class="ltr">${esc(m.email)}</span> <span class="tag sage">${ic('check', 13)} موثق تجريبيًا</span></span></div>
+      <div class="kv"><span>النشرة الأسبوعية</span><span>${sub && sub.status === 'active' ? '<span class="tag sage">مشترك</span>' : sub ? '<span class="tag peach">ألغي الاشتراك</span>' : '<span class="tag">غير مشترك</span>'}</span></div>
+      <div class="kv"><span class="muted" style="font-size:13.5px">توثيق إيميلك للتأييد لا يعني الاشتراك في أي بريد.</span><button class="btn btn-ghost btn-sm" data-act="go" data-v="newsletter">إدارة</button></div>
+    </div></section>
+  <section class="section"><div class="btn-row"><button class="btn btn-ghost" data-act="logout">${ic('logout', 19)} الخروج إلى وضع الزائر</button></div></section>`;
+}
+
+function inspireHtml() {
+  return `<span class="ins-ic">${ic('spark', 18)}</span><div class="grow"><small>سؤال للإلهام — اختياري، لن نكتب عنك</small><p>${esc(PROMPTS[ui.prompt % PROMPTS.length])}</p></div>
+    <div class="ins-acts"><button class="btn btn-ghost btn-sm" data-act="prompt-next">سؤال آخر</button><button class="icon-btn" data-act="prompt-hide" aria-label="إخفاء سؤال الإلهام">${ic('x', 16)}</button></div>`;
+}
+function vWrite() {
+  const m = me();
+  if (!m) return `${topbar()}<h1 class="prompt-h">ما الفكرة التي بقيت معك هذا الأسبوع؟</h1>
+    <div class="empty" style="margin-top:16px"><div class="empty-art" aria-hidden="true"><i></i><i></i><i></i></div><h3>الكتابة تبدأ بركن صغير</h3>
+    <p>أنشئ حسابًا ونبذة بصوتك، ثم شارك ركنك. تُفتح مساحة النشر بعد ترحيب ${ar(NEEDED)} قرّاء بإيميلات موثقة ومختلفة.</p>
+    <div class="btn-row" style="justify-content:center;margin-top:16px"><button class="btn btn-primary" data-act="signup">إنشاء حساب</button><button class="btn btn-ghost" data-act="login">دخول تجريبي</button></div></div>`;
+  const b = buf(); const appr = isApproved(m); const can = canPublishNow(m);
+  const n = glen(b.title) + glen(b.body); const over = n > LIMIT;
+  return `${topbar()}
+  <h1 class="prompt-h">ما الفكرة التي بقيت معك هذا الأسبوع؟</h1>
+  <p class="page-sub">اكتبها كما جاءت. لا أحد يستعجلك. <span class="dirty" id="dirty">${dirtyLabel()}</span></p>
+  ${statusBlock(m, true).replace(/<div class="btn-row">.*?<\/div>/s, '')}
+  ${!appr ? `<div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${m.id}">ركني — شاركه مع قرّائك</button></div>` : ''}
+  ${ui.promptHidden ? `<button class="link" style="margin-top:12px" data-act="prompt-show">${ic('spark', 16)} أحتاج سؤالًا للإلهام</button>` : `<div class="inspire" id="inspire">${inspireHtml()}</div>`}
+  <div class="editor roomy">
+    <div class="chips" role="radiogroup" aria-label="التخصص" style="margin:0 -20px 4px;padding:0 20px 8px">${CATS.map(c => `<button class="chip" role="radio" data-act="wcat" data-v="${c}" aria-pressed="${b.cat === c}" aria-checked="${b.cat === c}"><span class="ck">${ic('check', 15)}</span>${esc(c)}</button>`).join('')}</div>
+    <label class="sr" for="wt">العنوان (اختياري)</label><input id="wt" class="ttl" data-in="wtitle" placeholder="عنوان، إن أردت" value="${esc(b.title)}" maxlength="120">
+    <label class="sr" for="wb">النص</label><textarea id="wb" data-in="wbody" placeholder="ابدأ من أي مكان… جملة واحدة صادقة تكفي.">${esc(b.body)}</textarea>
+    <div id="counter">${counterHtml(n)}</div>
+  </div>
+  <div class="btn-row" style="margin-top:14px">
+    <button class="btn btn-ghost" data-act="wsave">حفظ المسودة</button>
+    <button class="btn btn-soft" data-act="wpreview">${ic('eye', 19)} معاينة</button>
+  </div>
+  <div style="margin-top:10px"><button class="btn btn-primary btn-block" id="pubbtn" data-act="wpublish" ${!can || over || !b.body.trim() ? 'aria-disabled="true"' : ''}>${!appr || !can ? ic('lock', 19) : ''} انشر نصّ هذا الأسبوع</button>
+    <p class="muted" id="pubwhy" style="font-size:13.5px;margin-top:8px;text-align:center">${publishWhy(m, n, b)}</p></div>`;
+}
+function buf() {
+  const m = me(); if (!ui.buf[m.id]) { const d = S.drafts[m.id] || {}; ui.buf[m.id] = { title: d.title || '', body: d.body || '', cat: d.cat || (m.interests || [])[0] || 'تأملات' }; }
+  return ui.buf[m.id];
+}
+function dirtyLabel() {
+  const m = me(); const b = buf(); const d = S.drafts[m.id];
+  const same = d ? (d.title === b.title && d.body === b.body && d.cat === b.cat) : (!b.title && !b.body);
+  if (!d && same) return '';
+  return same ? 'المسودة محفوظة · ' + fmtTime(d.savedAt) : 'تغييرات غير محفوظة';
+}
+function counterHtml(n) {
+  const over = n > LIMIT; const near = !over && n >= LIMIT * 0.9; const pct = Math.min(100, n / LIMIT * 100);
+  return `<div class="counter quiet${near ? ' near' : ''}${over ? ' over' : ''}"><span class="num" aria-live="polite">${ar(n)} / ${ar(LIMIT)} حرف</span><span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span></div>
+    ${near ? `<div class="near-msg">${ic('info', 16)} اقتربت من الحد — بقي ${plural(LIMIT - n, 'حرف واحد', 'حرفان', 'أحرف', 'حرفًا')}. العنوان والمسافات تُحتسب.</div>` : ''}
+    ${over ? `<div class="over-msg">${ic('alert', 18)} تجاوزت الحد ${n - LIMIT === 1 ? 'بحرف واحد' : n - LIMIT === 2 ? 'بحرفين' : 'بـ' + plural(n - LIMIT, '', '', 'أحرف', 'حرفًا')}. احذف قليلًا لتتمكن من النشر — مسودتك محفوظة كما هي.</div>` : ''}`;
+}
+function publishWhy(m, n, b) {
+  if (!isApproved(m)) return `تُفتح مساحة النشر حين يكتمل ترحيب ${ar(NEEDED)} قرّاء — بقي ${endorseWord(NEEDED - endorsements(m.id).length)}. اكتب مسودتك الآن، ستكون بانتظارك.`;
+  if (!canPublishNow(m)) return `نصّك لهذا الأسبوع منشور. نلتقي مع الصفحة البيضاء ${fmtDay(nextPubAt(m))}. حفظ المسودات لا يستهلك شيئًا.`;
+  if (!b.body.trim()) return 'حين تكتب، سيصبح زر النشر جاهزًا.';
+  if (n > LIMIT) return 'النص أطول من الحد المسموح.';
+  return 'نص واحد كل أسبوع. بعد النشر، يحين موعدك القادم بعد سبعة أيام.';
+}
+function refreshEditorMeta() {
+  const m = me(); const b = buf(); const n = glen(b.title) + glen(b.body);
+  $('#counter').innerHTML = counterHtml(n);
+  $('#dirty').textContent = dirtyLabel();
+  const btn = $('#pubbtn'); const dis = !canPublishNow(m) || n > LIMIT || !b.body.trim();
+  if (dis) btn.setAttribute('aria-disabled', 'true'); else btn.removeAttribute('aria-disabled');
+  $('#pubwhy').textContent = publishWhy(m, n, b);
+}
+
+function vNewsletter() {
+  const dev = S.nlDevice && S.subs[S.nlDevice] ? S.nlDevice : null; const sub = dev && S.subs[dev];
+  const m = me(); const ft = S.texts.find(t => t.feature); const fs = sentences(ft)[ft.hot[0]];
+  const qs = hotQuotes('الكل').filter(x => x.sid !== fs.sid).slice(0, 4);
+  const voice = candidates().find(p => !isApproved(p)) || candidates()[0];
+  let manage = '';
+  if (sub) {
+    manage = sub.status === 'active' ? `<div class="profile" style="margin-top:16px"><h3 style="font-size:18px;font-weight:800;display:flex;gap:8px;align-items:center">${ic('check', 20)} الرسالة تصلك كل أسبوع</h3>
+      <p class="muted" style="margin-top:4px">إلى <span class="ltr">${esc(dev)}</span></p>
+      <p style="font-weight:700;margin-top:14px">ماذا تحب أن نختار لك؟</p>
+      <div class="chips" style="margin:8px 0 0;padding:0;flex-wrap:wrap">${nlChips(sub.all, sub.interests, 'nlpref')}</div>
+      <div class="btn-row"><button class="btn btn-primary btn-sm" data-act="nl-savepref">حفظ التفضيلات</button><button class="btn btn-ghost btn-sm" data-act="nl-unsub">إلغاء الاشتراك</button></div>
+      <button class="link" style="margin-top:10px" data-act="nl-other">إدارة إيميل آخر</button></div>`
+    : `<div class="profile" style="margin-top:16px"><h3 style="font-size:18px;font-weight:800">توقفت الرسائل</h3>
+      <p class="muted" style="margin-top:4px">لن تصل الرسالة إلى <span class="ltr">${esc(dev)}</span>. تأييداتك وحسابك وصلاحياتك كما هي.</p>
+      <div class="btn-row"><button class="btn btn-primary btn-sm" data-act="nl-resub">أعد الاشتراك</button><button class="btn btn-ghost btn-sm" data-act="nl-other">إيميل آخر</button></div></div>`;
+  }
+  const pref = ui.nlForm || (ui.nlForm = { email: m ? m.email : '', all: true, interests: [] });
+  return `${subbar('رسالة الأسبوع')}
+  <div class="reader">
+  <section class="nl-hero"><span class="tag" style="background:rgba(255,254,251,.75)">${ic('mail', 15)} من ${BRAND}</span>
+    <h1>كل أسبوع، كلمات تستحق وقتك</h1><p>رسالة واحدة هادئة، نختار فيها ما توقّف عنده القرّاء: جمل، وأسماء كتّابها، وطريق إلى نصوصهم. متاحة لكل من يحب القراءة، دون حساب.</p></section>
+  ${manage || `<form class="profile" style="margin-top:16px" data-form="nl" novalidate>
+    <label class="field"><span>إلى أي إيميل نرسلها؟</span><input class="input email" type="email" name="email" inputmode="email" autocomplete="email" placeholder="name@example.com" value="${esc(pref.email)}" required></label>
+    <p style="font-weight:700;margin-top:16px;font-size:14px">ماذا تحب أن نختار لك؟ <span class="muted" style="font-weight:400">(اختياري)</span></p>
+    <div class="chips" style="margin:8px 0 0;padding:0;flex-wrap:wrap">${nlChips(pref.all, pref.interests, 'nlform')}</div>
+    <div class="msg info">${ic('info', 18)}<span>الاشتراك يشمل مختارات المنصة وأخبارها ورسائلها التسويقية عبر البريد. الإلغاء متاح في أي وقت، ولا يؤثر على أي تأييد أو حساب.</span></div>
+    <div id="nl-err"></div>
+    <button class="btn btn-primary btn-block" style="margin-top:16px" type="submit">اشترك في النشرة</button></form>`}
+  <section class="section"><div class="sec-head"><h2>عيّنة من رسالة أسبوعية</h2><span class="tag peach">معاينة</span></div>
+    <div class="letter"><span class="ribbon" aria-hidden="true"></span>
+      <p class="muted" style="font-size:13px">${fmtDay(Date.now())}</p>
+      <p class="salute" style="margin-top:6px">مرحبًا،</p>
+      <p class="intro">هذا ما بقي معنا من الأسبوع. جمل قصيرة توقّف عندها كثيرون، وأصحابها ينتظرون من يقرأ لهم أكثر. خذها على مهل، ومع قهوتك إن أمكن.</p>
+      <div class="week" style="margin-top:18px"><h4 style="margin:0 0 8px;font-size:13px;color:var(--muted)">جملة الأسبوع</h4><button class="lq" style="border:0;padding:0" data-act="open" data-id="${ft.id}" data-sid="${fs.sid}"><q style="font-size:19px;font-weight:700">${esc(fs.text)}</q><small><b>${esc(person(ft.author).name)}</b> · ${esc(person(ft.author).tagline || '')} — <span style="text-decoration:underline">اقرأ النص</span></small></button></div>
+      ${qs.map(x => `<button class="lq" data-act="open" data-id="${x.t.id}" data-sid="${x.sid}"><q>${esc(x.text.replace(/\n/g, ' / '))}</q><small><b>${esc(x.a.name)}</b> — من «${esc(x.t.title)}» · <span style="text-decoration:underline">إلى النص</span></small></button>`).join('')}
+      ${voice ? `<div class="sample-mini" style="margin-top:16px"><b>صوت جديد هذا الأسبوع: ${esc(voice.name)}</b><p>«${esc(voice.bio)}»</p><button class="link" data-act="profile" data-id="${voice.id}">${isApproved(voice) ? 'ادخل ركنه' : 'اقرأ عينته، وساعده على الوصول'}</button></div>` : ''}
+      <p class="sign">إلى الأسبوع القادم،<br>— محررو ${BRAND}، ومعهم كل من كتب وقرأ</p>
+      <p class="muted" style="font-size:12.5px;margin-top:16px;border-top:1px solid var(--border);padding-top:12px">تصلك هذه الرسالة لأنك وافقت على الاشتراك، ويمكنك إلغاؤه في أي وقت. (معاينة داخل النموذج — لا تُرسل رسائل فعلية.)</p>
+    </div></section></div>`;
+}
+function nlChips(all, ints, kind) {
+  return `<button type="button" class="chip" data-act="${kind}-all" aria-pressed="${!!all}"><span class="ck">${ic('check', 15)}</span>أحب أقرأ من كل شيء</button>` +
+    CATS.map(c => `<button type="button" class="chip" data-act="${kind}-cat" data-v="${c}" aria-pressed="${!all && ints.includes(c)}"><span class="ck">${ic('check', 15)}</span>${esc(c)}</button>`).join('');
+}
+
+/* ---------- العرض ---------- */
+const VIEWS = { home: vHome, discover: vDiscover, read: vRead, quotes: vQuotes, me: vMe, write: vWrite, profile: vProfile, newsletter: vNewsletter };
+function render(scrollTop) {
+  closePop();
+  const main = $('#main');
+  main.innerHTML = `<div class="view">${VIEWS[view.name]()}</div>`;
+  renderNav();
+  if (view.name === 'read' && view.p.sid) {
+    const fsid = view.p.sid; const el = $(`.s[data-sid="${fsid}"]`);
+    if (el) {
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' });
+        el.classList.add('flash');
+        setTimeout(() => { if (document.contains(el)) openPop(fsid, el, true); }, reduceMotion() ? 50 : 520);
+        view.p.sid = null;
+      });
+      return;
+    }
+  }
+  if (scrollTop) window.scrollTo({ top: 0, behavior: 'auto' });
+}
+function refreshSoft() { const y = window.scrollY; const sel = ui.sel; render(false); window.scrollTo(0, y); if (sel && view.name === 'read') { const el = $(`.s[data-sid="${sel}"]`); if (el) openPop(sel, el); } }
+
+/* ---------- شريط الجملة ---------- */
+let popEl = null;
+function closePop() {
+  if (popEl) { popEl.remove(); popEl = null; }
+  $$('.s.sel').forEach(e => { e.classList.remove('sel'); e.setAttribute('aria-expanded', 'false'); });
+  ui.sel = null;
+}
+function popInner(sid, beat) {
+  const liked = isLiked(sid); const n = likeCount(sid); const x = bySid(sid);
+  return `<div class="pop-row"><button class="like${liked ? ' on' : ''}${beat && liked ? ' beat' : ''}" data-act="like" data-sid="${sid}" aria-pressed="${liked}" aria-label="${liked ? 'إلغاء الإعجاب وإزالتها من مقتبساتك' : 'أعجبتني — احفظها في مقتبساتي'}">${ic('heart', 19, liked)}<span>${liked ? 'في مقتبساتك' : 'احتفظ بها'}</span></button>
+    <button data-act="copy-q" data-sid="${sid}">${ic('copy', 18)}<span>نسخ</span></button>
+    <button class="x" data-act="pop-close" aria-label="إغلاق">${ic('x', 18)}</button></div>
+    <div class="pop-meta">${x && x.hot ? '<span class="hottag" aria-hidden="true">✦</span>' : ''}<span>${n ? 'توقّف عند هذه الجملة ' + readersWord(n) : 'كن أول من يتوقّف عندها'}</span>
+      <button class="info" data-act="pop-info" aria-expanded="${!!ui.popInfo}" aria-label="ماذا يعني هذا العدد؟">${ic('info', 15)}</button></div>
+    ${ui.popInfo ? '<div class="pop-note">العدد يعني عدد من أعجبتهم الجملة فحفظوها، وليس وقت القراءة.</div>' : ''}`;
+}
+function openPop(sid, el, keepFocus) {
+  if (popEl) popEl.remove();
+  $$('.s.sel').forEach(e => { e.classList.remove('sel'); e.setAttribute('aria-expanded', 'false'); });
+  el.classList.add('sel'); el.setAttribute('aria-expanded', 'true'); ui.sel = sid;
+  popEl = document.createElement('div'); popEl.className = 'pop'; popEl.setAttribute('role', 'toolbar'); popEl.setAttribute('aria-label', 'خيارات الجملة');
+  popEl.innerHTML = popInner(sid); document.body.appendChild(popEl);
+  positionPop(el);
+  if (!keepFocus) { const b = popEl.querySelector('.like'); b && b.focus({ preventScroll: true }); }
+}
+function positionPop(el) {
+  if (!popEl) return;
+  const rs = el.getClientRects(); if (!rs.length) return;
+  const first = rs[0], last = rs[rs.length - 1];
+  const pw = popEl.offsetWidth, ph = popEl.offsetHeight;
+  const navTop = $('#nav').getBoundingClientRect().top;
+  let top = last.bottom + 10;
+  if (top + ph > navTop - 10) { top = first.top - ph - 10; }
+  if (top < 70) top = Math.min(last.bottom + 10, navTop - ph - 12);
+  let left = last.left + last.width / 2 - pw / 2;
+  left = Math.max(10, Math.min(left, document.documentElement.clientWidth - pw - 10));
+  popEl.style.top = (top + window.scrollY) + 'px'; popEl.style.left = (left + window.scrollX) + 'px';
+}
+function updateSentence(sid, beat) {
+  $$(`.s[data-sid="${sid}"]`).forEach(el => {
+    const liked = isLiked(sid);
+    el.classList.toggle('mine', liked);
+    $$('.mm, .mm + .sr', el).forEach(n => n.remove());
+    if (liked) el.insertAdjacentHTML('beforeend', `<span class="mm" aria-hidden="true">${ic('heart', 13, true)}</span><span class="sr"> (في مقتبساتك)</span>`);
+  });
+  const el = $(`.s[data-sid="${sid}"].sel`) || $(`.s[data-sid="${sid}"]`);
+  if (popEl && ui.sel === sid && el) { popEl.innerHTML = popInner(sid, beat); positionPop(el); popEl.querySelector('.like').focus({ preventScroll: true }); }
+}
+/* ---------- الإعجاب والحفظ ---------- */
+function setLike(sid, on) {
+  const m = me(); if (!m) return;
+  const L = S.likes[m.id] || (S.likes[m.id] = {});
+  if (on) L[sid] = Date.now(); else delete L[sid];
+  save();
+}
+function toggleLike(sid) {
+  if (!me()) { ui.pending = { type: 'like', sid }; openLogin('احتفظ بهذه الجملة', 'سجّل دخولك لنضعها في «مقتبساتي» مع اسم كاتبها ورابط نصّها، ثم نعيدك إليها.'); return; }
+  const on = !isLiked(sid); setLike(sid, on);
+  updateSentence(sid, true);
+  if (on) toast('صارت ضمن مقتبساتك', 'عرض', () => tab('quotes'));
+  else toast('أُزيلت من مقتبساتك');
+  announce(on ? 'صارت الجملة ضمن مقتبساتك' : 'أُزيلت الجملة من مقتبساتك');
+}
+function completePending() {
+  const p = ui.pending; ui.pending = null; if (!p) return;
+  if (p.type === 'like') {
+    if (!isLiked(p.sid)) setLike(p.sid, true);
+    const x = bySid(p.sid);
+    if (view.name === 'read' && x && view.p.id === x.t.id) { refreshSoft(); const el = $(`.s[data-sid="${p.sid}"]`); el && openPop(p.sid, el, true); }
+    else render(false);
+    toast('صارت ضمن مقتبساتك', 'عرض', () => tab('quotes'));
+  } else if (p.type === 'go') { tab(p.v); }
+}
+
+/* ---------- النسخ ---------- */
+async function copyText(txt, okMsg, label) {
+  try {
+    if (!navigator.clipboard || !window.isSecureContext) throw new Error('no');
+    await navigator.clipboard.writeText(txt); toast(okMsg);
+  } catch (e) {
+    openSheet(`<div class="sheet-h"><div><h2>${esc(label || 'انسخ النص')}</h2><p>لم يسمح المتصفح بالنسخ التلقائي هنا. حدّد النص وانسخه يدويًا.</p></div>${closeBtn()}</div>
+      <textarea class="input" readonly style="margin-top:14px;min-height:110px;${/^https?:/.test(txt) ? 'direction:ltr;text-align:left' : ''}" id="manualcopy">${esc(txt)}</textarea>
+      <div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">تم</button></div>`, () => { const t = $('#manualcopy'); t.focus(); t.select(); });
+  }
+}
+function quoteString(sid) { const x = bySid(sid); const a = person(x.t.author); return `«${x.text.replace(/\n/g, ' / ')}»\n— ${a.name}، «${x.t.title || 'بلا عنوان'}»\n${DEMO_HOST}/t/${x.t.id}`; }
+
+/* ---------- النوافذ السفلية ---------- */
+function closeBtn() { return `<button class="icon-btn" data-act="sheet-close" aria-label="إغلاق">${ic('x', 18)}</button>`; }
+function openSheet(html, after) {
+  const existing = $('.overlay');
+  if (!existing) ui.lastFocus = document.activeElement;
+  const ov = existing || document.createElement('div');
+  ov.className = 'overlay';
+  ov.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><div class="grab" aria-hidden="true"></div>${html}</div>`;
+  if (!existing) document.body.appendChild(ov);
+  const h = ov.querySelector('h2'); if (h) h.id = 'sh-t';
+  if (after) after(); else { const f = ov.querySelector('input:not([type=checkbox]),textarea') || ov.querySelector('.sheet button:not([data-act=sheet-close])'); f && f.focus({ preventScroll: true }); }
+}
+function closeSheet() {
+  const ov = $('.overlay'); if (!ov) return; ov.remove(); ui.sheet = null; ui.resetArm = false;
+  if (ui.lastFocus && document.contains(ui.lastFocus)) ui.lastFocus.focus({ preventScroll: true });
+}
+function errBox(msg) { return msg ? `<div class="msg err" role="alert">${ic('alert', 18)}<span>${msg}</span></div>` : ''; }
+
+/* دخول / تسجيل */
+function openLogin(title, desc) {
+  openSheet(`<div class="sheet-h"><div><h2>${esc(title || 'ادخل إلى ' + BRAND)}</h2><p>${esc(desc || 'حساب القارئ يحفظ مقتبساتك ويمنحك صفحة كاتب لاحقًا.')}</p></div>${closeBtn()}</div>
+    <div class="btn-row" style="flex-direction:column"><button class="btn btn-primary" data-act="login-demo">دخول تجريبي باسم «هدى» — قارئة</button>
+    <button class="btn btn-ghost" data-act="signup">إنشاء حساب جديد</button>
+    <button class="btn btn-ghost" data-act="sheet-close" style="border-color:transparent">متابعة القراءة كزائر</button></div>
+    <p class="muted" style="font-size:13px;margin-top:12px;text-align:center">دخول محاكى داخل النموذج — لا كلمات مرور ولا خوادم.</p>`);
+}
+function openSignup() {
+  const f = ui.signup || (ui.signup = { step: 1, name: '', email: '', bio: '', interests: [], err: '' });
+  if (f.step === 1) openSheet(`<div class="sheet-h"><div><h2>إنشاء حساب قارئ</h2><p>اسم ونبذة قصيرة — هذا كل ما نحتاجه.</p></div>${closeBtn()}</div>
+    <div class="steps" aria-hidden="true"><i class="on"></i><i></i></div>
+    <form data-form="signup1" novalidate>
+      <label class="field"><span>الاسم</span><input class="input" name="name" value="${esc(f.name)}" autocomplete="name" placeholder="مثال: نوف" required></label>
+      <label class="field"><span>الإيميل</span><input class="input email" type="email" name="email" inputmode="email" value="${esc(f.email)}" placeholder="name@example.com" autocomplete="email" required></label>
+      <label class="field"><span>نبذة شخصية</span><textarea class="input" name="bio" maxlength="240" placeholder="ماذا تقرأ؟ ماذا تحب أن تكتب؟">${esc(f.bio)}</textarea></label>
+      <p style="font-weight:700;margin-top:14px;font-size:14px">اهتماماتك</p>
+      <div class="chips" style="margin:8px 0 0;padding:0;flex-wrap:wrap">${CATS.map(c => `<button type="button" class="chip" data-act="su-cat" data-v="${c}" aria-pressed="${f.interests.includes(c)}"><span class="ck">${ic('check', 15)}</span>${esc(c)}</button>`).join('')}</div>
+      ${errBox(f.err)}
+      <p class="muted" style="font-size:13px;margin-top:12px">إنشاء الحساب لا يشترك بك في النشرة البريدية.</p>
+      <div class="btn-row"><button class="btn btn-primary btn-block" type="submit">متابعة</button></div></form>`);
+  else codeSheet({ title: 'تأكيد الإيميل', email: f.email, form: 'signup2', err: f.err, steps: 2 });
+}
+function codeSheet({ title, email, form, err, steps, sub }) {
+  openSheet(`<div class="sheet-h"><div><h2>${esc(title)}</h2><p>${sub || 'أدخل رمز التحقق المرسل إلى'} <span class="ltr">${esc(email)}</span></p></div>${closeBtn()}</div>
+    ${steps ? `<div class="steps" aria-hidden="true">${Array.from({ length: steps }, () => '<i class="on"></i>').join('')}</div>` : ''}
+    <form data-form="${form}" novalidate>
+      <label class="field"><span>رمز التحقق</span><input class="input code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required></label>
+      <div class="demo-note"><b>رمز تجريبي للمعاينة؛ لم تُرسل رسالة فعلية.</b><br>استخدم <span class="ltr" style="font-weight:800;letter-spacing:2px">${DEMO_CODE}</span></div>
+      ${errBox(err)}
+      <div class="btn-row"><button class="btn btn-ghost" type="button" data-act="code-back">تعديل الإيميل</button><button class="btn btn-primary" type="submit">تحقق</button></div></form>`);
+}
+
+/* التأييد */
+function openEndorse(id) {
+  const p = person(id); const m = me();
+  ui.endorse = { id, step: m ? 'member' : 'email', email: '', mkt: false, err: '' };
+  renderEndorse();
+}
+function renderEndorse() {
+  const E = ui.endorse; const p = person(E.id); const m = me(); const fn = p.name.split(' ')[0];
+  const cta = verb(p, 'أؤيد انضمامه', 'أؤيد انضمامها');
+  const head = (t, d) => `<div class="sheet-h"><div><h2>${t}</h2><p>${d}</p></div>${closeBtn()}</div>`;
+  const mkt = `<label class="check"><input type="checkbox" name="mkt" ${E.mkt ? 'checked' : ''}><span>أرغب في تلقي مختارات الكتابة وأخبار المنصة ورسائلها التسويقية عبر البريد الإلكتروني. <span class="muted">(اختياري — التأييد يُحتسب في الحالتين)</span></span></label>`;
+  if (E.step === 'member') {
+    openSheet(`${head('ساعد هذا الصوت على الوصول', 'ترحيبك بـ' + esc(fn) + ' يُحتسب مرة واحدة لكل إيميل موثق. التأييد ترحيب، لا تقييم.')}
+      <form data-form="end-member" novalidate>
+        <div class="row-card" style="margin-top:14px">${ic('mail', 20)}<span class="grow"><span class="t">التأييد بإيميلك</span><br><span class="d"><span class="ltr">${esc(m.email)}</span> · موثق تجريبيًا</span></span>${ic('check', 18)}</div>
+        ${mkt}${errBox(E.err)}
+        <div class="btn-row"><button class="btn btn-primary btn-block" type="submit">${ic('heart', 19)} ${cta}</button></div>
+        <button type="button" class="link" style="margin-top:10px" data-act="end-other">التأييد بإيميل آخر</button></form>`);
+  } else if (E.step === 'email') {
+    openSheet(`${head('ساعد هذا الصوت على الوصول', 'تأييدك لـ' + esc(fn) + ' يحتاج إيميلًا نتحقق منه فقط — بلا حساب ولا رقم جوال.')}
+      <div class="steps" aria-hidden="true"><i class="on"></i><i></i></div>
+      <form data-form="end-email" novalidate>
+        <label class="field"><span>إيميلك</span><input class="input email" type="email" name="email" inputmode="email" autocomplete="email" placeholder="name@example.com" value="${esc(E.email)}" required></label>
+        ${mkt}${errBox(E.err)}
+        <div class="btn-row"><button class="btn btn-primary btn-block" type="submit">متابعة إلى التحقق</button></div>
+        <p class="muted" style="font-size:13px;margin-top:10px">لن ننشئ لك حسابًا ولن نشترك بك في أي بريد دون اختيارك.</p></form>`);
+  } else if (E.step === 'code') {
+    codeSheet({ title: 'تحقق من إيميلك', email: E.email, form: 'end-code', err: E.err, steps: 2 });
+  } else if (E.step === 'done') {
+    const n = endorsements(p.id).length; const reached = E.reached;
+    const sub = subOf(E.email);
+    openSheet(`<div class="sheet-h"><div><div class="success-burst">${ic('check', 30)}</div><h2>${reached ? 'اكتمل الترحيب بصوت ' + esc(fn) : 'شكرًا لترحيبك'}</h2>
+      <p>${reached ? 'كان ترحيبك العاشر. سيجد ' + esc(fn) + ' في ' + verb(p, 'ركنه', 'ركنها') + ': «أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.»' : 'احتُسب تأييدك لـ' + esc(fn) + '. بقي ' + endorseWord(NEEDED - n) + ' ليكتمل الترحيب.'}</p></div>${closeBtn()}</div>
+      <div class="status ${reached ? 'ok' : 'wait'}" style="margin-top:14px">${progress(n)}</div>
+      <div class="msg info">${ic('info', 18)}<span>${E.mktDone ? 'اشتركت في النشرة الأسبوعية بموافقتك. يمكنك الإلغاء في أي وقت دون أن يتأثر تأييدك.' : 'لم نشترك بك في أي بريد. التأييد وحده لا يعني اشتراكًا.'}</span></div>
+      <div class="btn-row" style="flex-direction:column">
+        ${reached && p.member ? `<button class="btn btn-ink" data-act="switch-write" data-v="${p.id}">ادخل كـ${esc(fn)} وجرّب المحرر (تجربة الحالات)</button>` : ''}
+        ${!(sub && sub.status === 'active') ? `<button class="btn btn-soft" data-act="go-close" data-v="newsletter">${ic('mail', 18)} تعرّف على النشرة الأسبوعية</button>` : ''}
+        ${!me() ? `<button class="btn btn-ghost" data-act="signup">إنشاء حساب قارئ — خيار منفصل</button>` : ''}
+        <button class="btn btn-ghost" data-act="sheet-close">تم</button></div>`);
+  }
+}
+function commitEndorse(email) {
+  const E = ui.endorse; const p = person(E.id); const em = normEmail(email);
+  const list = S.endorse[p.id] || (S.endorse[p.id] = []);
+  if (list.includes(em)) { return false; }
+  const before = list.length; list.push(em);
+  if (!S.verified.includes(em)) S.verified.push(em);
+  E.reached = before < NEEDED && list.length >= NEEDED;
+  if (E.reached) { p.approved = true; p.justApproved = true; p.approvedAt = Date.now(); }
+  E.mktDone = false;
+  if (E.mkt) { const s = S.subs[em]; if (!s || s.status !== 'active') { S.subs[em] = { status: 'active', all: true, interests: [], at: Date.now(), source: 'تأييد' }; } S.nlDevice = em; E.mktDone = true; }
+  E.email = em; E.step = 'done'; save();
+  return true;
+}
+const dupMsg = (p) => `سبق أن رحّب هذا الإيميل بـ${esc(p.name)}. كل إيميل يُحتسب مرة واحدة لكل ${verb(p, 'كاتب', 'كاتبة')} — ويمكنه الترحيب بأصوات أخرى.`;
+
+/* تعديل الملف */
+function openEditProfile() {
+  const m = me(); ui.edit = { interests: [...(m.interests || [])] };
+  openSheet(`<div class="sheet-h"><div><h2>النبذة والاهتمامات</h2><p>تظهر في صفحتك العامة.</p></div>${closeBtn()}</div>
+    <form data-form="edit" novalidate><label class="field"><span>النبذة</span><textarea class="input" name="bio" maxlength="240">${esc(m.bio || '')}</textarea></label>
+    <p style="font-weight:700;margin-top:14px;font-size:14px">الاهتمامات</p>
+    <div class="chips" style="margin:8px 0 0;padding:0;flex-wrap:wrap" id="edchips">${CATS.map(c => `<button type="button" class="chip" data-act="ed-cat" data-v="${c}" aria-pressed="${ui.edit.interests.includes(c)}"><span class="ck">${ic('check', 15)}</span>${esc(c)}</button>`).join('')}</div>
+    <div class="btn-row"><button class="btn btn-primary btn-block" type="submit">حفظ</button></div></form>`);
+}
+
+/* تجربة الحالات */
+function openStates() {
+  const extra = Object.values(S.people).filter(p => p.created);
+  const desc = id => {
+    if (id === 'guest') return DEMO_ROLES[0].d; const p = person(id);
+    if (p.member && !isApproved(p)) return 'بانتظار تأييد القرّاء — ' + ar(endorsements(id).length) + ' من ' + ar(NEEDED);
+    if (isApproved(p)) return canPublishNow(p) ? 'معتمد' + verb(p, '', 'ة') + ' — ' + verb(p, 'يستطيع', 'تستطيع') + ' النشر الآن' : 'نشر' + verb(p, '', 'ت') + ' هذا الأسبوع — النشر القادم ' + fmtDay(nextPubAt(p));
+    return DEMO_ROLES.find(r => r.id === id)?.d || '';
+  };
+  const roleBtn = (id, t) => `<button class="role" data-act="switch" data-v="${id}" aria-current="${S.current === id}">${id === 'guest' ? av(null) : av(person(id))}<span class="grow"><span class="t">${esc(t)}</span><br><span class="d">${desc(id)}</span></span>${S.current === id ? ic('check', 18) : ''}</button>`;
+  openSheet(`<div class="sheet-h"><div><h2>تجربة الحالات</h2><p>بدّل الأدوار لتجربة رحلات المنتج. الصلاحيات مرتبطة بكل حساب ولا تنتقل بين الأدوار.</p></div>${closeBtn()}</div>
+    ${DEMO_ROLES.map(r => roleBtn(r.id, r.id === 'guest' ? r.t : person(r.id).name + ' — ' + (r.id === 'huda' ? 'قارئة' : isApproved(person(r.id)) ? verb(person(r.id), 'كاتب', 'كاتبة') : verb(person(r.id), 'مرشح', 'مرشحة')))).join('')}
+    ${extra.length ? `<p style="font-weight:700;margin-top:16px;font-size:14px">حسابات أنشأتها</p>${extra.map(p => roleBtn(p.id, p.name)).join('')}` : ''}
+    <div class="demo-note" style="margin-top:16px">البيانات محفوظة ${store.ok ? 'في هذا المتصفح فقط (localStorage)' : 'في الذاكرة فقط — ستُفقد عند إعادة التحميل'}. هذا محاكاة: لا يمثل حماية إنتاجية ولا توثيق بريد فعليًا، ولا يمنع التكرار بين الأجهزة.</div>
+    <div class="btn-row"><button class="btn btn-ghost" data-act="reset">${ui.resetArm ? 'اضغط مرة أخرى للتأكيد' : 'إعادة ضبط البيانات'}</button></div>`);
+}
+function switchTo(id) {
+  S.current = id; save(); closeSheet(); ui.buf = {}; ui.nlForm = null;
+  const n = id === 'guest' ? 'زائر' : person(id).name;
+  if (ui.pending && id !== 'guest') { completePending(); return; }
+  tab('home'); toast('تعمل الآن باسم: ' + n);
+}
+
+/* ---------- تنبيه ---------- */
+let toastTimer;
+function toast(msg, action, fn) {
+  $$('.toast').forEach(t => t.remove()); clearTimeout(toastTimer);
+  const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status');
+  t.innerHTML = `<span class="tx">${esc(msg)}</span>${action ? `<button class="ta">${esc(action)}</button>` : ''}`;
+  if (action) t.querySelector('.ta').onclick = () => { t.remove(); fn(); };
+  document.body.appendChild(t);
+  toastTimer = setTimeout(() => t.remove(), action ? 4200 : 2600);
+}
+function announce(s) { $('#live').textContent = s; }
+
+/* ================= الأحداث ================= */
+document.addEventListener('click', e => {
+  const sel = window.getSelection && String(window.getSelection());
+  const a = e.target.closest('[data-act]');
+  if (a && a.getAttribute('aria-disabled') === 'true' && a.dataset.act !== 'wpublish') return;
+  if (!a) {
+    const s = e.target.closest('.s[data-sid]');
+    if (s) { if (sel && sel.length > 2) return; if (ui.sel === s.dataset.sid) closePop(); else openPop(s.dataset.sid, s); return; }
+    if (e.target.classList.contains('overlay')) { closeSheet(); return; }
+    if (popEl && !e.target.closest('.pop')) closePop();
+    return;
+  }
+  const v = a.dataset.v, id = a.dataset.id, sid = a.dataset.sid;
+  switch (a.dataset.act) {
+    case 'tab': closeSheet(); tab(v); break;
+    case 'go': go(v); break;
+    case 'go-close': closeSheet(); go(v); break;
+    case 'back': back(); break;
+    case 'open': if (a.tagName === 'ARTICLE' && sel && sel.length > 2) return; go('read', { id, sid }); break;
+    case 'profile': closeSheet(); go('profile', { id }); break;
+    case 'homecat': ui.homeCat = v; refreshSoft(); break;
+    case 'disccat': ui.discCat = v; $$('[data-act=disccat]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); $('#disc-results').innerHTML = discResults(); break;
+    case 'disc-clear': ui.discCat = 'الكل'; ui.discQ = ''; render(false); break;
+    case 'qfolder': ui.qFolder = v; $$('[data-act=qfolder]').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); refreshSoft(); break;
+    case 'like': toggleLike(sid); break;
+    case 'pop-info': { ui.popInfo = !ui.popInfo; const el = $(`.s[data-sid="${ui.sel}"].sel`); if (popEl && el) { popEl.innerHTML = popInner(ui.sel); positionPop(el); popEl.querySelector('.info').focus({ preventScroll: true }); } break; }
+    case 'q-random': { const cards = $$('.keep'); if (!cards.length) break; const c = cards[Math.floor(Math.random() * cards.length)];
+      $$('.keep.glow').forEach(k => k.classList.remove('glow')); c.classList.add('glow'); c.scrollIntoView({ block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' });
+      setTimeout(() => c.classList.remove('glow'), 2400); announce('اخترنا لك ورقة: ' + c.querySelector('blockquote').textContent); break; }
+    case 'prompt-next': ui.prompt = (ui.prompt + 1 + Math.floor(Math.random() * (PROMPTS.length - 1))) % PROMPTS.length; $('#inspire').innerHTML = inspireHtml(); $('#inspire [data-act=prompt-next]').focus(); break;
+    case 'prompt-hide': ui.promptHidden = true; refreshSoft(); break;
+    case 'prompt-show': ui.promptHidden = false; refreshSoft(); break;
+    case 'like-direct': toggleLike(sid); if (me()) refreshSoft(); break;
+    case 'pop-close': { const s = ui.sel; closePop(); const el = s && $(`.s[data-sid="${s}"]`); el && el.focus({ preventScroll: true }); break; }
+    case 'copy-q': copyText(quoteString(sid), 'نُسخ المقتبس', 'انسخ المقتبس'); break;
+    case 'copy-link': copyText(v, 'نُسخ الرابط التجريبي', 'انسخ الرابط التجريبي'); break;
+    case 'unsave': {
+      const ts = myLikes()[sid]; setLike(sid, false); refreshSoft();
+      toast('أُزيلت من مقتبساتك', 'تراجع', () => { S.likes[S.current][sid] = ts; save(); refreshSoft(); }); break; }
+    case 'states': openStates(); break;
+    case 'switch': switchTo(v); break;
+    case 'switch-write': switchTo(v); tab('write'); break;
+    case 'reset':
+      if (!ui.resetArm) { ui.resetArm = true; openStates(); ui.resetArm = true; break; }
+      store.clear(); S = seed(); save(); Object.assign(ui, { homeCat: 'الكل', discCat: 'الكل', discQ: '', qFolder: 'الكل', qQ: '', buf: {}, pending: null, nlForm: null, signup: null });
+      closeSheet(); tab('home'); toast('أُعيدت البيانات إلى حالتها الأولى'); break;
+    case 'login': openLogin(); break;
+    case 'login-demo': switchTo('huda'); break;
+    case 'signup': ui.signup = null; openSignup(); break;
+    case 'su-cat': { const f = ui.signup; syncSignup(); f.interests = f.interests.includes(v) ? f.interests.filter(x => x !== v) : [...f.interests, v]; a.setAttribute('aria-pressed', f.interests.includes(v)); break; }
+    case 'code-back':
+      if (ui.endorse && $('[data-form=end-code]')) { ui.endorse.step = 'email'; ui.endorse.err = ''; renderEndorse(); }
+      else if ($('[data-form=signup2]')) { ui.signup.step = 1; ui.signup.err = ''; openSignup(); }
+      else if ($('[data-form=nl-code]')) { closeSheet(); }
+      break;
+    case 'logout': S.current = 'guest'; save(); ui.buf = {}; tab('home'); toast('أنت الآن زائر'); break;
+    case 'edit-profile': openEditProfile(); break;
+    case 'ed-cat': { const L = ui.edit.interests; ui.edit.interests = L.includes(v) ? L.filter(x => x !== v) : [...L, v]; a.setAttribute('aria-pressed', ui.edit.interests.includes(v)); break; }
+    case 'endorse': openEndorse(id); break;
+    case 'end-other': { const f = $('[data-form=end-member]'); ui.endorse.mkt = f ? f.mkt.checked : false; ui.endorse.step = 'email'; ui.endorse.err = ''; renderEndorse(); break; }
+    case 'sheet-close': closeSheet(); break;
+    case 'wcat': buf().cat = v; $$('[data-act=wcat]').forEach(b => { b.setAttribute('aria-pressed', b.dataset.v === v); b.setAttribute('aria-checked', b.dataset.v === v); }); $('#dirty').textContent = dirtyLabel(); break;
+    case 'wsave': { const m = me(); const b = buf(); S.drafts[m.id] = { ...b, savedAt: Date.now() }; save(); $('#dirty').textContent = dirtyLabel(); toast(glen(b.title) + glen(b.body) > LIMIT ? 'حُفظت المسودة — ما زالت أطول من الحد' : 'حُفظت المسودة'); break; }
+    case 'wpreview': openPreview(); break;
+    case 'wpublish': tryPublish(); break;
+    case 'do-publish': doPublish(); break;
+    case 'nlform-all': case 'nlpref-all': { const o = a.dataset.act.startsWith('nlform') ? syncNlForm() : ui.nlPref || (ui.nlPref = { ...S.subs[S.nlDevice] }); o.all = !o.all; if (o.all) o.interests = []; refreshChips(a.closest('.chips'), o); break; }
+    case 'nlform-cat': case 'nlpref-cat': { const o = a.dataset.act.startsWith('nlform') ? syncNlForm() : ui.nlPref || (ui.nlPref = { ...S.subs[S.nlDevice], interests: [...S.subs[S.nlDevice].interests] }); o.interests = o.interests.includes(v) ? o.interests.filter(x => x !== v) : [...o.interests, v]; o.all = o.interests.length === 0; refreshChips(a.closest('.chips'), o); break; }
+    case 'nl-savepref': { const s = S.subs[S.nlDevice]; if (ui.nlPref) { s.all = ui.nlPref.all; s.interests = ui.nlPref.interests; } ui.nlPref = null; save(); toast('حُفظت تفضيلات النشرة'); break; }
+    case 'nl-unsub': S.subs[S.nlDevice].status = 'unsub'; ui.nlPref = null; save(); refreshSoft(); toast('أُلغي اشتراكك — تأييداتك كما هي'); break;
+    case 'nl-resub': S.subs[S.nlDevice].status = 'active'; save(); refreshSoft(); toast('عاد اشتراكك في النشرة'); break;
+    case 'nl-other': S.nlDevice = null; ui.nlForm = { email: '', all: true, interests: [] }; save(); refreshSoft(); break;
+  }
+});
+function refreshChips(wrap, o) {
+  $$('.chip', wrap).forEach(c => { const isAll = c.dataset.act.endsWith('-all'); c.setAttribute('aria-pressed', isAll ? o.all : (!o.all && o.interests.includes(c.dataset.v))); });
+}
+function syncNlForm() { const f = $('[data-form=nl]'); if (f) ui.nlForm.email = f.email.value; return ui.nlForm; }
+function syncSignup() { const f = $('[data-form=signup1]'); if (f) Object.assign(ui.signup, { name: f.name.value, email: f.email.value, bio: f.bio.value }); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if ($('.overlay')) { closeSheet(); return; } if (popEl) { const s = ui.sel; closePop(); const el = s && $(`.s[data-sid="${s}"]`); el && el.focus(); } return; }
+  const s = e.target.closest && e.target.closest('.s[data-sid]');
+  if (s && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openPop(s.dataset.sid, s); return; }
+  const card = e.target.matches && e.target.matches('article.tcard');
+  if (card && e.key === 'Enter') { go('read', { id: e.target.dataset.id }); return; }
+  if (e.key === 'Tab') { const sh = $('.sheet'); if (!sh) return;
+    const f = $$('button,input,textarea,select,[tabindex]:not([tabindex="-1"])', sh).filter(x => !x.disabled && x.offsetParent !== null);
+    if (!f.length) return; const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+});
+
+document.addEventListener('input', e => {
+  const k = e.target.dataset && e.target.dataset.in; if (!k) return;
+  if (k === 'discq') { ui.discQ = e.target.value; $('#disc-results').innerHTML = discResults(); }
+  else if (k === 'qq') { ui.qQ = e.target.value; $('#q-results').innerHTML = quoteResults(); }
+  else if (k === 'wtitle') { buf().title = e.target.value; refreshEditorMeta(); }
+  else if (k === 'wbody') { buf().body = e.target.value; refreshEditorMeta(); }
+});
+
+document.addEventListener('submit', e => {
+  e.preventDefault(); const f = e.target; const k = f.dataset.form;
+  if (k === 'signup1') {
+    syncSignup(); const s = ui.signup; const em = normEmail(s.email);
+    if (!s.name.trim()) s.err = 'اكتب اسمك.';
+    else if (!validEmail(em)) s.err = 'هذا الإيميل غير صالح. تأكد من كتابته بصيغة name@example.com';
+    else if (Object.values(S.people).some(p => normEmail(p.email) === em)) s.err = 'هذا الإيميل مرتبط بحساب موجود. استخدم «تجربة الحالات» للدخول إليه.';
+    else { s.err = ''; s.email = em; if (S.verified.includes(em)) { createAccount(); return; } s.step = 2; }
+    openSignup(); return;
+  }
+  if (k === 'signup2') { const s = ui.signup; if (f.code.value.trim() !== DEMO_CODE) { s.err = 'الرمز غير صحيح. الرمز التجريبي هو ' + DEMO_CODE + '.'; openSignup(); return; } S.verified.push(s.email); createAccount(); return; }
+  if (k === 'end-member') {
+    const E = ui.endorse; E.mkt = f.mkt.checked; const p = person(E.id);
+    if (!commitEndorse(me().email)) { E.err = dupMsg(p); renderEndorse(); return; }
+    renderEndorse(); afterEndorse(); return;
+  }
+  if (k === 'end-email') {
+    const E = ui.endorse; const p = person(E.id); E.mkt = f.mkt.checked; E.email = f.email.value; const em = normEmail(E.email);
+    if (!validEmail(em)) { E.err = 'هذا الإيميل غير صالح. تأكد من كتابته بصيغة name@example.com'; renderEndorse(); return; }
+    if (endorsements(p.id).includes(em)) { E.err = dupMsg(p); renderEndorse(); return; }
+    if (me() && normEmail(me().email) === em) { /* إيميل العضو نفسه */ }
+    E.err = ''; E.email = em;
+    if (S.verified.includes(em)) { commitEndorse(em); renderEndorse(); afterEndorse(); toast('هذا الإيميل موثق مسبقًا — لا حاجة لرمز جديد'); return; }
+    E.step = 'code'; renderEndorse(); return;
+  }
+  if (k === 'end-code') {
+    const E = ui.endorse; const p = person(E.id);
+    if (f.code.value.trim() !== DEMO_CODE) { E.err = 'الرمز غير صحيح. لم يُحتسب التأييد بعد. الرمز التجريبي هو ' + DEMO_CODE + '.'; renderEndorse(); return; }
+    if (!commitEndorse(E.email)) { E.step = 'email'; E.err = dupMsg(p); renderEndorse(); return; }
+    renderEndorse(); afterEndorse(); return;
+  }
+  if (k === 'edit') { const m = me(); m.bio = f.bio.value.trim(); m.interests = ui.edit.interests; save(); closeSheet(); refreshSoft(); toast('حُفظت النبذة والاهتمامات'); return; }
+  if (k === 'nl') {
+    syncNlForm(); const o = ui.nlForm; const em = normEmail(o.email); const box = $('#nl-err');
+    if (!validEmail(em)) { box.innerHTML = errBox('هذا الإيميل غير صالح. تأكد من كتابته بصيغة name@example.com'); f.email.focus(); return; }
+    const s = S.subs[em];
+    if (s && s.status === 'active') { S.nlDevice = em; save(); refreshSoft(); toast('هذا الإيميل مشترك بالفعل — يمكنك إدارة تفضيلاته'); return; }
+    o.email = em;
+    if (S.verified.includes(em)) { subscribe(em); return; }
+    ui.nlCodeErr = ''; nlCodeSheet(); return;
+  }
+  if (k === 'nl-code') {
+    if (f.code.value.trim() !== DEMO_CODE) { ui.nlCodeErr = 'الرمز غير صحيح. الرمز التجريبي هو ' + DEMO_CODE + '.'; nlCodeSheet(); return; }
+    S.verified.push(ui.nlForm.email); closeSheet(); subscribe(ui.nlForm.email); return;
+  }
+});
+function nlCodeSheet() { codeSheet({ title: 'تأكيد الاشتراك', email: ui.nlForm.email, form: 'nl-code', err: ui.nlCodeErr, sub: 'لتأكيد الاشتراك، أدخل الرمز المرسل إلى' }); }
+function subscribe(em) {
+  const o = ui.nlForm; S.subs[em] = { status: 'active', all: o.all, interests: o.all ? [] : o.interests, at: Date.now(), source: 'النشرة' };
+  S.nlDevice = em; save(); refreshSoft(); window.scrollTo({ top: 0 }); toast('تم تأكيد اشتراكك في النشرة');
+}
+function afterEndorse() { if (view.name === 'profile' || view.name === 'discover' || view.name === 'home') { const y = scrollY; render(false); scrollTo(0, y); } }
+function createAccount() {
+  const s = ui.signup; const id = 'm' + Date.now().toString(36);
+  S.people[id] = { id, name: s.name.trim(), g: null, email: s.email, member: true, created: true, bio: s.bio.trim(), interests: s.interests };
+  if (!S.verified.includes(s.email)) S.verified.push(s.email);
+  S.current = id; save(); ui.signup = null; ui.buf = {}; closeSheet();
+  if (ui.pending) { completePending(); toast('مرحبًا ' + s.name.trim() + '! أُنشئ حسابك وحُفظت الجملة'); return; }
+  tab('me'); toast('مرحبًا ' + s.name.trim() + '! أُنشئ حسابك');
+}
+
+/* النشر */
+function openPreview() {
+  const b = buf(); const m = me(); const t = { id: 'preview', segs: segment(b.body), hot: [] };
+  openSheet(`<div class="sheet-h"><div><h2>معاينة</h2><p>هكذا سيظهر نصّك للقرّاء.</p></div>${closeBtn()}</div>
+    <div class="paper" style="box-shadow:none"><span class="tag">${esc(b.cat)}</span><h3 style="font-size:22px;font-weight:800;margin:10px 0 4px">${esc(b.title || 'بلا عنوان')}</h3>
+    <div class="who" style="margin:8px 0 12px">${av(m, 'sm')}<span class="nm">${esc(m.name)}</span></div>
+    <div class="read-body">${b.body.trim() ? '<p>' + t.segs.map(s => s === '¶' ? '</p><p>' : s === '↵' ? '<br>' : esc(s) + ' ').join('') + '</p>' : '<p class="muted">لا يوجد نص بعد.</p>'}</div></div>
+    <div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة للتحرير</button></div>`);
+}
+function tryPublish() {
+  const m = me(); const b = buf(); const n = glen(b.title) + glen(b.body);
+  if (!canPublishNow(m) || n > LIMIT || !b.body.trim()) { toast(publishWhy(m, n, b).split('.')[0]); return; }
+  openSheet(`<div class="sheet-h"><div><h2>نشر «${esc(b.title || 'بلا عنوان')}»؟</h2><p>${ar(n)} / ${ar(LIMIT)} حرف · ${esc(b.cat)}</p></div>${closeBtn()}</div>
+    <div class="msg info">${ic('info', 18)}<span>هذا نصّك لهذا الأسبوع. بعد النشر يُتاح نشرك القادم ${fmtDay(Date.now() + WEEK)}.</span></div>
+    <div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">ليس الآن</button><button class="btn btn-primary" data-act="do-publish">نشر</button></div>`);
+}
+function doPublish() {
+  const m = me(); const b = buf(); const n = glen(b.title) + glen(b.body);
+  if (!canPublishNow(m) || n > LIMIT || !b.body.trim()) { closeSheet(); return; }
+  const segs = segment(b.body); const cnt = segs.filter(s => s !== '¶' && s !== '↵').length;
+  const t = { id: 'u' + Date.now().toString(36), author: m.id, cat: b.cat, title: b.title.trim(), poem: false, pick: false, feature: false, createdAt: Date.now(), segs, hot: [], base: Array(cnt).fill(0) };
+  S.texts.push(t); m.lastPub = Date.now(); m.justApproved = false; delete S.drafts[m.id]; delete ui.buf[m.id]; save();
+  closeSheet(); hist.length = 0; view = { name: 'home', p: {} }; go('read', { id: t.id }); toast('نُشر نصّك. شكرًا لأنك شاركته معنا');
+}
+function segment(body) {
+  const out = [];
+  body.replace(/\r/g, '').trim().split(/\n\s*\n+/).forEach((para, pi) => {
+    if (pi) out.push('¶');
+    para.split('\n').forEach((line, li) => {
+      if (li) out.push('↵');
+      const parts = line.match(/[^.!؟?…]+(?:[.!؟?…]+[»"”)]*)|[^.!؟?…]+$/g) || [];
+      parts.map(p => p.trim()).filter(Boolean).forEach(p => out.push(p));
+    });
+  });
+  return out;
+}
+
+window.addEventListener('resize', () => { if (popEl && ui.sel) { const el = $(`.s[data-sid="${ui.sel}"]`); el && positionPop(el); } });
+window.addEventListener('scroll', () => { const sb = $('.subbar'); if (sb) sb.classList.toggle('scrolled', scrollY > 8); }, { passive: true });
+
+render(true);
+</script>
+</body>
+</html>
