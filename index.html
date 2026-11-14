@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#F7F4EE">
 <script>
 (function(){var t=null;try{t=localStorage.getItem('mayl-theme')}catch(e){}
-if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}
+if(t!=='light'&&t!=='dark'){t='light'}
 document.documentElement.setAttribute('data-theme',t);
 var m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==='dark'?'#1C1720':'#F7F4EE';})();
 </script>
