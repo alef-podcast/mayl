@@ -308,7 +308,7 @@ textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical
 .nav .wr{width:42px;height:42px;border-radius:50%;background:var(--honey);display:grid;place-items:center;color:var(--ink);margin-top:-2px;box-shadow:0 6px 14px -6px rgba(186,135,20,.8)}
 .nav button.w[aria-current=page]{background:none}
 .nav button.w[aria-current=page] .wr{box-shadow:0 0 0 2px var(--ink)}
-.toast{position:fixed;z-index:80;left:50%;bottom:calc(var(--nav-h) + 24px + var(--safe-b));transform:translateX(-50%);background:var(--ink);color:var(--paper);border-radius:999px;padding:11px 12px 11px 18px;display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:500;box-shadow:var(--shadow-lift);max-width:calc(100% - 28px);width:max-content;animation:toastin .25s ease both}
+.toast{position:fixed;z-index:120;left:50%;bottom:calc(var(--nav-h) + 24px + var(--safe-b));transform:translateX(-50%);background:var(--ink);color:var(--paper);border-radius:999px;padding:11px 12px 11px 18px;display:flex;align-items:center;gap:12px;font-size:14.5px;font-weight:500;box-shadow:var(--shadow-lift);max-width:calc(100% - 28px);width:max-content;animation:toastin .25s ease both}
 @keyframes toastin{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 .toast .ta{border:0;background:var(--honey);color:var(--ink);border-radius:999px;min-height:34px;padding:0 14px;font-weight:800;font-size:13.5px;white-space:nowrap}
 .toast .tx{padding-inline-start:6px}
@@ -356,7 +356,7 @@ textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical
 .by-line b{font-size:15px;font-weight:800;display:block}
 .by-line > span{min-width:0}
 .by-line.big{margin-top:16px;padding:10px 14px;border-radius:20px;background:var(--surface);border:1px solid var(--border);width:100%}
-.by-line.big > span:not(.av){flex:1}
+.by-line.big > span:not(.av):not(.swatch):not(.rk){flex:1}
 .mark{background:linear-gradient(100deg,rgba(255,232,140,0) .5%,#FFF0AA 2%,#FFE68A 55%,#FFF0AA 97%,rgba(255,232,140,0) 99.5%) 0 90%/100% 58% no-repeat;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .12em;border-radius:.25em .6em .35em .5em}
 .feed{display:flex;flex-direction:column;gap:26px;margin-top:16px}
 .b-full{background:var(--surface);border:1px solid var(--border);border-radius:28px 28px 28px 8px;padding:20px 20px 16px;box-shadow:var(--shadow)}
@@ -617,6 +617,86 @@ html[data-theme=dark] .i-bg i{opacity:.45}
 @media (max-width:380px){.i-dots{gap:6px}.i-dots i{width:18px;height:18px}.i-typed{font-size:17px}}
 @media (max-height:640px){.scene h2{margin-top:14px;font-size:22px}.i-typed{min-height:80px}}
 @media (prefers-reduced-motion:reduce){.i-logo text{fill:var(--ink);stroke-dashoffset:0;stroke-width:0}.i-logo .ul{stroke-dashoffset:0}.i-dots i{background:var(--honey)}.i-welcome{opacity:1}.i-typed::after{display:none}}
+
+/* ================= ركني ================= */
+.room-page .rp-head{display:flex;align-items:center;gap:14px;margin-top:10px}
+.room-page .rp-head h1{font-size:25px;font-weight:800;line-height:1.3}
+.rp-bio{font-size:16.5px;line-height:1.85;margin-top:10px}
+.room-wrap{position:relative;margin:16px 0 0;border-radius:28px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lift);aspect-ratio:400/306;background:#EADFCF}
+.room-svg{display:block;width:100%;height:100%}
+.room-temp{position:absolute;top:10px;right:10px;display:flex;gap:6px;align-items:center;background:rgba(255,254,251,.9);color:#2F2438;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px}
+.room-cap{font-size:13px;color:var(--muted);margin-top:10px}
+.motto{font-size:19px;font-weight:700;line-height:1.7;margin-top:6px}
+.room-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.room-acts .btn{flex:0 1 auto}
+.room-acts .btn[aria-pressed=true]{background:var(--lav-soft);border-color:#CFC2E6}
+.first-note{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1.5px dashed var(--border);border-radius:22px;padding:16px 18px}
+.first-note b{display:block;font-size:16px}.first-note p{font-size:14.5px;color:var(--muted);margin-top:2px}
+.r-hit{cursor:pointer;outline:none}
+.r-hit .hit-ring{fill:transparent;stroke:transparent;stroke-width:2.5}
+.r-hit:focus-visible .hit-ring{stroke:#2F2438;stroke-dasharray:5 4}
+@media (hover:hover){.r-hit:hover .hit-ring{fill:rgba(255,255,255,.12);stroke:rgba(47,36,56,.35);stroke-dasharray:4 4}}
+.anim .r-rain{animation:rRain .9s linear infinite}
+.anim .r-snow{animation:rSnow 11s linear infinite}
+.anim .r-wave{animation:rWave 6s ease-in-out infinite alternate}
+.anim .r-sway{animation:rSway 6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+.anim .r-fog{animation:rFog 16s ease-in-out infinite alternate}
+.anim .r-drip{animation:rDrip 8s ease-in infinite}
+.anim .r-flame{animation:rFlame 1.8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes rRain{from{transform:translate(0,0)}to{transform:translate(-8px,130px)}}
+@keyframes rSnow{from{transform:translate(0,0)}to{transform:translate(-6px,130px)}}
+@keyframes rWave{from{transform:translateX(0)}to{transform:translateX(-10px)}}
+@keyframes rSway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.4deg)}}
+@keyframes rFog{from{transform:translateX(-12px)}to{transform:translateX(14px)}}
+@keyframes rDrip{0%{transform:translateY(0);opacity:0}10%{opacity:1}80%{opacity:.9}100%{transform:translateY(46px);opacity:0}}
+@keyframes rFlame{0%{transform:scale(1,1)}50%{transform:scale(.92,1.06)}100%{transform:scale(1.04,.95)}}
+.glimpse{flex:none;width:104px;height:80px;border-radius:18px 18px 18px 6px;overflow:hidden;border:2px solid rgba(255,254,251,.85);box-shadow:0 6px 16px -10px rgba(47,36,56,.5);display:block;background:#EADFCF}
+.glimpse.sm{width:76px;height:58px;border-radius:14px 14px 14px 5px}
+.glimpse svg{width:100%;height:100%}
+.swatch{flex:none;width:42px;height:42px;border-radius:14px;overflow:hidden;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--border)}
+.swatch svg{width:100%;height:100%}
+.frame-big{display:block;width:100%;max-height:60vh;object-fit:contain;border-radius:18px;margin-top:14px;background:var(--paper)}
+.frame-quote{margin:16px 0 0;font-size:24px;font-weight:700;line-height:1.75;background:var(--paper);border-radius:20px;padding:22px 20px}
+/* المحرّر */
+.room-editor{position:fixed;top:0;right:0;bottom:0;left:0;z-index:95;background:var(--paper);display:flex;flex-direction:column;animation:fade .25s ease both}
+.re-preview{position:relative;flex:none;height:clamp(190px,37vh,330px);background:#EADFCF;border-bottom:1px solid var(--border);padding-top:var(--safe-t)}
+.re-preview .room-svg{width:100%;height:100%}
+.re-cap{position:absolute;bottom:8px;right:10px;background:rgba(255,254,251,.9);color:#2F2438;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px}
+.re-panel{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--surface);border-radius:26px 26px 0 0;margin-top:-18px;position:relative;box-shadow:0 -10px 30px -18px rgba(47,36,56,.4)}
+.re-head{display:flex;align-items:baseline;justify-content:space-between;padding:16px 20px 4px}
+.re-head h2{font-size:20px;font-weight:800}
+.re-dirty{font-size:12.5px;color:var(--muted)}
+.re-tabs{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.re-tabs button{flex:1;min-height:42px;border:0;border-radius:999px;background:var(--paper);font-weight:700;font-size:14.5px;white-space:nowrap;padding:0 12px}
+.re-tabs button[aria-selected=true]{background:var(--ink);color:var(--paper)}
+.re-body{flex:1;min-height:0;overflow:auto;padding:14px 18px 20px;overscroll-behavior:contain}
+.re-foot{display:flex;gap:10px;padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);background:var(--surface)}
+.re-foot .btn{flex:1}
+.re-lbl{font-size:14px;font-weight:800;margin:12px 0 8px}
+.re-sub{font-size:14px;color:var(--muted);margin-top:16px}
+.re-note{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.75}
+.re-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.re-preset{border:2px solid transparent;background:var(--paper);border-radius:18px;padding:5px 5px 8px;display:flex;flex-direction:column;gap:6px;align-items:stretch;font-weight:700;font-size:13px}
+.re-preset[aria-pressed=true]{border-color:var(--ink);background:var(--honey-soft)}
+.re-thumb{display:block;aspect-ratio:160/112;border-radius:13px;overflow:hidden}
+.re-thumb svg{width:100%;height:100%}
+.re-seg{display:flex;flex-wrap:wrap;gap:6px}
+.re-seg button{min-height:42px;padding:0 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-weight:500;font-size:14.5px}
+.re-seg button[aria-pressed=true]{background:var(--honey);border-color:var(--ink);font-weight:800;color:#2F2438}
+.re-img{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.re-imgprev{width:72px;height:90px;border-radius:10px;overflow:hidden;border:4px solid #8A6B52;flex:none}
+.re-imgprev img{width:100%;height:100%;object-fit:cover;display:block}
+@media (min-width:860px){
+  .room-editor{flex-direction:row}
+  .re-preview{flex:1;height:auto;border-bottom:0;display:flex;align-items:center;padding:24px}
+  .re-preview .room-svg{height:auto;border-radius:28px;box-shadow:var(--shadow-lift)}
+  .re-cap{bottom:34px;right:40px}
+  .re-panel{flex:none;width:430px;margin:0;border-radius:0;box-shadow:-10px 0 30px -20px rgba(47,36,56,.4)}
+}
+@media (max-height:640px){.re-preview{height:30vh}}
+html[data-theme=dark] .re-tabs button[aria-selected=true]{background:var(--honey);color:#2F2438}
+html[data-theme=dark] .room-wrap{border-color:#3B3242}
+@media (prefers-reduced-motion:reduce){.anim *{animation:none!important}}
 </style>
 </head>
 <body>
@@ -752,6 +832,53 @@ const DEMO_ROLES = [
   {id:'majed', t:'ماجد — كاتب', d:'نشر نصّه هذا الأسبوع'},
 ];
 
+
+/* ---------- الأركان: البيانات ---------- */
+const PAINTING = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150"><rect width="120" height="150" fill="#F4E7D4"/><circle cx="82" cy="44" r="20" fill="#F2B6A0"/><path d="M0 102 Q30 80 60 96 T120 88 V150 H0Z" fill="#B9D3A8"/><path d="M0 120 Q40 104 80 118 T120 112 V150 H0Z" fill="#8FB57E"/><path d="M38 118 C40 96 36 80 44 62" stroke="#5E7F55" stroke-width="2.2" fill="none"/><circle cx="44" cy="58" r="7" fill="#E58A9A"/><circle cx="44" cy="58" r="3" fill="#F5C75B"/><path d="M40 92 q-10 -4 -14 -12 q10 2 14 12z" fill="#6E9A6A"/><path d="M54 132 C56 116 60 108 66 100" stroke="#5E7F55" stroke-width="1.8" fill="none"/><circle cx="67" cy="98" r="5" fill="#F5C75B"/></svg>');
+const ROOM_BASE = { view: { place: 'forest', weather: 'clear', time: 'morning' }, candle: { on: false, shape: 'pillar', spot: 'table' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'border', lamp: { shape: 'straight', on: false }, frame: { shape: 'rect', kind: 'quote', text: '', img: null, crop: 'mid' }, motto: '' };
+function mkRoom(o) { const r = JSON.parse(JSON.stringify(ROOM_BASE)); for (const k in o) r[k] = (typeof o[k] === 'object' && o[k] && !Array.isArray(o[k])) ? Object.assign(r[k] || {}, o[k]) : o[k]; return r; }
+function seedRooms() {
+  return {
+    layan: mkRoom({ view: { place: 'city', weather: 'rain', time: 'night' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'stripes', lamp: { shape: 'arc', on: true }, frame: { shape: 'rect', kind: 'quote', text: 'بعض الرسائل تصل متأخرة، لكنها تصل.' }, motto: 'أكتب هنا حين تمطر.' }),
+    sara: mkRoom({ view: { place: 'garden', weather: 'clear', time: 'morning' }, plant: { kind: 'rose', spot: 'sill' }, rug: 'woven', lamp: { shape: 'straight', on: false }, frame: { shape: 'arch', kind: 'image', img: PAINTING, crop: 'mid' }, motto: 'نافذتي مفتوحة دائمًا، والهيل على النار.' }),
+    noura: mkRoom({ view: { place: 'sea', weather: 'clear', time: 'sunset' }, candle: { on: true, shape: 'jar', spot: 'sill' }, plant: { kind: 'olive', spot: 'floor' }, rug: 'border', lamp: { shape: 'straight', on: false }, frame: { shape: 'rect', kind: 'quote', text: 'البحر ما زال في مكانه.' }, motto: 'بين مدينتين، ركن واحد.' }),
+    dana: mkRoom({ view: { place: 'forest', weather: 'fog', time: 'morning' }, plant: { kind: 'leafy', spot: 'sill' }, rug: 'border', frame: { shape: 'arch', kind: 'quote', text: 'أبطئ قليلًا.' }, motto: 'هنا لا أستعجل شيئًا.' }),
+    yousef: mkRoom({ view: { place: 'sea', weather: 'rain', time: 'morning' }, candle: { on: true, shape: 'pillar', spot: 'table' }, rug: 'stripes', lamp: { shape: 'arc', on: false }, plant: { kind: 'olive', spot: 'floor' }, frame: { kind: 'quote', text: 'المطر صديق يتأخر.' } }),
+    omar: mkRoom({ view: { place: 'city', weather: 'clear', time: 'morning' }, plant: { kind: 'olive', spot: 'sill' }, rug: 'border', frame: { kind: 'quote', text: 'كل رقم حكاية صغيرة.' } }),
+    hind: mkRoom({ view: { place: 'forest', weather: 'snow', time: 'morning' }, lamp: { shape: 'arc', on: true }, rug: 'woven', candle: { on: true, shape: 'jar', spot: 'table' }, frame: { shape: 'arch', kind: 'quote', text: 'أين ذهب انتباهي اليوم؟' } }),
+    majed: mkRoom({ view: { place: 'city', weather: 'fog', time: 'sunset' }, rug: 'stripes', lamp: { shape: 'straight', on: true }, frame: { kind: 'quote', text: 'لماذا؟' } }),
+    rim: mkRoom({ view: { place: 'garden', weather: 'snow', time: 'morning' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'woven', frame: { shape: 'arch', kind: 'quote', text: 'لسنا مستعجلين.' }, motto: 'الليمونة ما زالت تنمو.' }),
+    salem: mkRoom({ view: { place: 'sea', weather: 'clear', time: 'night' }, candle: { on: true, shape: 'pillar', spot: 'table' }, lamp: { shape: 'arc', on: false }, rug: 'border', frame: { kind: 'quote', text: 'الطرق تتغير.' } }),
+    huda: mkRoom({ view: { place: 'garden', weather: 'clear', time: 'sunset' }, plant: { kind: 'rose', spot: 'floor' }, rug: 'woven', frame: { kind: 'quote', text: '' } }),
+  };
+}
+const roomOf = id => (S.rooms && S.rooms[id]) || ROOM_BASE;
+const PLACES = [['sea', 'بحر'], ['garden', 'حديقة'], ['forest', 'غابة'], ['city', 'مدينة']];
+const WEATHERS = [['clear', 'صافٍ'], ['rain', 'مطر'], ['fog', 'ضباب'], ['snow', 'ثلج']];
+const TIMES = [['morning', 'صباح'], ['sunset', 'غروب'], ['night', 'ليل']];
+const PRESETS = [
+  { name: 'ليلة ممطرة', view: { place: 'city', weather: 'rain', time: 'night' } },
+  { name: 'صباح الربيع', view: { place: 'garden', weather: 'clear', time: 'morning' } },
+  { name: 'شتاء هادئ', view: { place: 'forest', weather: 'snow', time: 'morning' } },
+  { name: 'بحر وقت الغروب', view: { place: 'sea', weather: 'clear', time: 'sunset' } },
+  { name: 'غابة ضبابية', view: { place: 'forest', weather: 'fog', time: 'morning' } },
+  { name: 'مدينة ليلًا', view: { place: 'city', weather: 'clear', time: 'night' } }];
+const lbl = (arr, k) => (arr.find(x => x[0] === k) || ['', ''])[1];
+function roomCaption(c) {
+  const v = c.view; const w = v.weather === 'clear' ? '' : ' · ' + lbl(WEATHERS, v.weather);
+  const pre = PRESETS.find(p => p.view.place === v.place && p.view.weather === v.weather && p.view.time === v.time);
+  return 'خلف النافذة: ' + (pre ? pre.name : lbl(PLACES, v.place) + ' · ' + lbl(TIMES, v.time) + w);
+}
+const PLANTS = [['leafy', 'نبتة خضراء'], ['rose', 'وردة'], ['olive', 'غصن زيتون']];
+const RUGS = [['stripes', 'خطوط هادئة'], ['border', 'إطار بسيط'], ['woven', 'دائرية منسوجة']];
+function roomDesc(c) {
+  const parts = [roomCaption(c)];
+  if (c.lamp.on) parts.push('مصباح مضاء'); if (c.candle.on) parts.push('شمعة');
+  parts.push(lbl(PLANTS, c.plant.kind));
+  if (c.frame.kind === 'image' && c.frame.img) parts.push('صورة معلّقة'); else if (c.frame.text) parts.push('جملة على الجدار');
+  return parts.join('، ');
+}
+
 /* ---------- التخزين ---------- */
 const store = (() => {
   let ok = true, mem = null;
@@ -793,11 +920,12 @@ function seed() {
     verified: ['huda@example.com','rim@example.com','salem@example.com','layan@example.com','majed@example.com'],
     likes: { huda: { 't3-0': now - 2 * DAY, 't7-2': now - 5 * DAY } },
     drafts: { rim: { title: '', body: 'أحيانًا لا يحتاج الصباح إلى خطة، بل إلى نافذة مفتوحة وكوب شاي', cat: 'تأملات', savedAt: now - DAY } },
-    subs: {}, nlDevice: null
+    subs: {}, nlDevice: null, rooms: seedRooms()
   };
 }
 
 let S = store.load();
+if (S && S.v === 2 && !S.rooms) { S.rooms = seedRooms(); store.save(S); }
 if (!S || S.v !== 2) { S = seed(); store.save(S); }
 const save = () => store.save(S);
 
@@ -805,7 +933,7 @@ const save = () => store.save(S);
 let view = { name: 'home', p: {} };
 const hist = [];
 const ui = { homeCat: 'الكل', discCat: 'الكل', discQ: '', qFolder: 'الكل', qQ: '', sel: null, pending: null,
-             buf: {}, sheet: null, lastFocus: null, resetArm: false, prompt: 0, promptHidden: false, popInfo: false };
+             buf: {}, sheet: null, lastFocus: null, resetArm: false, prompt: 0, promptHidden: false, popInfo: false, roomTemp: {}, roomStill: false, roomDraft: null, reTab: 'view', roomImgSrc: null };
 
 /* ---------- أدوات ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -929,7 +1057,7 @@ function renderNav() {
   const a = activeTab();
   $('#nav').innerHTML = TABS.map(t => t.id === 'write'
     ? `<button class="w" data-act="tab" data-v="write" ${a === 'write' ? 'aria-current="page"' : ''}><span class="wr">${ic('pen', 21)}</span><span>${t.t}</span></button>`
-    : `<button data-act="tab" data-v="${t.id}" ${a === t.id ? 'aria-current="page"' : ''}>${ic(t.i, 22, a === t.id && t.id !== 'disc')}<span>${t.t}</span></button>`).join('');
+    : `<button data-act="tab" data-v="${t.id}" ${a === t.id ? 'aria-current="page"' : ''}>${ic(t.i, 22, a === t.id && t.id !== 'discover')}<span>${t.t}</span></button>`).join('');
 }
 
 /* ---------- عناصر مشتركة ---------- */
@@ -981,10 +1109,10 @@ function nlInvite(compact) {
 }
 function voiceCard(p) {
   const n = endorsements(p.id).length; const ok = isApproved(p);
-  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${blob(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${roomGlimpse(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
     <p class="snip">${esc(p.sample.body)}</p>
     ${ok ? `<span class="tag sage">${ic('check', 14)} انضم${verb(p, '', 'ت')} حديثًا</span>` : progress(n)}
-    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">${ok ? 'ادخل ' + verb(p, 'ركنه', 'ركنها') : 'ساعد هذا الصوت على الوصول'}</button></div>`;
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">${ok ? 'زُر ركني' : 'زُر ركني وساعده على الوصول'.replace('ساعده', verb(p, 'ساعده', 'ساعدها'))}</button></div>`;
 }
 function hotQuotes(filterCat, q) {
   const out = [];
@@ -1053,11 +1181,11 @@ function writerBlock(p, label) {
   const t = sortedTexts().find(x => x.author === p.id); const hi = t ? (t.hot[0] ?? 0) : 0; const line = t ? sentences(t)[hi] : null;
   return `<section class="b-writer" style="--tint:${tintOf(p)}">
     <div class="eyebrow">${label}</div>
-    <div class="w-top">${blob(p)}<div><h3>${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <div class="w-top">${roomGlimpse(p)}<div><h3>${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
     <p class="voice-bio">«${esc(p.bio)}»</p>
     <div class="tags"><span class="tl" style="display:inline">${verb(p, 'يكتب عن', 'تكتب عن')}</span>${(p.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('')}</div>
     ${line ? `<button class="w-line" data-act="open" data-id="${t.id}" data-sid="${line.sid}"><span class="mark">${esc(line.text.replace(/\n/g, ' / '))}</span><small>من «${esc(t.title)}» — اقرأ النص</small></button>` : ''}
-    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">ادخل ركن ${esc(p.name.split(' ')[0])}</button>
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر ركني</button>
   </section>`;
 }
 function voiceBlock(p) {
@@ -1081,9 +1209,356 @@ function feedEnd() {
     <button class="btn btn-ghost" data-act="tab" data-v="discover">استكشف المزيد</button></div>`;
 }
 function writerMini(p) {
-  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${blob(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
-    <p class="snip">${esc(p.bio)}</p><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">ادخل ${verb(p, 'ركنه', 'ركنها')}</button></div>`;
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${roomGlimpse(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="snip">${esc(p.bio)}</p><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر ركني</button></div>`;
 }
+
+
+/* ================= الأركان: الرسم ================= */
+let RUID = 0;
+function rng(seed) { let x = seed % 2147483647; if (x <= 0) x += 2147483646; return () => (x = x * 16807 % 2147483647) / 2147483647; }
+function wavePath(y, amp, len, w = 200) { let d = `M-30 ${y}`; for (let x = -30; x < w; x += len) d += ` q ${len / 4} ${-amp} ${len / 2} 0 t ${len / 2} 0`; return d; }
+function viewContent(v, u) {
+  const { place, weather, time } = v; const winter = weather === 'snow';
+  const SKY = { morning: { clear: ['#8EC2EC', '#F7EDD8'], rain: ['#8693A4', '#C6CCD3'], fog: ['#C5CAD0', '#ECE8E1'], snow: ['#B4C6DA', '#EEF1F4'] },
+    sunset: { clear: ['#4F4A8A', '#F29C64'], rain: ['#585170', '#C08C7A'], fog: ['#9A8EA4', '#E9C2A3'], snow: ['#7E799E', '#EBBFA4'] },
+    night: { clear: ['#0C1230', '#2C2A58'], rain: ['#0F1522', '#272D3D'], fog: ['#23273A', '#45475A'], snow: ['#141D38', '#384362'] } };
+  const sk = SKY[time][weather]; const R = rng(7 + place.length * 13 + time.length);
+  let g = `<defs><linearGradient id="${u}sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sk[0]}"/><stop offset="1" stop-color="${sk[1]}"/></linearGradient>
+    <radialGradient id="${u}gl"><stop offset="0" stop-color="#FFF4D2" stop-opacity=".85"/><stop offset="1" stop-color="#FFF4D2" stop-opacity="0"/></radialGradient>
+    <filter id="${u}bl" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="5"/></filter></defs>
+    <rect width="160" height="130" fill="url(#${u}sk)"/>`;
+  const horizon = { sea: 74, garden: 88, forest: 76, city: 100 }[place];
+  if (time === 'night') {
+    if (weather === 'clear' || weather === 'snow') for (let i = 0; i < 26; i++) g += `<circle cx="${(R() * 160).toFixed(1)}" cy="${(R() * (horizon - 10)).toFixed(1)}" r="${(R() * .7 + .3).toFixed(2)}" fill="#FFF8E6" opacity="${(R() * .6 + .3).toFixed(2)}"/>`;
+    if (weather !== 'rain') g += `<circle cx="122" cy="24" r="22" fill="url(#${u}gl)" opacity=".5"/><circle cx="122" cy="24" r="8" fill="#F6EDD2" opacity="${weather === 'fog' ? .5 : .95}"/><circle cx="126" cy="21" r="7" fill="${sk[0]}" opacity="${weather === 'fog' ? .3 : .9}"/>`;
+  } else if (time === 'sunset') {
+    if (weather !== 'rain') g += `<circle cx="78" cy="${horizon - 4}" r="40" fill="url(#${u}gl)" opacity=".8"/><circle cx="78" cy="${horizon - 4}" r="15" fill="#FFC27A" opacity="${weather === 'fog' ? .55 : .95}"/>`;
+  } else if (weather === 'clear' || weather === 'snow') {
+    g += `<circle cx="128" cy="20" r="26" fill="url(#${u}gl)" opacity=".7"/><circle cx="128" cy="20" r="9" fill="#FFF8DC"/>`;
+  }
+  if (time !== 'night' && weather !== 'clear') g += `<g fill="#FFFFFF" opacity="${weather === 'rain' ? .25 : .45}" filter="url(#${u}bl)"><ellipse cx="40" cy="22" rx="40" ry="10"/><ellipse cx="118" cy="14" rx="44" ry="9"/></g>`;
+  let land = '', after = '';
+  if (place === 'sea') {
+    const SEA = { morning: ['#6AA6D0', '#2B6A93'], sunset: ['#D49378', '#4F5384'], night: ['#22305A', '#0C142C'] }[time];
+    land += `<defs><linearGradient id="${u}sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SEA[0]}"/><stop offset="1" stop-color="${SEA[1]}"/></linearGradient></defs>
+      <path d="M0 ${horizon} L0 ${horizon - 6} Q14 ${horizon - 14} 30 ${horizon - 5} Q40 ${horizon - 2} 46 ${horizon}Z" fill="${SEA[1]}" opacity=".7"/>
+      <rect y="${horizon}" width="160" height="${130 - horizon}" fill="url(#${u}sea)"/>`;
+    if (time === 'sunset' && weather !== 'rain') after += `<ellipse cx="78" cy="${horizon + 16}" rx="7" ry="16" fill="#FFD08A" opacity=".45"/><ellipse cx="78" cy="${horizon + 6}" rx="16" ry="2" fill="#FFE0A6" opacity=".5"/>`;
+    if (time === 'night' && weather !== 'rain') after += `<ellipse cx="122" cy="${horizon + 18}" rx="4" ry="16" fill="#F6EDD2" opacity=".25"/>`;
+    for (let i = 0; i < 4; i++) after += `<path class="r-wave" style="animation-delay:${-i * 1.4}s" d="${wavePath(horizon + 8 + i * 9, 1.4 + i * .5, 16 + i * 4)}" stroke="#FFFFFF" stroke-opacity="${(.22 + i * .07).toFixed(2)}" stroke-width="${(.8 + i * .25).toFixed(2)}" fill="none"/>`;
+    const SAND = winter ? '#EDEFF1' : { morning: '#E8D3AE', sunset: '#D9A58A', night: '#4E4559' }[time];
+    after += `<path d="M0 116 Q50 108 100 114 T160 112 V130 H0Z" fill="${SAND}"/><path class="r-wave" style="animation-duration:5s" d="${wavePath(115, 1.2, 22)}" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2" fill="none"/>`;
+  } else if (place === 'garden') {
+    land += `<path d="M0 ${horizon} Q40 ${horizon - 12} 80 ${horizon - 4} T160 ${horizon - 6} V130 H0Z" fill="${winter ? '#DCE3E9' : '#A9CB93'}"/>
+      <rect y="${horizon + 6}" width="160" height="${130 - horizon - 6}" fill="${winter ? '#EEF1F4' : '#86B86E'}"/>
+      <path d="M0 ${horizon + 6} Q80 ${horizon + 1} 160 ${horizon + 6}" stroke="${winter ? '#D8DFE6' : '#76A85E'}" stroke-width="2" fill="none"/>`;
+    const tree = (x, y, sc, d) => {
+      let t = `<g transform="translate(${x} ${y}) scale(${sc})"><path d="M-2 0 L-1.4 -26 Q-6 -34 -12 -38 M-1 -24 Q4 -34 10 -40 M-1.4 -16 Q-8 -20 -14 -20" stroke="${winter ? '#6E5D52' : '#7A5C48'}" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="-3" y="-26" width="4.5" height="26" fill="${winter ? '#6E5D52' : '#7A5C48'}"/>`;
+      if (winter) t += `<g fill="#FFFFFF"><ellipse cx="-11" cy="-39" rx="5" ry="2"/><ellipse cx="9" cy="-41" rx="5" ry="2"/><ellipse cx="-13" cy="-21" rx="4" ry="1.6"/></g>`;
+      else t += `<g class="r-sway" style="animation-delay:${d}s"><circle cx="-10" cy="-38" r="12" fill="#F3B3C6"/><circle cx="6" cy="-42" r="13" fill="#F8CBD8"/><circle cx="-2" cy="-30" r="11" fill="#EFA2B9"/><circle cx="12" cy="-30" r="9" fill="#F6BFCE"/><circle cx="-16" cy="-26" r="8" fill="#F8D3DE"/></g>`;
+      return t + '</g>';
+    };
+    land += tree(34, horizon + 22, 1, 0) + tree(124, horizon + 18, .8, -2);
+    if (!winter) { const cols = ['#F7A8BC', '#F5C75B', '#FFFFFF', '#E58A9A', '#C9A7E2']; for (let i = 0; i < 46; i++) land += `<circle cx="${(R() * 160).toFixed(1)}" cy="${(horizon + 14 + R() * (116 - horizon)).toFixed(1)}" r="${(R() * 1.1 + 1).toFixed(2)}" fill="${cols[i % 5]}"/>`; }
+    else for (let i = 0; i < 6; i++) land += `<ellipse cx="${(R() * 160).toFixed(1)}" cy="${(horizon + 14 + R() * 20).toFixed(1)}" rx="12" ry="2" fill="#FFFFFF" opacity=".8"/>`;
+  } else if (place === 'forest') {
+    const pine = (x, b, h, w, f, cap) => { let p = `<path d="M${x} ${b - h} L${x + w / 2} ${b - h * .45} L${x + w * .3} ${b - h * .45} L${x + w * .58} ${b} L${x - w * .58} ${b} L${x - w * .3} ${b - h * .45} L${x - w / 2} ${b - h * .45}Z" fill="${f}"/>`; if (cap) p += `<path d="M${x} ${b - h} L${x + w * .2} ${b - h * .78} L${x - w * .2} ${b - h * .78}Z" fill="#FFFFFF"/><path d="M${x - w * .45} ${b - h * .47} L${x + w * .45} ${b - h * .47}" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>`; return p; };
+    land += `<rect y="${horizon + 18}" width="160" height="${130 - horizon - 18}" fill="${winter ? '#EEF1F4' : '#58775F'}"/>`;
+    let far = '', mid = '', near = '';
+    for (let i = 0; i < 9; i++) far += pine(i * 19 + 4, horizon + 22, 30 + R() * 14, 16, winter ? '#C7D2DA' : '#86A592', false);
+    for (let i = 0; i < 6; i++) mid += pine(i * 30 + 14, horizon + 34, 40 + R() * 14, 22, winter ? '#5F7D73' : '#4C755F', winter);
+    for (let i = 0; i < 3; i++) near += pine([10, 150, 118][i], 132, 64 + R() * 10, 32, winter ? '#3D5C50' : '#2E5443', winter);
+    land += `<g opacity=".85">${far}</g>${mid}<g class="r-sway" style="animation-duration:7s">${near}</g>`;
+  } else {
+    let farB = '', nearB = '', lit = '';
+    for (let x = -4; x < 160; x += 14 + R() * 8) { const h = 30 + R() * 38; farB += `<rect x="${x.toFixed(1)}" y="${(horizon - h).toFixed(1)}" width="${(12 + R() * 8).toFixed(1)}" height="${h.toFixed(1)}" fill="${winter ? '#B8C0CE' : '#9EA8BE'}"/>`; }
+    for (let x = -6; x < 160; x += 22 + R() * 10) {
+      const h = 22 + R() * 34, w = 18 + R() * 10, y = horizon + 14 - h; nearB += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="#6B7289"/>`;
+      if (winter) nearB += `<rect x="${x.toFixed(1)}" y="${(y - 1.5).toFixed(1)}" width="${w.toFixed(1)}" height="2.5" fill="#FFFFFF"/>`;
+      for (let wy = y + 4; wy < horizon + 8; wy += 6) for (let wx = x + 3; wx < x + w - 3; wx += 5) {
+        const r = R(); const on = time === 'night' ? r < .45 : time === 'sunset' ? r < .14 : false;
+        if (on) lit += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="2.6" height="3" fill="${time === 'night' ? '#FFD98A' : '#FFE6B0'}" opacity="${(.7 + R() * .3).toFixed(2)}"/>`;
+        else if (time === 'morning') nearB += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="2.6" height="3" fill="#C9D6E6" opacity=".7"/>`;
+      }
+    }
+    land += `<g opacity=".9">${farB}</g>${nearB}<rect y="${horizon + 14}" width="160" height="${116 - horizon}" fill="${winter ? '#E9ECEF' : '#5A5F70'}"/>`;
+    after += lit;
+    if (time === 'night') for (const x of [26, 86, 140]) after += `<rect x="${x}" y="${horizon + 2}" width="1.4" height="14" fill="#2A2D3A"/><circle cx="${x + .7}" cy="${horizon + 2}" r="7" fill="url(#${u}gl)"/><circle cx="${x + .7}" cy="${horizon + 2}" r="1.6" fill="#FFE2A0"/>`;
+  }
+  g += land;
+  if (time === 'night') g += `<rect width="160" height="130" fill="#0A0E2A" opacity=".45"/>`;
+  if (time === 'sunset') g += `<rect width="160" height="130" fill="#FF9A5C" opacity=".14"/>`;
+  g += after;
+  if (weather === 'fog') g += `<g filter="url(#${u}bl)" fill="${time === 'night' ? '#9AA0B2' : '#F4F1EC'}" opacity="${time === 'night' ? .35 : .6}"><ellipse class="r-fog" cx="60" cy="${horizon + 6}" rx="90" ry="9"/><ellipse class="r-fog" style="animation-delay:-6s" cx="110" cy="${horizon + 24}" rx="80" ry="8"/><ellipse class="r-fog" style="animation-delay:-3s" cx="40" cy="${horizon + 40}" rx="70" ry="7"/></g><rect width="160" height="130" fill="${time === 'night' ? '#4A4C5C' : '#ECE9E3'}" opacity=".22"/>`;
+  if (weather === 'rain') { let l = ''; for (let i = 0; i < 70; i++) { const x = R() * 180, y = -130 + R() * 260; l += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l-2.4 9"/>`; } g += `<g class="r-rain" stroke="${time === 'night' ? '#B9C6E0' : '#EEF3FA'}" stroke-opacity="${time === 'night' ? .45 : .6}" stroke-width=".8" stroke-linecap="round">${l}</g>`; }
+  if (weather === 'snow') { let l = ''; for (let i = 0; i < 60; i++) { const x = R() * 170, y = -130 + R() * 260; l += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(R() * .9 + .5).toFixed(2)}"/>`; } g += `<g class="r-snow" fill="#FFFFFF" opacity=".9">${l}</g>`; }
+  return g;
+}
+function viewThumb(v) { return `<svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${viewContent(v, 'v' + (++RUID) + '_')}</svg>`; }
+function plantSvg(kind) {
+  if (kind === 'rose') return `<path d="M-7 0 L-9 -26 Q0 -30 9 -26 L7 0Z" fill="#DCD1EF" opacity=".85"/><path d="M-7 -6 H7" stroke="#C3B6DA" stroke-width="1"/>
+    <g stroke="#5E7F55" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M0 -24 C-2 -40 -8 -50 -10 -60"/><path d="M1 -24 C3 -42 6 -52 9 -66"/><path d="M0 -24 C0 -38 2 -44 1 -52"/></g>
+    <path d="M-6 -44 q-8 -2 -10 -8 q8 0 10 8z M5 -46 q8 -4 12 -2 q-6 6 -12 2z" fill="#6E9A6A"/>
+    <g><circle cx="-10" cy="-62" r="6.5" fill="#D9667A"/><path d="M-13 -62 q3 -4 6 0 q-3 3 -6 0z" fill="#B84E63"/><circle cx="9" cy="-68" r="7" fill="#E58A9A"/><path d="M6 -68 q3 -4 6 0 q-3 3 -6 0z" fill="#C9677C"/><circle cx="1" cy="-54" r="5.5" fill="#EFA3B2"/></g>`;
+  if (kind === 'olive') return `<path d="M-9 0 L-10 -18 H10 L9 0Z" fill="#EAE2D4"/><rect x="-11" y="-20" width="22" height="3.5" rx="1.5" fill="#DDD3C2"/>
+    <g stroke="#6B6B4E" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M0 -19 C-2 -40 -10 -56 -14 -76"/><path d="M0 -22 C4 -42 10 -54 16 -70"/><path d="M-4 -46 C-12 -52 -18 -54 -22 -60"/></g>
+    <g fill="#9AAE8A">${[[-6, -34, 30], [-10, -48, -20], [-13, -64, 25], [-16, -74, -30], [4, -36, -25], [9, -48, 30], [13, -60, -20], [15, -68, 35], [-17, -55, 40], [-21, -59, -10], [2, -28, 20]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="1.8" transform="rotate(${r} ${x} ${y})"/>`).join('')}</g>`;
+  return `<path d="M-11 0 L-13 -20 H13 L11 0Z" fill="#C98B6E"/><rect x="-14" y="-22" width="28" height="4" rx="2" fill="#B97A5E"/>
+    <g stroke="#4D7A4B" stroke-width="1.4" fill="none"><path d="M0 -20 C-6 -34 -14 -40 -20 -46"/><path d="M0 -20 C2 -38 4 -48 2 -62"/><path d="M0 -20 C8 -32 16 -38 22 -42"/></g>
+    <g fill="#6E9A6A"><path d="M-20 -46 c-12 -2 -16 -14 -10 -20 c8 2 12 10 10 20z"/><path d="M2 -62 c-10 -6 -8 -20 0 -24 c8 6 8 16 0 24z" fill="#5A8758"/><path d="M22 -42 c4 -12 16 -14 20 -8 c-4 8 -12 10 -20 8z"/><path d="M-6 -30 c-10 0 -16 -8 -14 -14 c8 0 14 6 14 14z" fill="#5A8758"/><path d="M8 -30 c6 -8 16 -8 18 -2 c-6 6 -12 6 -18 2z" fill="#7FA97A"/></g>`;
+}
+function candleSvg(shape) {
+  const flame = `<g class="r-flame"><path d="M0 -4 C-3 -8 -2 -13 0 -17 C2 -13 3 -8 0 -4Z" fill="#FFC870"/><path d="M0 -6 C-1.2 -8 -1 -11 0 -13 C1 -11 1.2 -8 0 -6Z" fill="#FFF3C8"/></g>`;
+  if (shape === 'jar') return `<rect x="-7" y="-14" width="14" height="14" rx="3" fill="#FFFFFF" fill-opacity=".45" stroke="#E5D8C6" stroke-width=".8"/><rect x="-5.5" y="-9" width="11" height="8.5" rx="2" fill="#FBF0DD"/><path d="M0 -9 v-2" stroke="#3A2E2A" stroke-width=".8"/><g transform="translate(0 -7)">${flame}</g>`;
+  return `<rect x="-4.5" y="-18" width="9" height="18" rx="1.5" fill="#FBF4E6"/><rect x="-4.5" y="-18" width="3" height="18" fill="#FFFFFF" opacity=".5"/><path d="M0 -18 v-2.5" stroke="#3A2E2A" stroke-width=".8"/><g transform="translate(0 -16)">${flame}</g>`;
+}
+function hit(name, label, inner, ring, stat) {
+  if (stat) return `<g>${inner}</g>`;
+  return `<g class="r-hit" data-room="${name}" tabindex="0" role="button" aria-label="${esc(label)}"><rect class="hit-ring" x="${ring[0]}" y="${ring[1]}" width="${ring[2]}" height="${ring[3]}" rx="10"/>${inner}</g>`;
+}
+function roomSvg(c, opt = {}) {
+  const u = 'r' + (++RUID) + '_'; const st = !!opt.static; const v = c.view; const t = v.time;
+  const lampOn = opt.lampOn != null ? opt.lampOn : c.lamp.on; const night = t === 'night', sunset = t === 'sunset';
+  const vb = opt.crop ? '96 4 280 216' : '0 14 400 306';
+  const f = c.frame; const arch = f.shape === 'arch';
+  const ALIGN = { top: 'xMidYMin', mid: 'xMidYMid', bot: 'xMidYMax' }[f.crop || 'mid'];
+  let s = `<svg class="room-svg${st ? '' : ' anim'}" viewBox="${vb}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(opt.label || roomDesc(c))}" focusable="false">
+  <defs>
+    <linearGradient id="${u}wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3EBDF"/><stop offset="1" stop-color="#E9DDCC"/></linearGradient>
+    <linearGradient id="${u}floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D3B18D"/><stop offset="1" stop-color="#B98F6A"/></linearGradient>
+    <pattern id="${u}pap" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M8 0 V16" stroke="#E5D7C4" stroke-width="1.2" opacity=".55"/></pattern>
+    <radialGradient id="${u}lamp"><stop offset="0" stop-color="#FFD98A" stop-opacity=".75"/><stop offset=".45" stop-color="#FFC970" stop-opacity=".28"/><stop offset="1" stop-color="#FFC970" stop-opacity="0"/></radialGradient>
+    <radialGradient id="${u}cand"><stop offset="0" stop-color="#FFD27A" stop-opacity=".7"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
+    <linearGradient id="${u}beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sunset ? '#FFC47E' : '#FFFFFF'}" stop-opacity="${sunset ? .42 : .3}"/><stop offset="1" stop-color="${sunset ? '#FFC47E' : '#FFFFFF'}" stop-opacity="0"/></linearGradient>
+    <linearGradient id="${u}chair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DFA88F"/><stop offset="1" stop-color="#C98C73"/></linearGradient>
+    <mask id="${u}m"><rect x="-10" y="-10" width="420" height="340" fill="#fff"/><rect x="160" y="36" width="160" height="130" fill="#000"/></mask>
+    <clipPath id="${u}fc">${arch ? '<path d="M75 108 V66 a17 17 0 0 1 34 0 V108Z"/>' : '<rect x="74" y="56" width="36" height="52" rx="1"/>'}</clipPath>
+  </defs>
+  <rect x="34" y="0" width="366" height="232" fill="url(#${u}wall)"/><rect x="34" y="0" width="366" height="232" fill="url(#${u}pap)"/>
+  <path d="M0 0 L34 14 L34 232 L0 266Z" fill="#E2D3BF"/><path d="M0 0 L34 14 L34 232 L0 266Z" fill="url(#${u}pap)" opacity=".5"/>
+  <path d="M0 266 L34 232 H400 V320 H0Z" fill="url(#${u}floor)"/>
+  <g stroke="#7A5236" stroke-opacity=".16" stroke-width="1">${[60, 110, 160, 210, 260, 310, 360].map(x => `<path d="M${x} 232 L${((x - 217) * 1.9 + 217).toFixed(0)} 320"/>`).join('')}<path d="M10 258 H400 M0 282 H400 M0 304 H400" stroke-opacity=".1"/></g>
+  <rect x="34" y="226" width="366" height="7" fill="#EFE5D7"/><path d="M34 226 H400" stroke="#D9CAB5" stroke-width="1"/><path d="M0 260 L34 226" stroke="#D9CAB5" stroke-width="1"/>
+  <rect x="150" y="28" width="184" height="156" rx="3" fill="#5B4636" opacity=".1" transform="translate(3 4)"/>
+  <rect x="148" y="24" width="184" height="154" rx="3" fill="#FBF7F0"/>
+  <rect x="155" y="31" width="170" height="140" fill="#E4D8C7"/>
+  <svg x="160" y="36" width="160" height="130" viewBox="0 0 160 130" preserveAspectRatio="none" overflow="hidden">${viewContent(v, u + 'v')}</svg>
+  <path d="M155 31 L160 36 V166 L155 171Z" fill="#D2C3AF"/><path d="M155 31 H325 L320 36 H160Z" fill="#DBCDBA"/>
+  <path d="M160 36 H206 L160 96Z" fill="#FFFFFF" opacity=".07"/><path d="M226 36 H246 L180 166 H160Z" fill="#FFFFFF" opacity=".05"/>`;
+  if (v.weather === 'rain') { let d = ''; const R = rng(91); for (let i = 0; i < 9; i++) { const x = 164 + R() * 152, y = 40 + R() * 70; d += `<g class="r-drip" style="animation-delay:${(-R() * 7).toFixed(2)}s"><path d="M${x.toFixed(1)} ${(y - 7).toFixed(1)} v7" stroke="#FFFFFF" stroke-opacity=".25" stroke-width=".9"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.5" fill="#FFFFFF" opacity=".55"/></g>`; } s += `<svg x="160" y="36" width="160" height="130" viewBox="160 36 160 130" overflow="hidden">${d}</svg>`; }
+  s += `<rect x="238" y="36" width="4.5" height="130" fill="#FBF7F0"/><rect x="160" y="98" width="160" height="4" fill="#FBF7F0"/>
+  <path d="M128 17 H352" stroke="#8B6E5A" stroke-width="2.5" stroke-linecap="round"/><circle cx="128" cy="17" r="3" fill="#8B6E5A"/><circle cx="352" cy="17" r="3" fill="#8B6E5A"/>
+  <path d="M132 17 C136 70 128 130 140 200 L160 200 C154 140 160 70 156 17Z" fill="#FFFDF7" opacity=".82"/><path d="M140 22 C143 80 138 140 148 198" stroke="#E9DFD0" stroke-width="1.2" fill="none"/>
+  <path d="M348 17 C344 70 352 130 342 200 L322 200 C328 140 322 70 326 17Z" fill="#FFFDF7" opacity=".82"/><path d="M340 22 C337 80 342 140 334 198" stroke="#E9DFD0" stroke-width="1.2" fill="none"/>
+  <rect x="138" y="176" width="204" height="10" rx="2" fill="#FBF7F0"/><rect x="140" y="186" width="200" height="4" fill="#5B4636" opacity=".12"/>`;
+  // الفريم
+  let fr = arch ? `<path d="M68 114 V66 a24 24 0 0 1 48 0 V114Z" fill="#8A6B52"/><path d="M71 111 V66 a21 21 0 0 1 42 0 V111Z" fill="#FFFEFB"/>`
+                : `<rect x="66" y="48" width="52" height="68" rx="2" fill="#8A6B52"/><rect x="69" y="51" width="46" height="62" fill="#FFFEFB"/>`;
+  if (f.kind === 'image' && f.img) fr += `<image href="${f.img}" x="74" y="${arch ? 49 : 56}" width="36" height="${arch ? 59 : 52}" preserveAspectRatio="${ALIGN} slice" clip-path="url(#${u}fc)"/>`;
+  else fr += `<text x="92" y="${arch ? 80 : 76}" text-anchor="middle" font-size="18" font-weight="800" fill="#C9A46A" font-family="Tajawal, sans-serif">”</text>${f.text ? '<g fill="#B8AEB9">' + [0, 1, 2].map(i => `<rect x="${80 + i * 2}" y="${(arch ? 86 : 84) + i * 6}" width="${24 - i * 4}" height="2" rx="1"/>`).join('') + '</g>' : ''}`;
+  s += `<path d="M92 34 L76 48 M92 34 L108 48" stroke="#8B6E5A" stroke-width=".8" fill="none" opacity="${arch ? 0 : .7}"/><circle cx="92" cy="34" r="1.6" fill="#8B6E5A" opacity="${arch ? 0 : 1}"/>`;
+  s += `<rect x="70" y="116" width="48" height="4" fill="#5B4636" opacity=".08"/>`;
+  s += hit('frame', f.kind === 'image' && f.img ? 'الفريم: كبّر الصورة' : 'الفريم: اقرأ الجملة', fr, [60, 40, 64, 84], st);
+  // الرف
+  const books = [[352, 24, '#8A6B9A'], [361, 20, '#F2B6A0'], [369, 26, '#DDE8D2'], [378, 18, '#F5C75B'], [386, 22, '#DCD1EF']].map(([x, h, col]) => `<rect x="${x}" y="${92 - h}" width="${x === 378 ? 7 : 8}" height="${h}" rx="1" fill="${col}"/><rect x="${x + 1.5}" y="${92 - h + 4}" width="${x === 378 ? 4 : 5}" height="1.4" fill="#FFFFFF" opacity=".5"/>`).join('');
+  s += hit('shelf', 'الرف: كل الكتابات', `<rect x="344" y="92" width="56" height="5" rx="1" fill="#9C7A5E"/><rect x="348" y="97" width="3" height="8" fill="#8A6B52"/><rect x="392" y="97" width="3" height="8" fill="#8A6B52"/>${books}<rect x="347" y="88" width="4" height="4" rx="2" fill="#C98B6E"/><rect x="344" y="128" width="56" height="5" rx="1" fill="#9C7A5E"/><rect x="352" y="112" width="20" height="16" rx="3" fill="#E9DFD1"/><path d="M356 118 h12 M356 122 h9" stroke="#C9B9A4" stroke-width="1.4"/><rect x="380" y="106" width="9" height="22" rx="1" fill="#C3B6DA"/>`, [338, 60, 62, 78], st);
+  // السجادة
+  const rugP = 'M78 268 L322 268 L370 314 L30 314Z';
+  if (c.rug === 'woven') s += `<ellipse cx="200" cy="292" rx="160" ry="24" fill="#F0CFBE"/>${[0, 1, 2].map(i => `<ellipse cx="200" cy="292" rx="${140 - i * 34}" ry="${21 - i * 5}" fill="none" stroke="#D9A48C" stroke-width="2" stroke-dasharray="${i === 1 ? '4 3' : '0'}"/>`).join('')}`;
+  else if (c.rug === 'stripes') s += `<path d="${rugP}" fill="#E3EBDA"/>${[276, 286, 296, 306].map((y, i) => { const k = (y - 268) / 46; return `<path d="M${(78 - 48 * k).toFixed(1)} ${y} L${(322 + 48 * k).toFixed(1)} ${y}" stroke="${i % 2 ? '#B8CDAE' : '#A6BE9B'}" stroke-width="${i % 2 ? 2 : 3.5}"/>`; }).join('')}`;
+  else s += `<path d="${rugP}" fill="#EADCCB"/><path d="M92 273 L308 273 L348 309 L52 309Z" fill="none" stroke="#B98E73" stroke-width="2"/><path d="M104 278 L296 278 L330 304 L70 304Z" fill="none" stroke="#DCC3AD" stroke-width="1.2"/>`;
+  // المصباح
+  const lampLit = lampOn; const shadeCol = lampLit ? '#FFE8B5' : '#EADBC2';
+  let lamp = '';
+  if (c.lamp.shape === 'arc') lamp = `<ellipse cx="24" cy="300" rx="13" ry="3.5" fill="#3F3530"/><path d="M24 299 L28 172 Q34 128 98 136" stroke="#3F3530" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M84 142 Q98 124 112 142Z" fill="${lampLit ? '#E9C887' : '#C9A46A'}"/><ellipse cx="98" cy="142" rx="14" ry="2.6" fill="${shadeCol}"/>`;
+  else lamp = `<ellipse cx="26" cy="300" rx="12" ry="3.2" fill="#3F3530"/><path d="M26 299 V140" stroke="#3F3530" stroke-width="2.4"/><path d="M10 112 H42 L48 142 H4Z" fill="${shadeCol}"/><path d="M10 112 H42" stroke="#D9C7AA" stroke-width="1.2"/>`;
+  const lampC = c.lamp.shape === 'arc' ? [98, 148] : [26, 130];
+  s += hit('lamp', lampOn ? 'المصباح: جرّب إطفاءه' : 'المصباح: جرّب إضاءته', lamp, c.lamp.shape === 'arc' ? [2, 118, 120, 188] : [0, 104, 54, 200], st);
+  // المقعد
+  s += `<ellipse cx="100" cy="286" rx="62" ry="6" fill="#5B4636" opacity=".14"/>
+  <rect x="48" y="272" width="5" height="14" rx="1" fill="#6A4F3E"/><rect x="146" y="272" width="5" height="14" rx="1" fill="#6A4F3E"/>
+  <path d="M58 236 C56 196 62 170 100 168 C138 170 144 196 142 236Z" fill="url(#${u}chair)"/>
+  <path d="M70 230 C70 202 76 184 100 182 C124 184 130 202 130 230Z" fill="#E5B39C" opacity=".55"/>
+  <rect x="50" y="232" width="100" height="40" rx="12" fill="#D59A80"/><rect x="58" y="228" width="84" height="18" rx="9" fill="#E7B7A2"/>
+  <rect x="38" y="214" width="26" height="60" rx="12" fill="#C98A70"/><rect x="136" y="214" width="26" height="60" rx="12" fill="#C98A70"/>
+  <path d="M136 214 C150 210 162 214 162 228 L162 252 C150 250 140 246 136 240Z" fill="#DCD1EF" opacity=".95"/><path d="M142 222 L158 220 M142 232 L158 231 M142 242 L158 242" stroke="#C3B6DA" stroke-width="1.2"/>`;
+  // الطاولة والدفتر
+  s += `<ellipse cx="200" cy="288" rx="16" ry="3.5" fill="#5B4636" opacity=".2"/><rect x="197" y="238" width="6" height="48" fill="#8A6B52"/><ellipse cx="200" cy="287" rx="13" ry="3" fill="#8A6B52"/>
+  <ellipse cx="200" cy="238" rx="30" ry="8" fill="#9C7A5E"/><ellipse cx="200" cy="236" rx="30" ry="8" fill="#B08D6E"/>`;
+  s += hit('notebook', 'الدفتر: اقرأ آخر نص', `<path d="M178 234 L204 230 L212 235 L186 239Z" fill="#F5C75B"/><path d="M178 234 L186 239 V241 L178 236Z" fill="#D9AA3E"/><path d="M186 239 L212 235 V237 L186 241Z" fill="#E7B84A"/><path d="M200 232 L206 236" stroke="#9C6A3E" stroke-width="1.4"/><path d="M190 230 L210 227" stroke="#2F2438" stroke-width="1.4" stroke-linecap="round"/>`, [168, 216, 52, 32], st);
+  if (c.candle.on) s += `<g transform="translate(${c.candle.spot === 'sill' ? '172 177' : '219 236'})">${candleSvg(c.candle.shape)}</g>`;
+  s += `<g transform="translate(${c.plant.spot === 'sill' ? '304 177) scale(.6' : '268 304'})">${c.plant.spot === 'floor' ? '<ellipse cx="0" cy="1" rx="16" ry="3" fill="#5B4636" opacity=".18"/>' : ''}${plantSvg(c.plant.kind)}</g>`;
+  // الضوء
+  s += '<g pointer-events="none">';
+  if (t === 'morning') s += `<path d="M160 166 L320 166 L372 318 L176 318Z" fill="url(#${u}beam)"/><rect x="0" y="0" width="400" height="320" fill="#FFFFFF" opacity=".04" mask="url(#${u}m)"/>`;
+  if (sunset) s += `<path d="M160 166 L320 166 L296 318 L96 318Z" fill="url(#${u}beam)"/><rect x="0" y="0" width="400" height="320" fill="#FF9F5E" opacity=".13" mask="url(#${u}m)"/>`;
+  if (night) s += `<rect x="0" y="0" width="400" height="320" fill="#1E1533" opacity="${lampOn ? .36 : .5}" mask="url(#${u}m)"/><path d="M160 166 L320 166 L344 318 L170 318Z" fill="#B8C8FF" opacity=".05"/>`;
+  if (v.weather === 'rain' && !night) s += `<rect x="0" y="0" width="400" height="320" fill="#5A6476" opacity=".08" mask="url(#${u}m)"/>`;
+  if (lampOn) s += `<circle cx="${lampC[0]}" cy="${lampC[1]}" r="${night ? 150 : 110}" fill="url(#${u}lamp)" opacity="${night ? 1 : sunset ? .6 : .4}"/>${c.lamp.shape === 'arc' ? `<path d="M85 143 L60 290 L150 290 L111 143Z" fill="#FFD98A" opacity="${night ? .1 : .05}"/><ellipse cx="98" cy="142" rx="14" ry="2.6" fill="#FFF3D0"/>` : `<path d="M10 112 H42 L48 142 H4Z" fill="#FFEDC2" opacity=".9"/>`}`;
+  if (c.candle.on && t !== 'morning') { const cp = c.candle.spot === 'sill' ? [172, 160] : [219, 220]; s += `<circle cx="${cp[0]}" cy="${cp[1]}" r="${night ? 46 : 30}" fill="url(#${u}cand)" opacity="${night ? 1 : .6}"/>`; }
+  return s + '</g></svg>';
+}
+function roomGlimpse(p, cls = '') { return `<span class="glimpse ${cls}" aria-hidden="true">${roomSvg(roomOf(p.id), { static: true, crop: true })}</span>`; }
+
+/* ---------- الأصوات المولّدة (اختيارية) ---------- */
+const AUD = { ctx: null, nodes: null, owner: null };
+const soundKind = v => v.weather === 'rain' ? 'rain' : v.place === 'sea' ? 'sea' : null;
+function startAmbient(kind, owner) {
+  try {
+    const C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
+    AUD.ctx = AUD.ctx || new C(); const ctx = AUD.ctx; if (ctx.resume) ctx.resume();
+    const len = 2 * ctx.sampleRate; const buf = ctx.createBuffer(1, len, ctx.sampleRate); const d = buf.getChannelData(0);
+    if (kind === 'rain') for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    else { let last = 0; for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; } }
+    const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+    const fl = ctx.createBiquadFilter(); fl.type = kind === 'rain' ? 'bandpass' : 'lowpass'; fl.frequency.value = kind === 'rain' ? 1500 : 520; fl.Q.value = kind === 'rain' ? .5 : .7;
+    const g = ctx.createGain(); g.gain.value = 0; src.connect(fl); fl.connect(g); g.connect(ctx.destination); src.start();
+    g.gain.linearRampToValueAtTime(kind === 'rain' ? .14 : .3, ctx.currentTime + 1.2);
+    let lfo = null; if (kind === 'sea') { lfo = ctx.createOscillator(); lfo.frequency.value = .11; const lg = ctx.createGain(); lg.gain.value = .16; lfo.connect(lg); lg.connect(g.gain); lfo.start(); }
+    AUD.nodes = { src, g, lfo }; AUD.owner = owner; return true;
+  } catch (e) { return false; }
+}
+function stopAmbient() {
+  if (!AUD.nodes) return; const { src, g, lfo } = AUD.nodes; AUD.nodes = null; AUD.owner = null;
+  try { g.gain.cancelScheduledValues(AUD.ctx.currentTime); g.gain.setTargetAtTime(0, AUD.ctx.currentTime, .15); setTimeout(() => { try { src.stop(); lfo && lfo.stop(); } catch (e) {} }, 700); } catch (e) {}
+}
+
+/* ---------- تفاعل الأثاث ---------- */
+function roomAction(name, ownerId) {
+  const p = person(ownerId); if (!p) return; const c = roomOf(p.id);
+  const texts = sortedTexts().filter(t => t.author === p.id); const own = me() && me().id === p.id;
+  if (name === 'notebook') { if (texts[0]) go('read', { id: texts[0].id }); else toast(own ? 'هنا ستبدأ أولى كتاباتك' : 'هنا ستبدأ أولى كتابات' + verb(p, 'ه', 'ها')); }
+  else if (name === 'shelf') scrollToWritings(p);
+  else if (name === 'frame') openFrame(p);
+  else if (name === 'lamp') toggleRoomLamp(p);
+}
+function scrollToWritings(p) {
+  const el = $('#writings') || $('#latest'); if (!el) return;
+  el.scrollIntoView({ block: 'start', behavior: reduceMotion() ? 'auto' : 'smooth' });
+  if (!sortedTexts().some(t => t.author === p.id)) toast('لا كتابات بعد — ' + (me() && me().id === p.id ? 'رفّك ينتظر نصّك الأول' : 'الرف ينتظر أول نص'));
+}
+function toggleRoomLamp(p) {
+  const c = roomOf(p.id); const T = ui.roomTemp[p.id] || (ui.roomTemp[p.id] = {});
+  const cur = T.lamp != null ? T.lamp : c.lamp.on; T.lamp = !cur; if (T.lamp === c.lamp.on) delete T.lamp;
+  refreshSoft();
+  const own = me() && me().id === p.id;
+  toast(own ? 'معاينة فقط — غيّري الإعداد من «رتّب ركنك»' : 'معاينة لك فقط؛ لا يتغيّر ركن ' + p.name.split(' ')[0]);
+}
+function openFrame(p) {
+  const f = roomOf(p.id).frame; const first = p.name.split(' ')[0];
+  if (f.kind === 'image' && f.img) openSheet(`<div class="sheet-h"><div><h2>على جدار ${esc(first)}</h2><p>صورة اختار${verb(p, 'ها', 'تها')} لركن${verb(p, 'ه', 'ها')}.</p></div>${closeBtn()}</div><img class="frame-big" src="${f.img}" alt="الصورة المعلّقة في ركن ${esc(p.name)}"><div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة إلى الركن</button></div>`);
+  else openSheet(`<div class="sheet-h"><div><h2>على جدار ${esc(first)}</h2><p>جملة ${verb(p, 'اختارها', 'اختارتها')} لتبقى معلّقة هنا.</p></div>${closeBtn()}</div><blockquote class="frame-quote">${f.text ? '«' + esc(f.text) + '»' : 'الفريم ما زال فارغًا.'}</blockquote><div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة إلى الركن</button></div>`);
+}
+
+/* ---------- محرّر الركن ---------- */
+const clone = o => JSON.parse(JSON.stringify(o));
+const sameView = (a, b) => a.place === b.place && a.weather === b.weather && a.time === b.time;
+function reDirty() { const m = me(); return m && JSON.stringify(ui.roomDraft) !== JSON.stringify(roomOf(m.id)); }
+function seg(label, key, opts, cur) {
+  return `<div class="re-group"><p class="re-lbl" id="lb-${key}">${label}</p><div class="re-seg" role="group" aria-labelledby="lb-${key}">${opts.map(o => `<button type="button" data-re="${key}" data-v="${o[0]}" aria-pressed="${cur === o[0]}">${o[1]}</button>`).join('')}</div></div>`;
+}
+function reBody() {
+  const d = ui.roomDraft; const tab = ui.reTab;
+  if (tab === 'view') return `<p class="re-lbl">مشاهد جاهزة</p><div class="re-presets">${PRESETS.map((p, i) => `<button type="button" class="re-preset" data-re="preset" data-v="${i}" aria-pressed="${sameView(p.view, d.view)}"><span class="re-thumb">${viewThumb(p.view)}</span><span>${p.name}</span></button>`).join('')}</div>
+    <p class="re-sub">أو خصّص الإطلالة بنفسك — يمكنك الجمع بينها:</p>
+    ${seg('المكان', 'place', PLACES, d.view.place)}${seg('الأجواء', 'weather', WEATHERS, d.view.weather)}${seg('الوقت', 'time', TIMES, d.view.time)}`;
+  if (tab === 'items') return `
+    ${seg('الشمعة', 'candle-on', [['1', 'ظاهرة'], ['0', 'مخفية']], d.candle.on ? '1' : '0')}
+    ${d.candle.on ? seg('شكل الشمعة', 'candle-shape', [['pillar', 'عمودية'], ['jar', 'في برطمان']], d.candle.shape) + seg('مكان الشمعة', 'candle-spot', [['table', 'على الطاولة'], ['sill', 'حافة النافذة']], d.candle.spot) : ''}
+    ${seg('نبتة أو وردة', 'plant', PLANTS, d.plant.kind)}${seg('مكانها', 'plant-spot', [['floor', 'على الأرض'], ['sill', 'حافة النافذة']], d.plant.spot)}
+    ${seg('السجادة', 'rug', RUGS, d.rug)}
+    ${seg('المصباح الأرضي', 'lamp-shape', [['straight', 'مستقيم'], ['arc', 'مقوّس']], d.lamp.shape)}${seg('ضوء المصباح', 'lamp-on', [['1', 'مضاء'], ['0', 'مطفأ']], d.lamp.on ? '1' : '0')}
+    <p class="re-note">الدفتر والرف جزء ثابت من ركنك: الدفتر يفتح آخر نص، والرف يقود إلى كتاباتك.</p>`;
+  const f = d.frame;
+  return `${seg('شكل الفريم', 'frame-shape', [['rect', 'مستطيل'], ['arch', 'مقوّس']], f.shape)}
+    ${seg('ماذا يعرض الفريم؟', 'frame-kind', [['quote', 'جملة أكتبها'], ['image', 'صورة أختارها']], f.kind)}
+    ${f.kind === 'quote' ? `<label class="field"><span>جملتك على الجدار</span><textarea class="input" data-re-in="frame-text" maxlength="90" rows="2" placeholder="جملة قصيرة تحب أن يراها زوّارك">${esc(f.text || '')}</textarea></label>
+      <p class="re-note">تظهر للجميع. لا نضع مقتبساتك الخاصة هنا تلقائيًا.</p>`
+    : `<div class="re-img">${f.img ? `<span class="re-imgprev"><img src="${f.img}" alt="" style="object-position:${{ top: 'top', mid: 'center', bot: 'bottom' }[f.crop || 'mid']}"></span>` : ''}
+        <button type="button" class="btn btn-ghost btn-sm" data-re="pick-img">${f.img ? 'اختر صورة أخرى' : 'اختر صورة من جهازك'}</button></div>
+      ${f.img ? seg('قص الصورة داخل الفريم', 'crop', [['top', 'الأعلى'], ['mid', 'الوسط'], ['bot', 'الأسفل']], f.crop || 'mid') : ''}
+      <div class="demo-note">رفع الصورة هنا للمعاينة فقط: تُصغَّر وتُحفظ في متصفحك، ولا تُرفع إلى أي خدمة فعلية.</div><div id="re-img-err"></div>`}
+    <label class="field"><span>عبارتك الشخصية <span class="muted" style="font-weight:400">(اختيارية، تظهر تحت الركن)</span></span><input class="input" data-re-in="motto" maxlength="80" value="${esc(d.motto || '')}" placeholder="مثل: أكتب هنا حين تمطر."></label>`;
+}
+function openRoomEditor() {
+  const m = me(); if (!m) return;
+  ui.roomDraft = clone(roomOf(m.id)); ui.reTab = 'view'; closePop(); $$('.toast').forEach(t => t.remove());
+  const el = document.createElement('div'); el.className = 'room-editor'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-labelledby', 're-title');
+  document.body.appendChild(el); document.documentElement.classList.add('intro-open'); $('#app').setAttribute('aria-hidden', 'true'); $('#nav').setAttribute('aria-hidden', 'true');
+  el.innerHTML = `<div class="re-preview" id="rePrev"></div><div class="re-panel"><div class="re-head"><h2 id="re-title">رتّب ركنك</h2><span class="re-dirty" id="reDirty"></span></div>
+    <div class="re-tabs" role="tablist">${[['view', 'الإطلالة'], ['items', 'تفاصيل الركن'], ['wall', 'على الجدار']].map(([k, l]) => `<button type="button" role="tab" data-re="tab" data-v="${k}" id="ret-${k}" aria-controls="reBody"></button>`).join('')}</div>
+    <div class="re-body" id="reBody" role="tabpanel"></div>
+    <div class="re-foot"><button type="button" class="btn btn-ghost" data-re="cancel">إلغاء التغييرات</button><button type="button" class="btn btn-primary" data-re="save">احفظ الركن</button></div></div>
+    <input type="file" accept="image/*" id="reFile" class="sr" tabindex="-1" aria-hidden="true">`;
+  el.addEventListener('click', reClick); el.addEventListener('input', reInput); $('#reFile').addEventListener('change', reFile);
+  reRender(true); setTimeout(() => { const t = $('#ret-view'); t && t.focus({ preventScroll: true }); }, 60);
+}
+function reRender(body) {
+  const d = ui.roomDraft; const m = me();
+  $('#rePrev').innerHTML = roomSvg(d, { label: 'معاينة ركنك: ' + roomDesc(d), static: ui.roomStill }) + `<span class="re-cap">${esc(roomCaption(d))}</span>`;
+  $$('[data-re=tab]').forEach(b => { const k = b.dataset.v; b.textContent = { view: 'الإطلالة', items: 'تفاصيل الركن', wall: 'على الجدار' }[k]; b.setAttribute('aria-selected', String(k === ui.reTab)); });
+  if (body) { const bd = $('#reBody'); const y = bd.scrollTop; bd.innerHTML = reBody(); bd.scrollTop = y; bd.setAttribute('aria-labelledby', 'ret-' + ui.reTab); }
+  $('#reDirty').textContent = reDirty() ? 'تغييرات غير محفوظة' : 'محفوظ';
+}
+function closeRoomEditor() {
+  const el = $('.room-editor'); if (!el) return; el.remove(); ui.roomDraft = null;
+  document.documentElement.classList.remove('intro-open'); $('#app').removeAttribute('aria-hidden'); $('#nav').removeAttribute('aria-hidden');
+}
+function reClick(e) {
+  const b = e.target.closest('[data-re]'); if (!b) return; const d = ui.roomDraft; const v = b.dataset.v;
+  switch (b.dataset.re) {
+    case 'tab': ui.reTab = v; reRender(true); $('#reBody').scrollTop = 0; return;
+    case 'preset': d.view = clone(PRESETS[+v].view); break;
+    case 'place': case 'weather': case 'time': d.view[b.dataset.re] = v; break;
+    case 'candle-on': d.candle.on = v === '1'; break;
+    case 'candle-shape': d.candle.shape = v; break;
+    case 'candle-spot': d.candle.spot = v; if (v === 'sill' && d.plant.spot === 'sill' && d.plant.kind) {} break;
+    case 'plant': d.plant.kind = v; break;
+    case 'plant-spot': d.plant.spot = v; break;
+    case 'rug': d.rug = v; break;
+    case 'lamp-shape': d.lamp.shape = v; break;
+    case 'lamp-on': d.lamp.on = v === '1'; break;
+    case 'frame-shape': d.frame.shape = v; break;
+    case 'frame-kind': d.frame.kind = v; break;
+    case 'crop': d.frame.crop = v; break;
+    case 'pick-img': $('#reFile').click(); return;
+    case 'save': { const m = me(); S.rooms = S.rooms || {}; S.rooms[m.id] = clone(d); save(); delete ui.roomTemp[m.id]; closeRoomEditor(); refreshSoft(); toast('حُفظ ركنك'); return; }
+    case 'cancel': { const dirty = reDirty(); closeRoomEditor(); refreshSoft(); if (dirty) toast('عاد ركنك كما حفظته آخر مرة'); return; }
+    default: return;
+  }
+  reRender(true);
+  const again = $(`#reBody [data-re="${b.dataset.re}"][data-v="${v}"]`); again && again.focus({ preventScroll: true });
+}
+function reInput(e) {
+  const k = e.target.dataset.reIn; if (!k) return;
+  if (k === 'frame-text') ui.roomDraft.frame.text = e.target.value.trim() ? e.target.value : '';
+  if (k === 'motto') ui.roomDraft.motto = e.target.value;
+  reRender(false);
+}
+function reFile(e) {
+  const file = e.target.files && e.target.files[0]; e.target.value = ''; if (!file) return;
+  const err = m => { const box = $('#re-img-err'); if (box) box.innerHTML = errBox(m); };
+  if (!/^image\//.test(file.type)) { err('اختر ملف صورة (JPG أو PNG).'); return; }
+  const fr = new FileReader();
+  fr.onerror = () => err('تعذّرت قراءة الصورة.');
+  fr.onload = () => { const img = new Image(); img.onerror = () => err('تعذّر فتح الصورة.'); img.onload = () => {
+    try { const max = 520; const sc = Math.min(1, max / Math.max(img.width, img.height)); const cv = document.createElement('canvas'); cv.width = Math.round(img.width * sc); cv.height = Math.round(img.height * sc);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); ui.roomDraft.frame.img = cv.toDataURL('image/jpeg', .82); ui.roomDraft.frame.kind = 'image'; ui.roomDraft.frame.crop = 'mid'; reRender(true);
+    } catch (x) { err('تعذّر تجهيز الصورة للمعاينة.'); } }; img.src = fr.result; };
+  fr.readAsDataURL(file);
+}
+document.addEventListener('keydown', e => {
+  if (!$('.room-editor')) return;
+  if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); const dirty = reDirty(); closeRoomEditor(); refreshSoft(); if (dirty) toast('عاد ركنك كما حفظته آخر مرة'); return; }
+  if (e.key === 'Tab') { const ed = $('.room-editor'); const f = $$('button,input,textarea', ed).filter(x => x.offsetParent !== null && x.id !== 'reFile'); if (!f.length) return; const a = f[0], z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    e.stopImmediatePropagation(); }
+}, true);
+document.addEventListener('keydown', e => {
+  const h = e.target.closest && e.target.closest('.r-hit');
+  if (h && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopImmediatePropagation(); const o = h.closest('[data-room-owner]'); o && roomAction(h.dataset.room, o.dataset.roomOwner); }
+}, true);
 
 /* ================= الشاشات ================= */
 function vHome() {
@@ -1161,7 +1636,7 @@ function vRead() {
     ${t.mood ? `<div class="mood banner">${moodSvg(t.mood)}</div>` : ''}
     <header class="reader-head"><span class="tag">${esc(t.cat)}</span>
       <h1>${esc(t.title || 'بلا عنوان')}</h1>
-      <button class="by-line big" data-act="profile" data-id="${a.id}">${av(a)}<span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span>${ic('fwd', 18)}</button>
+      <button class="by-line big" data-act="profile" data-id="${a.id}"><span class="swatch" aria-hidden="true">${viewThumb(roomOf(a.id).view)}</span><span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span><span class="tl rk" style="display:inline-flex;align-items:center;gap:2px;white-space:nowrap">${verb(a, 'ركنه', 'ركنها')} ${ic('fwd', 16)}</span></button>
       <div class="legend"><span class="s-demo">✦ مظلّلة</span><span>جمل توقّف عندها كثيرون. اضغط أي جملة لتحتفظ بها.</span></div>
     </header>
     <div class="paper"><span class="ribbon" aria-hidden="true"></span><div class="read-body" lang="ar">${sentencesHtml(t)}</div>
@@ -1170,7 +1645,7 @@ function vRead() {
       <section class="about" style="--tint:${tintOf(a)}"><div class="eyebrow">عن ${esc(first)}، ${verb(a, 'بصوته', 'بصوتها')}</div>
         <div class="w-top">${blob(a, 'sm')}<div><h3 style="font-size:19px">${esc(a.name)}</h3><span class="tl">${esc(a.tagline || '')}</span></div></div>
         <p class="voice-bio" style="font-size:17px">«${esc(a.bio)}»</p>
-        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${a.id}">ادخل ${verb(a, 'ركنه', 'ركنها')}</button>${more.length ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${more[0].id}">${verb(a, 'نصّه', 'نصّها')}: «${esc(more[0].title)}»</button>` : ''}</div></section>
+        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${a.id}">ارجع إلى ${verb(a, 'ركنه', 'ركنها')}</button>${more.length ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${more[0].id}">${verb(a, 'نصّه', 'نصّها')}: «${esc(more[0].title)}»</button>` : ''}</div></section>
       ${letterBlock()}
     </div>
   </article>`;
@@ -1226,32 +1701,39 @@ function statusBlock(p, own) {
 function vProfile() {
   const p = person(view.p.id); if (!p) return subbar('ركن') + '<div class="empty"><h3>هذه الصفحة غير موجودة</h3></div>';
   const m = me(); const own = m && m.id === p.id; const appr = isApproved(p); const first = p.name.split(' ')[0];
-  const texts = sortedTexts().filter(t => t.author === p.id);
-  const myEmail = m && normEmail(m.email);
-  const already = myEmail && endorsements(p.id).includes(myEmail);
-  const top = texts.find(t => t.hot.length); const line = top ? sentences(top)[top.hot[0]] : null;
+  const texts = sortedTexts().filter(t => t.author === p.id); const latest = texts[0];
+  const myEmail = m && normEmail(m.email); const already = myEmail && endorsements(p.id).includes(myEmail);
   const cta = verb(p, 'أؤيد انضمامه', 'أؤيد انضمامها');
+  const c = roomOf(p.id); const T = ui.roomTemp[p.id] || {}; const lampOn = T.lamp != null ? T.lamp : c.lamp.on;
+  const snd = soundKind(c.view); const playing = !!(AUD.nodes && AUD.owner === p.id);
   return `${subbar(own ? 'ركني' : 'ركن ' + first, `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}" aria-label="نسخ رابط الركن">${ic('share', 19)}</button>`)}
-  <div class="reader">
-  <section class="corner" style="--tint:${tintOf(p)}"><span class="tape" aria-hidden="true"></span>
-    <div class="w-top">${blob(p, 'lg')}<div style="min-width:0"><h1>${esc(p.name)}</h1><span class="tl">${esc(p.tagline || '')}</span></div></div>
-    <p class="corner-label">${own ? 'بصوتك' : verb(p, 'بصوته', 'بصوتها')}</p>
-    <p class="voice-bio">«${esc(p.bio || '…')}»</p>
-    <div class="tags"><span class="tl" style="display:inline;font-weight:800">${own ? 'تكتب عن' : verb(p, 'يكتب عن', 'تكتب عن')}</span>${(p.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('')}</div>
-    ${own ? `<button class="btn btn-ghost btn-sm" data-act="edit-profile">${ic('edit', 17)} عدّل نبذتك</button>` : ''}
-  </section>
-  ${line ? `<section class="section"><div class="eyebrow">جملة من ${own ? 'ركنك' : verb(p, 'ركنه', 'ركنها')}</div>
-    <button class="w-line big" data-act="open" data-id="${top.id}" data-sid="${line.sid}"><span class="mark">${esc(line.text)}</span><small>من «${esc(top.title)}» · ${likeLine(likeCount(line.sid))}</small></button></section>` : ''}
-  ${p.sample ? `<section class="section"><div class="sec-head"><h2>عينة كتابة</h2><span class="tag peach">للتعارف والترحيب</span></div>
-    <div class="sample-box"><span class="ribbon" aria-hidden="true"></span><h3 style="font-size:19px;font-weight:800;margin-bottom:6px">${esc(p.sample.title)}</h3><p class="read-body">${esc(p.sample.body)}</p>
-    <p class="muted" style="font-size:13px;margin-top:10px">العينة للتعارف فقط؛ ليست منشورًا عامًا ولا تُحتسب ضمن نص الأسبوع.</p></div></section>` : ''}
+  <div class="reader room-page">
+  <header class="rp-head">${blob(p, '', false)}<div style="min-width:0"><h1>${esc(p.name)}</h1><span class="tl">${esc(p.tagline || '')}</span></div></header>
+  <p class="rp-bio">${esc(p.bio || '')}${own ? ` <button class="link" data-act="edit-profile" style="font-size:13px">عدّل نبذتك</button>` : ''}</p>
+  <figure class="room-wrap" id="room-${p.id}" data-room-owner="${p.id}">${roomSvg(c, { lampOn, static: ui.roomStill, label: 'ركن ' + p.name + ': ' + roomDesc(Object.assign({}, c, { lamp: { ...c.lamp, on: lampOn } })) })}
+    ${T.lamp != null ? `<figcaption class="room-temp">${ic('info', 14)} معاينة الضوء لك فقط</figcaption>` : ''}</figure>
+  <p class="room-cap">${esc(roomCaption(c))}</p>
+  ${c.motto ? `<p class="motto">«${esc(c.motto)}»</p>` : ''}
+  <div class="room-acts">
+    ${own ? `<button class="btn btn-primary btn-sm" data-act="room-edit">${ic('edit', 17)} رتّب ركنك</button>` : ''}
+    ${latest ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${latest.id}">اقرأ آخر نص</button>` : ''}
+    ${texts.length ? `<button class="btn btn-ghost btn-sm" data-act="room-shelf" data-id="${p.id}">كل الكتابات</button>` : ''}
+    <button class="btn btn-ghost btn-sm" data-act="room-lamp" data-id="${p.id}" aria-pressed="${lampOn}">${lampOn ? 'أطفئ المصباح' : 'أضئ المصباح'}</button>
+    <button class="btn btn-ghost btn-sm" data-act="room-still" aria-pressed="${ui.roomStill}">${ui.roomStill ? 'شغّل الحركة' : 'أوقف الحركة'}</button>
+    ${snd ? `<button class="btn btn-ghost btn-sm" data-act="room-sound" data-id="${p.id}" aria-pressed="${playing}">${playing ? 'أوقف الصوت' : (snd === 'rain' ? 'صوت المطر' : 'صوت البحر')}</button>` : ''}
+  </div>
+  <section class="section" id="latest"><div class="sec-head"><h2>${own ? 'آخر ما كتبت' : 'آخر ما ' + verb(p, 'كتب', 'كتبت')}</h2></div>
+    ${latest ? textCard(latest) : `<div class="first-note">${ic('pen', 22)}<div><b>هنا ستبدأ ${own ? 'أولى كتاباتك' : 'أولى كتابات' + verb(p, 'ه', 'ها')}</b><p>${own ? (appr ? 'صفحتك البيضاء جاهزة متى شئت.' : 'رتّب ركنك وجهّز مسودتك؛ يُفتح النشر حين يكتمل ترحيب القرّاء.') : 'الدفتر على الطاولة ما زال فارغًا.'}</p></div></div>`}</section>
   ${p.member && !appr ? `<section class="section"><div class="eyebrow">ساعد هذا الصوت على الوصول</div>${statusBlock(p, own)}
     ${own ? `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}">${ic('share', 19)} شارك ركنك</button></div>
         <p class="muted" style="font-size:13px;margin-top:8px">الترحيب يأتي من قرّائك؛ لا يمكنك تأييد نفسك.</p>`
       : `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary btn-block" data-act="endorse" data-id="${p.id}">${ic('heart', 19)} ${cta}</button></div>
         ${already ? `<p class="msg info">${ic('info', 18)}<span>سبق أن رحّبت${verb(m, '', 'ِ')} بـ${esc(first)} بإيميلك الموثق. يمكنك الترحيب بإيميل آخر تملكه.</span></p>` : `<p class="muted" style="font-size:13px;margin-top:8px">التأييد لا ينشئ حسابًا ولا يشترك بك في أي بريد.</p>`}`}</section>` : ''}
   ${own && appr ? `<section class="section">${statusBlock(p, true)}</section>` : ''}
-  ${texts.length ? `<section class="section"><div class="sec-head"><h2>${own ? 'نصوصي' : 'نصوص ' + verb(p, 'كتبها', 'كتبتها')}</h2></div><div class="grid">${texts.map(textCard).join('')}</div></section>` : ''}
+  ${p.sample ? `<section class="section"><div class="sec-head"><h2>عينة كتابة</h2><span class="tag peach">للتعارف والترحيب</span></div>
+    <div class="sample-box"><span class="ribbon" aria-hidden="true"></span><h3 style="font-size:19px;font-weight:800;margin-bottom:6px">${esc(p.sample.title)}</h3><p class="read-body">${esc(p.sample.body)}</p>
+    <p class="muted" style="font-size:13px;margin-top:10px">العينة للتعارف فقط؛ ليست منشورًا عامًا ولا تُحتسب ضمن نص الأسبوع.</p></div></section>` : ''}
+  ${texts.length > 1 ? `<section class="section" id="writings"><div class="sec-head"><h2>كل الكتابات</h2></div><div class="grid">${texts.slice(1).map(textCard).join('')}</div></section>` : ''}
   <section class="section">${letterBlock()}</section></div>`;
 }
 function vMe() {
@@ -1405,6 +1887,7 @@ function nlChips(all, ints, kind) {
 const VIEWS = { home: vHome, discover: vDiscover, read: vRead, quotes: vQuotes, me: vMe, write: vWrite, profile: vProfile, newsletter: vNewsletter };
 function render(scrollTop) {
   closePop();
+  if (AUD.nodes && !(view.name === 'profile' && view.p.id === AUD.owner)) stopAmbient();
   const main = $('#main');
   main.innerHTML = `<div class="view">${VIEWS[view.name]()}</div>`;
   renderNav();
@@ -1670,6 +2153,8 @@ function announce(s) { $('#live').textContent = s; }
 /* ================= الأحداث ================= */
 document.addEventListener('click', e => {
   const sel = window.getSelection && String(window.getSelection());
+  const rh = e.target.closest('.r-hit');
+  if (rh) { const o = rh.closest('[data-room-owner]'); if (o) { roomAction(rh.dataset.room, o.dataset.roomOwner); return; } }
   const a = e.target.closest('[data-act]');
   if (a && a.getAttribute('aria-disabled') === 'true' && a.dataset.act !== 'wpublish') return;
   if (!a) {
@@ -1707,6 +2192,11 @@ document.addEventListener('click', e => {
       const ts = myLikes()[sid]; setLike(sid, false); refreshSoft();
       toast('أُزيلت من مقتبساتك', 'تراجع', () => { S.likes[S.current][sid] = ts; save(); refreshSoft(); }); break; }
     case 'states': openStates(); break;
+    case 'room-edit': openRoomEditor(); break;
+    case 'room-shelf': scrollToWritings(person(id)); break;
+    case 'room-lamp': toggleRoomLamp(person(id)); break;
+    case 'room-still': ui.roomStill = !ui.roomStill; refreshSoft(); announce(ui.roomStill ? 'أُوقفت الحركة' : 'عادت الحركة'); break;
+    case 'room-sound': if (AUD.nodes && AUD.owner === id) { stopAmbient(); refreshSoft(); } else { stopAmbient(); if (startAmbient(soundKind(roomOf(id).view), id)) { refreshSoft(); toast('صوت مولَّد داخل المتصفح — أوقفه متى شئت'); } else toast('تعذّر تشغيل الصوت في هذا المتصفح'); } break;
     case 'replay-intro': closeSheet(); openIntro(); break;
     case 'theme': setTheme(isDark() ? 'light' : 'dark'); break;
     case 'switch': switchTo(v); break;
