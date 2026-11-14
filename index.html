@@ -618,85 +618,118 @@ html[data-theme=dark] .i-bg i{opacity:.45}
 @media (max-height:640px){.scene h2{margin-top:14px;font-size:22px}.i-typed{min-height:80px}}
 @media (prefers-reduced-motion:reduce){.i-logo text{fill:var(--ink);stroke-dashoffset:0;stroke-width:0}.i-logo .ul{stroke-dashoffset:0}.i-dots i{background:var(--honey)}.i-welcome{opacity:1}.i-typed::after{display:none}}
 
-/* ================= ركني ================= */
-.room-page .rp-head{display:flex;align-items:center;gap:14px;margin-top:10px}
-.room-page .rp-head h1{font-size:25px;font-weight:800;line-height:1.3}
-.rp-bio{font-size:16.5px;line-height:1.85;margin-top:10px}
-.room-wrap{position:relative;margin:16px 0 0;border-radius:28px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lift);aspect-ratio:400/306;background:#EADFCF}
-.room-svg{display:block;width:100%;height:100%}
-.room-temp{position:absolute;top:10px;right:10px;display:flex;gap:6px;align-items:center;background:rgba(255,254,251,.9);color:#2F2438;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px}
-.room-cap{font-size:13px;color:var(--muted);margin-top:10px}
-.motto{font-size:19px;font-weight:700;line-height:1.7;margin-top:6px}
-.room-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.room-acts .btn{flex:0 1 auto}
-.room-acts .btn[aria-pressed=true]{background:var(--lav-soft);border-color:#CFC2E6}
-.first-note{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1.5px dashed var(--border);border-radius:22px;padding:16px 18px}
+/* ================= مساحة الكاتب (الثيمات) ================= */
+html,body{background:var(--pagebg,var(--paper))}
+html[data-theme=dark]{--pagebg:var(--paper)!important}
+.subbar{background:var(--pagebg,var(--paper))}
+.app{padding-bottom:calc(var(--nav-h) + 64px + var(--safe-b))}
+.nav{bottom:calc(8px + var(--safe-b))}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:calc(var(--nav-h) + 30px + var(--safe-b));background:var(--pagebg,var(--paper));-webkit-mask-image:linear-gradient(to top,#000 58%,transparent);mask-image:linear-gradient(to top,#000 58%,transparent);pointer-events:none;z-index:29}
+html.sp-editing .nav,html.sp-editing body::after{display:none}
+html.sp-editing .app{padding-bottom:60vh}
+.space{position:relative;margin:0 -18px;padding-bottom:6px}
+.sp-cover{position:relative;height:clamp(150px,44vw,250px);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 48%,transparent 100%);mask-image:linear-gradient(to bottom,#000 48%,transparent 100%)}
+.cover-svg{display:block;width:100%;height:100%}
+.sp-head{position:relative;padding:0 22px;margin-top:-58px}
+.sp-head > :not(.orn){position:relative;z-index:1}
+.sp-id{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.sp-av{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;font-size:36px;font-weight:800;color:var(--ink);background:var(--t-soft);box-shadow:0 0 0 5px var(--t-bg),0 0 0 7px var(--acc-line)}
+.sp-photo{width:80px;height:80px;border-radius:20px;overflow:hidden;padding:0;border:0;box-shadow:0 0 0 4px var(--t-bg),0 12px 24px -14px rgba(47,36,56,.55);background:var(--t-soft)}
+.sp-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.sp-name{font-size:31px;font-weight:800;line-height:1.3;margin-top:14px}
+.sp-tag{font-size:15px;color:var(--muted);margin-top:2px}
+.sp-bio{font-size:17.5px;line-height:1.9;margin-top:12px;max-width:36em}
+.sp-note{font-size:19px;font-weight:700;line-height:1.7;margin-top:14px;padding-inline-start:30px}
+.sp-qm{position:absolute;inset-inline-start:0;top:-4px;font-size:40px;line-height:1;color:var(--acc);font-weight:800}
+.sp-ints{font-size:14px;color:var(--muted);margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sp-ints span{color:var(--ink);font-weight:700}
+.sp-ints i{color:var(--acc);font-style:normal;font-weight:800}
+.sp-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.sp-status{margin-top:18px;padding:12px 14px;border-radius:18px;background:var(--acc-soft,var(--lav-soft))}
+.sp-st-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:700}
+.sp-status .prog{gap:8px}.sp-status .prog b{font-size:13px}
+.sp-status .dots i{width:10px;height:10px;border-width:1.5px}
+.sp-status .dots i.on{background:var(--acc,var(--honey))}
+.sp-status p{font-size:13.5px;margin-top:6px;line-height:1.7;color:var(--ink)}
+.sp-status .btn{margin-top:10px}
+.sp-already{display:flex;gap:6px;align-items:center;font-size:13px!important;color:var(--muted)!important}
+.sp-line{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;margin-top:16px;color:var(--ink)}
+.sp-sec{padding:0 22px;margin-top:26px}
+.sp-h2{font-size:15px;font-weight:800;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.sp-h2::before{content:"";width:18px;height:3px;border-radius:3px;background:var(--acc)}
+.sp-text{display:block;padding:16px 0 18px;border-bottom:1px solid var(--t-border);cursor:pointer}
+.sp-text:last-child{border-bottom:0}
+.sp-text h3{font-size:21px;font-weight:800;line-height:1.45}
+.sp-text p{font-size:17px;line-height:1.95;margin-top:6px;color:var(--ink);opacity:.86;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sp-text p.poem{white-space:pre-line}
+.sp-text.first{padding:18px;margin:10px -4px 4px;border:0;border-radius:22px;background:var(--t-surface);box-shadow:0 1px 0 var(--t-border)}
+.sp-text.first p{-webkit-line-clamp:6}
+.sp-text .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:var(--muted)}
+.sp-text .go{border:0;background:none;padding:6px 0;font-weight:800;color:var(--ink);text-decoration:underline;text-decoration-color:var(--acc);text-decoration-thickness:2px;text-underline-offset:5px;font-size:14px}
+.sp-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:4px}
+.sp-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.sp-sample{margin-top:12px;padding:18px;border-radius:22px;background:var(--t-surface);border:1px dashed var(--t-border)}
+.sp-sample h3{font-size:20px;font-weight:800;margin-top:2px}
+.sp-sample p{font-size:17.5px;line-height:1.95;margin-top:6px}
+.sp-sample small{display:block;font-size:12.5px;color:var(--muted);margin-top:10px}
+.first-note{display:flex;gap:12px;align-items:flex-start;background:var(--t-surface,var(--surface));border:1.5px dashed var(--t-border,var(--border));border-radius:22px;padding:16px 18px;margin-top:10px}
 .first-note b{display:block;font-size:16px}.first-note p{font-size:14.5px;color:var(--muted);margin-top:2px}
-.r-hit{cursor:pointer;outline:none}
-.r-hit .hit-ring{fill:transparent;stroke:transparent;stroke-width:2.5}
-.r-hit:focus-visible .hit-ring{stroke:#2F2438;stroke-dasharray:5 4}
-@media (hover:hover){.r-hit:hover .hit-ring{fill:rgba(255,255,255,.12);stroke:rgba(47,36,56,.35);stroke-dasharray:4 4}}
-.anim .r-rain{animation:rRain .9s linear infinite}
-.anim .r-snow{animation:rSnow 11s linear infinite}
-.anim .r-wave{animation:rWave 6s ease-in-out infinite alternate}
-.anim .r-sway{animation:rSway 6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
-.anim .r-fog{animation:rFog 16s ease-in-out infinite alternate}
-.anim .r-drip{animation:rDrip 8s ease-in infinite}
-.anim .r-flame{animation:rFlame 1.8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
-@keyframes rRain{from{transform:translate(0,0)}to{transform:translate(-8px,130px)}}
-@keyframes rSnow{from{transform:translate(0,0)}to{transform:translate(-6px,130px)}}
-@keyframes rWave{from{transform:translateX(0)}to{transform:translateX(-10px)}}
-@keyframes rSway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.4deg)}}
-@keyframes rFog{from{transform:translateX(-12px)}to{transform:translateX(14px)}}
-@keyframes rDrip{0%{transform:translateY(0);opacity:0}10%{opacity:1}80%{opacity:.9}100%{transform:translateY(46px);opacity:0}}
-@keyframes rFlame{0%{transform:scale(1,1)}50%{transform:scale(.92,1.06)}100%{transform:scale(1.04,.95)}}
-.glimpse{flex:none;width:104px;height:80px;border-radius:18px 18px 18px 6px;overflow:hidden;border:2px solid rgba(255,254,251,.85);box-shadow:0 6px 16px -10px rgba(47,36,56,.5);display:block;background:#EADFCF}
-.glimpse.sm{width:76px;height:58px;border-radius:14px 14px 14px 5px}
-.glimpse svg{width:100%;height:100%}
+.orn{position:absolute;pointer-events:none;z-index:0}
+.orn-glow{top:-90px;right:-50px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,196,128,.42),rgba(255,196,128,0) 66%)}
+.orn-win{top:70px;left:8px;width:120px;height:150px;filter:blur(1.5px)}
+.orn-win svg,.orn-sprig svg{width:100%;height:100%}
+.orn-sprig{top:62px;left:10px;width:80px;height:108px}
+.orn-rule{top:130px;bottom:0;right:9px;width:5px;border-right:1px solid var(--acc-line);border-left:1px solid var(--acc-line)}
+.orn-wave{display:block;width:calc(100% - 44px);height:12px;margin:24px auto 0}
+.tchip{flex:none;width:92px;height:62px;border-radius:16px 16px 16px 6px;overflow:hidden;display:block;box-shadow:0 0 0 2px rgba(255,254,251,.85),0 6px 14px -10px rgba(47,36,56,.5)}
+.tchip.sm{width:64px;height:46px;border-radius:12px 12px 12px 5px}
+.rd-cover{height:116px;margin:0 -18px -26px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 20%,transparent);mask-image:linear-gradient(to bottom,#000 20%,transparent)}
+.rd-themed .ribbon{background:var(--acc)}
+.rd-themed .reader-head .tag{background:var(--acc-soft)}
+.rd-themed .by-line.big{border-color:var(--acc-line)}
 .swatch{flex:none;width:42px;height:42px;border-radius:14px;overflow:hidden;border:2px solid var(--surface);box-shadow:0 0 0 1px var(--border)}
-.swatch svg{width:100%;height:100%}
 .frame-big{display:block;width:100%;max-height:60vh;object-fit:contain;border-radius:18px;margin-top:14px;background:var(--paper)}
-.frame-quote{margin:16px 0 0;font-size:24px;font-weight:700;line-height:1.75;background:var(--paper);border-radius:20px;padding:22px 20px}
-/* المحرّر */
-.room-editor{position:fixed;top:0;right:0;bottom:0;left:0;z-index:95;background:var(--paper);display:flex;flex-direction:column;animation:fade .25s ease both}
-.re-preview{position:relative;flex:none;height:clamp(190px,37vh,330px);background:#EADFCF;border-bottom:1px solid var(--border);padding-top:var(--safe-t)}
-.re-preview .room-svg{width:100%;height:100%}
-.re-cap{position:absolute;bottom:8px;right:10px;background:rgba(255,254,251,.9);color:#2F2438;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px}
-.re-panel{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--surface);border-radius:26px 26px 0 0;margin-top:-18px;position:relative;box-shadow:0 -10px 30px -18px rgba(47,36,56,.4)}
-.re-head{display:flex;align-items:baseline;justify-content:space-between;padding:16px 20px 4px}
-.re-head h2{font-size:20px;font-weight:800}
+.cv-anim .cv-rain{animation:cvRain 22s linear infinite}
+.cv-anim .cv-drift{animation:cvDrift 24s ease-in-out infinite alternate}
+@keyframes cvRain{from{transform:translateY(0)}to{transform:translateY(200px)}}
+@keyframes cvDrift{from{transform:translateX(-10px)}to{transform:translateX(12px)}}
+/* اللوحة */
+.sp-panel{position:fixed;left:0;right:0;bottom:0;z-index:95;margin:0 auto;width:min(100%,640px);max-height:56vh;display:flex;flex-direction:column;background:var(--surface);border-radius:26px 26px 0 0;box-shadow:0 -14px 40px -16px rgba(47,36,56,.45);animation:up .28s ease both}
+.spp-head{display:flex;justify-content:space-between;align-items:baseline;padding:16px 20px 2px}
+.spp-head h2{font-size:19px;font-weight:800}
+.spp-body{flex:1;min-height:0;overflow:auto;padding:0 18px 14px;overscroll-behavior:contain}
+.spp-themes{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:2px 18px 4px}
+.spp-themes::-webkit-scrollbar{display:none}
+.spp-themes button,.spp-covers button{border:2px solid transparent;background:var(--paper);border-radius:18px;padding:5px 5px 8px;display:flex;flex-direction:column;gap:6px;font-size:13px;text-align:center;color:var(--ink)}
+.spp-themes button{flex:0 0 112px}
+.spp-themes button b{font-weight:800}
+.spp-themes button[aria-pressed=true],.spp-covers button[aria-pressed=true]{border-color:var(--ink);background:var(--honey-soft)}
+.spp-thumb{display:block;height:62px;border-radius:13px;overflow:hidden}
+.spp-covers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.spp-covers button{font-weight:700;font-size:12.5px}
+.spp-acc{display:flex;flex-wrap:wrap;gap:8px}
+.spp-acc button{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px 0 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:14px;color:var(--ink)}
+.spp-acc i{width:20px;height:20px;border-radius:50%;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.spp-acc button[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink);font-weight:800}
+.spp-note{font-size:13px;color:var(--muted);margin-top:6px}
+.spp-imgprev{width:64px;height:64px;border-radius:14px;overflow:hidden;flex:none}
+.spp-imgprev img{width:100%;height:100%;object-fit:cover;display:block}
+.re-lbl{font-size:14px;font-weight:800;margin:14px 0 8px}
+.re-note{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.75}
 .re-dirty{font-size:12.5px;color:var(--muted)}
-.re-tabs{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
-.re-tabs button{flex:1;min-height:42px;border:0;border-radius:999px;background:var(--paper);font-weight:700;font-size:14.5px;white-space:nowrap;padding:0 12px}
-.re-tabs button[aria-selected=true]{background:var(--ink);color:var(--paper)}
-.re-body{flex:1;min-height:0;overflow:auto;padding:14px 18px 20px;overscroll-behavior:contain}
-.re-foot{display:flex;gap:10px;padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);background:var(--surface)}
-.re-foot .btn{flex:1}
-.re-lbl{font-size:14px;font-weight:800;margin:12px 0 8px}
-.re-sub{font-size:14px;color:var(--muted);margin-top:16px}
-.re-note{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.75}
-.re-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.re-preset{border:2px solid transparent;background:var(--paper);border-radius:18px;padding:5px 5px 8px;display:flex;flex-direction:column;gap:6px;align-items:stretch;font-weight:700;font-size:13px}
-.re-preset[aria-pressed=true]{border-color:var(--ink);background:var(--honey-soft)}
-.re-thumb{display:block;aspect-ratio:160/112;border-radius:13px;overflow:hidden}
-.re-thumb svg{width:100%;height:100%}
 .re-seg{display:flex;flex-wrap:wrap;gap:6px}
-.re-seg button{min-height:42px;padding:0 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-weight:500;font-size:14.5px}
+.re-seg button{min-height:42px;padding:0 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-weight:500;font-size:14.5px;color:var(--ink)}
 .re-seg button[aria-pressed=true]{background:var(--honey);border-color:var(--ink);font-weight:800;color:#2F2438}
 .re-img{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
-.re-imgprev{width:72px;height:90px;border-radius:10px;overflow:hidden;border:4px solid #8A6B52;flex:none}
-.re-imgprev img{width:100%;height:100%;object-fit:cover;display:block}
+.re-foot{display:flex;gap:10px;padding:12px 16px calc(12px + var(--safe-b));border-top:1px solid var(--border);background:var(--surface);border-radius:0 0 0 0}
+.re-foot .btn{flex:1}
 @media (min-width:860px){
-  .room-editor{flex-direction:row}
-  .re-preview{flex:1;height:auto;border-bottom:0;display:flex;align-items:center;padding:24px}
-  .re-preview .room-svg{height:auto;border-radius:28px;box-shadow:var(--shadow-lift)}
-  .re-cap{bottom:34px;right:40px}
-  .re-panel{flex:none;width:430px;margin:0;border-radius:0;box-shadow:-10px 0 30px -20px rgba(47,36,56,.4)}
+  .sp-panel{left:auto;right:24px;bottom:24px;margin:0;width:400px;max-height:calc(100vh - 48px);border-radius:26px;overflow:hidden}
+  html.sp-editing .app{padding-bottom:60px;padding-right:440px}
+  .sp-head{padding:0 32px}.sp-sec{padding:0 32px}
 }
-@media (max-height:640px){.re-preview{height:30vh}}
-html[data-theme=dark] .re-tabs button[aria-selected=true]{background:var(--honey);color:#2F2438}
-html[data-theme=dark] .room-wrap{border-color:#3B3242}
-@media (prefers-reduced-motion:reduce){.anim *{animation:none!important}}
+html[data-theme=dark] .space,html[data-theme=dark] .rd-themed{--t-bg:var(--paper)!important;--t-soft:var(--lav-soft)!important;--t-border:var(--border)!important;--t-surface:var(--surface)!important}
+@media (max-width:380px){.sp-head,.sp-sec{padding-left:16px;padding-right:16px}.sp-name{font-size:27px}}
 </style>
 </head>
 <body>
@@ -833,50 +866,45 @@ const DEMO_ROLES = [
 ];
 
 
-/* ---------- الأركان: البيانات ---------- */
+/* ---------- مساحات الكتّاب: الثيمات ---------- */
+const clone = o => JSON.parse(JSON.stringify(o));
+function rng(seed) { let x = seed % 2147483647; if (x <= 0) x += 2147483646; return () => (x = x * 16807 % 2147483647) / 2147483647; }
 const PAINTING = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 150"><rect width="120" height="150" fill="#F4E7D4"/><circle cx="82" cy="44" r="20" fill="#F2B6A0"/><path d="M0 102 Q30 80 60 96 T120 88 V150 H0Z" fill="#B9D3A8"/><path d="M0 120 Q40 104 80 118 T120 112 V150 H0Z" fill="#8FB57E"/><path d="M38 118 C40 96 36 80 44 62" stroke="#5E7F55" stroke-width="2.2" fill="none"/><circle cx="44" cy="58" r="7" fill="#E58A9A"/><circle cx="44" cy="58" r="3" fill="#F5C75B"/><path d="M40 92 q-10 -4 -14 -12 q10 2 14 12z" fill="#6E9A6A"/><path d="M54 132 C56 116 60 108 66 100" stroke="#5E7F55" stroke-width="1.8" fill="none"/><circle cx="67" cy="98" r="5" fill="#F5C75B"/></svg>');
-const ROOM_BASE = { view: { place: 'forest', weather: 'clear', time: 'morning' }, candle: { on: false, shape: 'pillar', spot: 'table' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'border', lamp: { shape: 'straight', on: false }, frame: { shape: 'rect', kind: 'quote', text: '', img: null, crop: 'mid' }, motto: '' };
-function mkRoom(o) { const r = JSON.parse(JSON.stringify(ROOM_BASE)); for (const k in o) r[k] = (typeof o[k] === 'object' && o[k] && !Array.isArray(o[k])) ? Object.assign(r[k] || {}, o[k]) : o[k]; return r; }
-function seedRooms() {
+const THEMES = {
+  rain: { name: 'مساء ممطر', note: 'رمادي بنفسجي، ضباب خفيف ووهج دافئ.', bg: '#EFEBF1', soft: '#E3DDEA', border: '#DCD5E3',
+    covers: ['مطر على الزجاج', 'ضباب المساء', 'وهج دافئ'], accents: [['#7B6CA3', 'بنفسجي المساء'], ['#B4864C', 'وهج عسلي'], ['#5C6F8E', 'رمادي أزرق']], orn: 'وهج دافئ خفيف' },
+  morning: { name: 'ضوء الصباح', note: 'كريمي، ضوء منتشر وظل نافذة خافت.', bg: '#FAF5EB', soft: '#F2E7D3', border: '#EADFCB',
+    covers: ['ضوء منتشر', 'ستارة كتان', 'صباح باكر'], accents: [['#B98326', 'عسلي'], ['#C0735A', 'خوخي محروق'], ['#6F8562', 'زيتوني']], orn: 'ظل نافذة خافت' },
+  sea: { name: 'قرب البحر', note: 'أزرق رمادي هادئ، ودرجات رملية.', bg: '#EDF1F2', soft: '#DFE7EA', border: '#D4DEE2',
+    covers: ['أفق هادئ', 'شاطئ رملي', 'بحر غائم'], accents: [['#4A7390', 'أزرق البحر'], ['#A2805A', 'رملي'], ['#4F8683', 'أخضر بحري']], orn: 'خط موجة' },
+  spring: { name: 'ربيع هادئ', note: 'أخضر مريمي، إضاءة لطيفة وتفصيل نباتي محدود.', bg: '#F1F4EB', soft: '#E2EAD7', border: '#D8E2CD',
+    covers: ['مرج مزهر', 'ظل أوراق', 'غصن مزهر'], accents: [['#5A8556', 'مريمي غامق'], ['#BC6F8A', 'وردي هادئ'], ['#A0843F', 'عسلي ترابي']], orn: 'غصن صغير عند الحافة' },
+  paper: { name: 'ورق وحبر', note: 'خلفية ورقية دافئة، حبر داكن وتكوين بسيط.', bg: '#F6F0E3', soft: '#ECE3D1', border: '#E1D5BF',
+    covers: ['ورق مسطّر', 'ضربة حبر', 'حبر مائي'], accents: [['#2F2438', 'حبر برقوقي'], ['#97473A', 'حبر أحمر'], ['#3B5577', 'حبر أزرق']], orn: 'خط هامش مزدوج' },
+};
+const THEME_KEYS = Object.keys(THEMES);
+const SPACE_BASE = { theme: 'paper', cover: 0, accent: 0, orn: true, personal: { kind: 'none', text: '', img: null } };
+function mkSpace(o) { const r = clone(SPACE_BASE); Object.assign(r, o); r.personal = Object.assign({ kind: 'none', text: '', img: null }, o.personal || {}); return r; }
+function seedThemes() {
   return {
-    layan: mkRoom({ view: { place: 'city', weather: 'rain', time: 'night' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'stripes', lamp: { shape: 'arc', on: true }, frame: { shape: 'rect', kind: 'quote', text: 'بعض الرسائل تصل متأخرة، لكنها تصل.' }, motto: 'أكتب هنا حين تمطر.' }),
-    sara: mkRoom({ view: { place: 'garden', weather: 'clear', time: 'morning' }, plant: { kind: 'rose', spot: 'sill' }, rug: 'woven', lamp: { shape: 'straight', on: false }, frame: { shape: 'arch', kind: 'image', img: PAINTING, crop: 'mid' }, motto: 'نافذتي مفتوحة دائمًا، والهيل على النار.' }),
-    noura: mkRoom({ view: { place: 'sea', weather: 'clear', time: 'sunset' }, candle: { on: true, shape: 'jar', spot: 'sill' }, plant: { kind: 'olive', spot: 'floor' }, rug: 'border', lamp: { shape: 'straight', on: false }, frame: { shape: 'rect', kind: 'quote', text: 'البحر ما زال في مكانه.' }, motto: 'بين مدينتين، ركن واحد.' }),
-    dana: mkRoom({ view: { place: 'forest', weather: 'fog', time: 'morning' }, plant: { kind: 'leafy', spot: 'sill' }, rug: 'border', frame: { shape: 'arch', kind: 'quote', text: 'أبطئ قليلًا.' }, motto: 'هنا لا أستعجل شيئًا.' }),
-    yousef: mkRoom({ view: { place: 'sea', weather: 'rain', time: 'morning' }, candle: { on: true, shape: 'pillar', spot: 'table' }, rug: 'stripes', lamp: { shape: 'arc', on: false }, plant: { kind: 'olive', spot: 'floor' }, frame: { kind: 'quote', text: 'المطر صديق يتأخر.' } }),
-    omar: mkRoom({ view: { place: 'city', weather: 'clear', time: 'morning' }, plant: { kind: 'olive', spot: 'sill' }, rug: 'border', frame: { kind: 'quote', text: 'كل رقم حكاية صغيرة.' } }),
-    hind: mkRoom({ view: { place: 'forest', weather: 'snow', time: 'morning' }, lamp: { shape: 'arc', on: true }, rug: 'woven', candle: { on: true, shape: 'jar', spot: 'table' }, frame: { shape: 'arch', kind: 'quote', text: 'أين ذهب انتباهي اليوم؟' } }),
-    majed: mkRoom({ view: { place: 'city', weather: 'fog', time: 'sunset' }, rug: 'stripes', lamp: { shape: 'straight', on: true }, frame: { kind: 'quote', text: 'لماذا؟' } }),
-    rim: mkRoom({ view: { place: 'garden', weather: 'snow', time: 'morning' }, plant: { kind: 'leafy', spot: 'floor' }, rug: 'woven', frame: { shape: 'arch', kind: 'quote', text: 'لسنا مستعجلين.' }, motto: 'الليمونة ما زالت تنمو.' }),
-    salem: mkRoom({ view: { place: 'sea', weather: 'clear', time: 'night' }, candle: { on: true, shape: 'pillar', spot: 'table' }, lamp: { shape: 'arc', on: false }, rug: 'border', frame: { kind: 'quote', text: 'الطرق تتغير.' } }),
-    huda: mkRoom({ view: { place: 'garden', weather: 'clear', time: 'sunset' }, plant: { kind: 'rose', spot: 'floor' }, rug: 'woven', frame: { kind: 'quote', text: '' } }),
+    layan: mkSpace({ theme: 'rain', cover: 0, accent: 0, orn: true, personal: { kind: 'quote', text: 'بعض الرسائل تصل متأخرة، لكنها تصل.' } }),
+    sara: mkSpace({ theme: 'morning', cover: 0, accent: 1, orn: true, personal: { kind: 'image', img: PAINTING } }),
+    noura: mkSpace({ theme: 'sea', cover: 0, accent: 1, orn: true, personal: { kind: 'quote', text: 'البحر ما زال في مكانه.' } }),
+    dana: mkSpace({ theme: 'spring', cover: 1, accent: 0, orn: false }),
+    majed: mkSpace({ theme: 'paper', cover: 1, accent: 0, orn: true }),
+    yousef: mkSpace({ theme: 'rain', cover: 1, accent: 2, orn: false }),
+    omar: mkSpace({ theme: 'paper', cover: 0, accent: 2, orn: false }),
+    hind: mkSpace({ theme: 'sea', cover: 2, accent: 0, orn: false }),
+    rim: mkSpace({ theme: 'spring', cover: 2, accent: 1, orn: true, personal: { kind: 'quote', text: 'لسنا مستعجلين.' } }),
+    salem: mkSpace({ theme: 'morning', cover: 2, accent: 2, orn: false, personal: { kind: 'quote', text: 'الطرق تتغير، والحكايات تبقى.' } }),
+    huda: mkSpace({ theme: 'spring', cover: 0, accent: 2, orn: false }),
   };
 }
-const roomOf = id => (S.rooms && S.rooms[id]) || ROOM_BASE;
-const PLACES = [['sea', 'بحر'], ['garden', 'حديقة'], ['forest', 'غابة'], ['city', 'مدينة']];
-const WEATHERS = [['clear', 'صافٍ'], ['rain', 'مطر'], ['fog', 'ضباب'], ['snow', 'ثلج']];
-const TIMES = [['morning', 'صباح'], ['sunset', 'غروب'], ['night', 'ليل']];
-const PRESETS = [
-  { name: 'ليلة ممطرة', view: { place: 'city', weather: 'rain', time: 'night' } },
-  { name: 'صباح الربيع', view: { place: 'garden', weather: 'clear', time: 'morning' } },
-  { name: 'شتاء هادئ', view: { place: 'forest', weather: 'snow', time: 'morning' } },
-  { name: 'بحر وقت الغروب', view: { place: 'sea', weather: 'clear', time: 'sunset' } },
-  { name: 'غابة ضبابية', view: { place: 'forest', weather: 'fog', time: 'morning' } },
-  { name: 'مدينة ليلًا', view: { place: 'city', weather: 'clear', time: 'night' } }];
-const lbl = (arr, k) => (arr.find(x => x[0] === k) || ['', ''])[1];
-function roomCaption(c) {
-  const v = c.view; const w = v.weather === 'clear' ? '' : ' · ' + lbl(WEATHERS, v.weather);
-  const pre = PRESETS.find(p => p.view.place === v.place && p.view.weather === v.weather && p.view.time === v.time);
-  return 'خلف النافذة: ' + (pre ? pre.name : lbl(PLACES, v.place) + ' · ' + lbl(TIMES, v.time) + w);
-}
-const PLANTS = [['leafy', 'نبتة خضراء'], ['rose', 'وردة'], ['olive', 'غصن زيتون']];
-const RUGS = [['stripes', 'خطوط هادئة'], ['border', 'إطار بسيط'], ['woven', 'دائرية منسوجة']];
-function roomDesc(c) {
-  const parts = [roomCaption(c)];
-  if (c.lamp.on) parts.push('مصباح مضاء'); if (c.candle.on) parts.push('شمعة');
-  parts.push(lbl(PLANTS, c.plant.kind));
-  if (c.frame.kind === 'image' && c.frame.img) parts.push('صورة معلّقة'); else if (c.frame.text) parts.push('جملة على الجدار');
-  return parts.join('، ');
+function spaceOf(id) { const m = (typeof me === 'function') ? me() : null; if (ui.spaceDraft && m && m.id === id) return ui.spaceDraft; return (S.themes && S.themes[id]) || SPACE_BASE; }
+function hexA(h, a) { const n = parseInt(h.slice(1), 16); return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`; }
+function themeStyle(c) {
+  const T = THEMES[c.theme] || THEMES.paper; const acc = (T.accents[c.accent] || T.accents[0])[0];
+  return `--t-bg:${T.bg};--t-soft:${T.soft};--t-border:${T.border};--t-surface:rgba(255,254,251,.74);--acc:${acc};--acc-soft:${hexA(acc, .12)};--acc-line:${hexA(acc, .42)}`;
 }
 
 /* ---------- التخزين ---------- */
@@ -920,12 +948,12 @@ function seed() {
     verified: ['huda@example.com','rim@example.com','salem@example.com','layan@example.com','majed@example.com'],
     likes: { huda: { 't3-0': now - 2 * DAY, 't7-2': now - 5 * DAY } },
     drafts: { rim: { title: '', body: 'أحيانًا لا يحتاج الصباح إلى خطة، بل إلى نافذة مفتوحة وكوب شاي', cat: 'تأملات', savedAt: now - DAY } },
-    subs: {}, nlDevice: null, rooms: seedRooms()
+    subs: {}, nlDevice: null, themes: seedThemes()
   };
 }
 
 let S = store.load();
-if (S && S.v === 2 && !S.rooms) { S.rooms = seedRooms(); store.save(S); }
+if (S && S.v === 2 && !S.themes) { S.themes = seedThemes(); store.save(S); }
 if (!S || S.v !== 2) { S = seed(); store.save(S); }
 const save = () => store.save(S);
 
@@ -933,7 +961,7 @@ const save = () => store.save(S);
 let view = { name: 'home', p: {} };
 const hist = [];
 const ui = { homeCat: 'الكل', discCat: 'الكل', discQ: '', qFolder: 'الكل', qQ: '', sel: null, pending: null,
-             buf: {}, sheet: null, lastFocus: null, resetArm: false, prompt: 0, promptHidden: false, popInfo: false, roomTemp: {}, roomStill: false, roomDraft: null, reTab: 'view', roomImgSrc: null };
+             buf: {}, sheet: null, lastFocus: null, resetArm: false, prompt: 0, promptHidden: false, popInfo: false, spaceDraft: null };
 
 /* ---------- أدوات ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -1090,7 +1118,7 @@ function subbar(title, extra = '') {
 function textCard(t) {
   const a = person(t.author); const mine = me() && t.author === me().id;
   return `<article class="tcard${mine ? ' mine' : ''}" data-act="open" data-id="${t.id}">
-    ${t.mood ? `<div class="mood">${moodSvg(t.mood)}</div>` : ''}
+    ${t.mood ? `<div class="mood">${coverSvg(spaceOf(t.author).theme, spaceOf(t.author).cover)}</div>` : ''}
     <div class="row"><span class="by-line">${av(a, 'sm')}<span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span></span></div>
     <h3>${esc(t.title || 'بلا عنوان')}</h3>
     <p class="ex${t.poem ? ' poem' : ''}">${esc(excerpt(t))}</p>
@@ -1109,10 +1137,10 @@ function nlInvite(compact) {
 }
 function voiceCard(p) {
   const n = endorsements(p.id).length; const ok = isApproved(p);
-  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${roomGlimpse(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${tchip(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
     <p class="snip">${esc(p.sample.body)}</p>
     ${ok ? `<span class="tag sage">${ic('check', 14)} انضم${verb(p, '', 'ت')} حديثًا</span>` : progress(n)}
-    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">${ok ? 'زُر ركني' : 'زُر ركني وساعده على الوصول'.replace('ساعده', verb(p, 'ساعده', 'ساعدها'))}</button></div>`;
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">${ok ? 'زُر مساحتي' : 'زُر مساحتي وساعده على الوصول'.replace('ساعده', verb(p, 'ساعده', 'ساعدها'))}</button></div>`;
 }
 function hotQuotes(filterCat, q) {
   const out = [];
@@ -1132,7 +1160,7 @@ function qorg(x) {
 
 
 /* ---------- الجولة الثانية: حضور الكتّاب والورق ---------- */
-const tintOf = p => (p && p.tint) || AVC[hash((p && p.id) || 'x') % AVC.length];
+const tintOf = p => p ? (THEMES[spaceOf(p.id).theme] || THEMES.paper).soft : AVC[0];
 const readersWord = n => plural(n, 'قارئ واحد', 'قارئان', 'قرّاء', 'قارئًا');
 const daysWord = d => d <= 1 ? 'يوم واحد' : d === 2 ? 'يومين' : d <= 10 ? ar(d) + ' أيام' : ar(d) + ' يومًا';
 const blob = (p, cls = '', onTint = true) => `<span class="blob ${cls}" style="background:${!p ? 'var(--paper)' : onTint ? 'var(--surface)' : tintOf(p)}" aria-hidden="true">${p ? esc(p.name.trim()[0]) : ''}</span>`;
@@ -1181,11 +1209,11 @@ function writerBlock(p, label) {
   const t = sortedTexts().find(x => x.author === p.id); const hi = t ? (t.hot[0] ?? 0) : 0; const line = t ? sentences(t)[hi] : null;
   return `<section class="b-writer" style="--tint:${tintOf(p)}">
     <div class="eyebrow">${label}</div>
-    <div class="w-top">${roomGlimpse(p)}<div><h3>${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <div class="w-top">${tchip(p)}<div><h3>${esc(p.name)}</h3><span class="tl">${esc(p.tagline || '')}</span></div></div>
     <p class="voice-bio">«${esc(p.bio)}»</p>
     <div class="tags"><span class="tl" style="display:inline">${verb(p, 'يكتب عن', 'تكتب عن')}</span>${(p.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('')}</div>
     ${line ? `<button class="w-line" data-act="open" data-id="${t.id}" data-sid="${line.sid}"><span class="mark">${esc(line.text.replace(/\n/g, ' / '))}</span><small>من «${esc(t.title)}» — اقرأ النص</small></button>` : ''}
-    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر ركني</button>
+    <button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر مساحتي</button>
   </section>`;
 }
 function voiceBlock(p) {
@@ -1209,355 +1237,149 @@ function feedEnd() {
     <button class="btn btn-ghost" data-act="tab" data-v="discover">استكشف المزيد</button></div>`;
 }
 function writerMini(p) {
-  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${roomGlimpse(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
-    <p class="snip">${esc(p.bio)}</p><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر ركني</button></div>`;
+  return `<div class="voice" style="--tint:${tintOf(p)}"><div class="w-top" style="margin-top:0">${tchip(p, 'sm')}<div><div class="nm" style="font-weight:800">${esc(p.name)}</div><span class="tl">${esc(p.tagline || '')}</span></div></div>
+    <p class="snip">${esc(p.bio)}</p><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${p.id}">زُر مساحتي</button></div>`;
 }
 
 
-/* ================= الأركان: الرسم ================= */
-let RUID = 0;
-function rng(seed) { let x = seed % 2147483647; if (x <= 0) x += 2147483646; return () => (x = x * 16807 % 2147483647) / 2147483647; }
-function wavePath(y, amp, len, w = 200) { let d = `M-30 ${y}`; for (let x = -30; x < w; x += len) d += ` q ${len / 4} ${-amp} ${len / 2} 0 t ${len / 2} 0`; return d; }
-function viewContent(v, u) {
-  const { place, weather, time } = v; const winter = weather === 'snow';
-  const SKY = { morning: { clear: ['#8EC2EC', '#F7EDD8'], rain: ['#8693A4', '#C6CCD3'], fog: ['#C5CAD0', '#ECE8E1'], snow: ['#B4C6DA', '#EEF1F4'] },
-    sunset: { clear: ['#4F4A8A', '#F29C64'], rain: ['#585170', '#C08C7A'], fog: ['#9A8EA4', '#E9C2A3'], snow: ['#7E799E', '#EBBFA4'] },
-    night: { clear: ['#0C1230', '#2C2A58'], rain: ['#0F1522', '#272D3D'], fog: ['#23273A', '#45475A'], snow: ['#141D38', '#384362'] } };
-  const sk = SKY[time][weather]; const R = rng(7 + place.length * 13 + time.length);
-  let g = `<defs><linearGradient id="${u}sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sk[0]}"/><stop offset="1" stop-color="${sk[1]}"/></linearGradient>
-    <radialGradient id="${u}gl"><stop offset="0" stop-color="#FFF4D2" stop-opacity=".85"/><stop offset="1" stop-color="#FFF4D2" stop-opacity="0"/></radialGradient>
-    <filter id="${u}bl" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="5"/></filter></defs>
-    <rect width="160" height="130" fill="url(#${u}sk)"/>`;
-  const horizon = { sea: 74, garden: 88, forest: 76, city: 100 }[place];
-  if (time === 'night') {
-    if (weather === 'clear' || weather === 'snow') for (let i = 0; i < 26; i++) g += `<circle cx="${(R() * 160).toFixed(1)}" cy="${(R() * (horizon - 10)).toFixed(1)}" r="${(R() * .7 + .3).toFixed(2)}" fill="#FFF8E6" opacity="${(R() * .6 + .3).toFixed(2)}"/>`;
-    if (weather !== 'rain') g += `<circle cx="122" cy="24" r="22" fill="url(#${u}gl)" opacity=".5"/><circle cx="122" cy="24" r="8" fill="#F6EDD2" opacity="${weather === 'fog' ? .5 : .95}"/><circle cx="126" cy="21" r="7" fill="${sk[0]}" opacity="${weather === 'fog' ? .3 : .9}"/>`;
-  } else if (time === 'sunset') {
-    if (weather !== 'rain') g += `<circle cx="78" cy="${horizon - 4}" r="40" fill="url(#${u}gl)" opacity=".8"/><circle cx="78" cy="${horizon - 4}" r="15" fill="#FFC27A" opacity="${weather === 'fog' ? .55 : .95}"/>`;
-  } else if (weather === 'clear' || weather === 'snow') {
-    g += `<circle cx="128" cy="20" r="26" fill="url(#${u}gl)" opacity=".7"/><circle cx="128" cy="20" r="9" fill="#FFF8DC"/>`;
+/* ================= مساحات الكتّاب: الأغلفة ================= */
+let CUID = 0;
+function coverSvg(theme, i, opt = {}) {
+  const u = 'c' + (++CUID) + '_'; const k = (THEMES[theme] ? theme : 'paper') + ((i | 0) % 3); const R = rng(hash(k) + 17);
+  const bl = (id, sd) => `<filter id="${u}${id}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="${sd}"/></filter>`;
+  const lg = (id, a, b, vert = true) => `<linearGradient id="${u}${id}" x1="0" y1="0" x2="${vert ? 0 : 1}" y2="${vert ? 1 : 0}"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;
+  const grainDef = `<filter id="${u}gr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .32 0 0 0 0 .26 0 0 0 0 .2 0 0 0 .55 0"/></filter>`;
+  const grain = op => `<rect width="400" height="200" filter="url(#${u}gr)" opacity="${op}"/>`;
+  const streaks = (n, op, len) => { let l = ''; for (let j = 0; j < n; j++) l += `<path d="M${(R() * 470 - 30).toFixed(1)} ${(R() * 400 - 200).toFixed(1)} l-6 ${len}"/>`; return `<g class="cv-rain" stroke="#FFFFFF" stroke-opacity="${op}" stroke-width=".9" stroke-linecap="round">${l}</g>`; };
+  const dots = (n, ys, cols, rmin, rmax, op) => { let o = ''; for (let j = 0; j < n; j++) o += `<circle cx="${(R() * 400).toFixed(1)}" cy="${(ys[0] + R() * (ys[1] - ys[0])).toFixed(1)}" r="${(rmin + R() * (rmax - rmin)).toFixed(1)}" fill="${cols[j % cols.length]}" opacity="${(op[0] + R() * (op[1] - op[0])).toFixed(2)}"/>`; return o; };
+  let d = '', b = '';
+  switch (k) {
+    case 'rain0': d = lg('g', '#5A5573', '#A79FB8') + bl('b', 9) + bl('s', .8);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><g filter="url(#${u}b)">${[[64, 128, 30, '#F2C78C', .55], [128, 92, 18, '#F7DCAB', .45], [318, 66, 24, '#F2C78C', .38], [256, 146, 34, '#CBBDE4', .4], [360, 152, 18, '#F7DCAB', .32], [196, 58, 14, '#E9DDF5', .35]].map(([x, y, r, c, o]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${o}"/>`).join('')}</g>${streaks(90, .15, 26)}<g filter="url(#${u}s)" fill="#FFFFFF" opacity=".4">${Array.from({ length: 16 }, () => `<ellipse cx="${(R() * 400).toFixed(1)}" cy="${(R() * 200).toFixed(1)}" rx="1.4" ry="2"/>`).join('')}</g>`; break;
+    case 'rain1': d = lg('g', '#8A84A0', '#DAD4E0') + bl('b', 10);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><path d="M0 118 Q60 94 120 110 T240 102 T400 108 V200 H0Z" fill="#A39CB4" opacity=".7"/><path d="M0 146 Q80 126 170 140 T400 134 V200 H0Z" fill="#8F88A3" opacity=".5"/><circle cx="300" cy="102" r="24" fill="#FFD7A0" opacity=".4" filter="url(#${u}b)"/><g filter="url(#${u}b)" fill="#F4F1F6" opacity=".65"><ellipse class="cv-drift" cx="120" cy="116" rx="170" ry="16"/><ellipse class="cv-drift" style="animation-delay:-9s" cx="300" cy="150" rx="160" ry="14"/></g>${streaks(36, .12, 22)}`; break;
+    case 'rain2': d = lg('g', '#443E58', '#8C84A1') + `<radialGradient id="${u}gw"><stop offset="0" stop-color="#FFC98A" stop-opacity=".62"/><stop offset=".55" stop-color="#FFB877" stop-opacity=".16"/><stop offset="1" stop-color="#FFB877" stop-opacity="0"/></radialGradient>` + bl('b', 12);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><circle cx="96" cy="150" r="160" fill="url(#${u}gw)"/><circle cx="96" cy="150" r="34" fill="#FFE2B8" opacity=".3" filter="url(#${u}b)"/><circle cx="322" cy="56" r="40" fill="#BFB4D8" opacity=".25" filter="url(#${u}b)"/>${streaks(44, .11, 24)}`; break;
+    case 'morning0': d = lg('g', '#FFF8EC', '#F2E3C8') + bl('b', 7) + bl('w', 3);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><g filter="url(#${u}b)" fill="#FFFFFF"><path d="M250 -20 L330 -20 L190 220 L110 220Z" opacity=".5"/><path d="M352 -20 L382 -20 L262 220 L232 220Z" opacity=".35"/></g><circle cx="330" cy="30" r="90" fill="#FFFFFF" opacity=".55" filter="url(#${u}b)"/>`; break;
+    case 'morning1': d = `<linearGradient id="${u}f" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#DCCAAE" stop-opacity=".45"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".7"/><stop offset="1" stop-color="#DCCAAE" stop-opacity=".45"/></linearGradient>` + bl('b', 22);
+      { let x = -6, f = ''; while (x < 400) { const w = 18 + R() * 18; f += `<rect x="${x.toFixed(1)}" y="0" width="${w.toFixed(1)}" height="200" fill="url(#${u}f)"/>`; x += w; } b = `<rect width="400" height="200" fill="#F5ECDB"/>${f}<circle cx="70" cy="10" r="120" fill="#FFFFFF" opacity=".6" filter="url(#${u}b)"/>`; } break;
+    case 'morning2': d = lg('g', '#F7D6BF', '#FBF2E4') + bl('b', 18) + bl('s', 3);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><circle cx="296" cy="74" r="70" fill="#FFE8BC" opacity=".85" filter="url(#${u}b)"/><circle cx="296" cy="74" r="20" fill="#FFF5DA" opacity=".95" filter="url(#${u}s)"/><path d="M0 152 Q100 130 200 146 T400 138 V200 H0Z" fill="#F0D7BF" opacity=".75"/><path d="M0 172 Q140 156 260 170 T400 164 V200 H0Z" fill="#EBCDB2" opacity=".55"/>`; break;
+    case 'sea0': d = lg('s', '#CBD8E1', '#EFE8DD') + lg('w', '#93ADBE', '#66869C') + bl('b', 14);
+      b = `<rect width="400" height="110" fill="url(#${u}s)"/><circle cx="120" cy="92" r="46" fill="#FFF3DC" opacity=".55" filter="url(#${u}b)"/><rect y="108" width="400" height="92" fill="url(#${u}w)"/><path d="M0 108.5 H400" stroke="#FFFFFF" stroke-opacity=".6"/><g class="cv-drift" stroke="#FFFFFF" stroke-linecap="round">${Array.from({ length: 26 }, () => { const y = 116 + R() * 78, x = R() * 400, w = 10 + R() * 36; return `<path d="M${x.toFixed(1)} ${y.toFixed(1)} h${w.toFixed(1)}" stroke-opacity="${(.18 + R() * .25).toFixed(2)}" stroke-width="${(.8 + R()).toFixed(1)}"/>`; }).join('')}</g>`; break;
+    case 'sea1': d = lg('s', '#D4E0E6', '#EFEAE1') + lg('w', '#9AB3C2', '#7E9AAD');
+      b = `<rect width="400" height="200" fill="url(#${u}s)"/><path d="M0 78 H400 V128 Q300 120 200 128 T0 124Z" fill="url(#${u}w)"/><path class="cv-drift" d="M-30 125 Q50 115 130 125 T290 123 T450 125" stroke="#FFFFFF" stroke-width="3.2" stroke-opacity=".8" fill="none"/><path d="M0 126 Q100 118 200 128 T400 124 V200 H0Z" fill="#E9D9C0"/><path d="M0 162 Q120 146 240 162 T400 156 V200 H0Z" fill="#DFCAAD"/><g stroke="#CDB696" stroke-opacity=".5" stroke-width="1" fill="none"><path d="M40 146 q20 -4 40 0"/><path d="M230 140 q24 -5 48 0"/><path d="M320 182 q20 -4 40 0"/></g>`; break;
+    case 'sea2': d = lg('s', '#B5C0C8', '#DCE1E3') + lg('w', '#909EA8', '#738490') + bl('b', 11);
+      b = `<rect width="400" height="200" fill="url(#${u}s)"/><rect y="122" width="400" height="78" fill="url(#${u}w)"/><g filter="url(#${u}b)" fill="#F2F4F5" opacity=".6"><ellipse class="cv-drift" cx="140" cy="120" rx="190" ry="12"/><ellipse class="cv-drift" style="animation-delay:-10s" cx="320" cy="98" rx="140" ry="10"/></g><path d="M0 122.5 H400" stroke="#FFFFFF" stroke-opacity=".35"/>`; break;
+    case 'spring0': d = lg('g', '#DAE7D0', '#F5F2E7') + bl('b', 3) + bl('B', 8);
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><path d="M0 140 Q100 112 210 132 T400 124 V200 H0Z" fill="#BDD3AC" opacity=".75"/><g filter="url(#${u}B)">${dots(10, [110, 200], ['#F4C2D0', '#FFFFFF', '#F8DDE5'], 8, 16, [.35, .6])}</g><g filter="url(#${u}b)">${dots(46, [118, 200], ['#F4C2D0', '#FFFFFF', '#F8DDE5', '#EEC0CC'], 2, 5, [.6, .95])}</g>`; break;
+    case 'spring1': d = lg('g', '#EFF3E7', '#E1E9D6') + bl('b', 2.4) + bl('L', 20);
+      { const branch = (tx, ty, rot, sc) => `<g transform="translate(${tx} ${ty}) rotate(${rot}) scale(${sc})"><path d="M0 0 C40 10 80 30 130 70" stroke="#93AE86" stroke-width="3" fill="none"/>${[[20, 4, -30], [40, 12, 30], [58, 20, -35], [76, 32, 28], [94, 44, -30], [110, 56, 30], [126, 68, -10]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="15" ry="6" transform="rotate(${r} ${x} ${y})" fill="#93AE86"/>`).join('')}</g>`;
+        b = `<rect width="400" height="200" fill="url(#${u}g)"/><circle cx="210" cy="90" r="90" fill="#FFFFFF" opacity=".5" filter="url(#${u}L)"/><g filter="url(#${u}b)" opacity=".42">${branch(-10, -6, 8, 1.1)}${branch(410, 210, 190, 1)}</g>`; } break;
+    case 'spring2': d = lg('g', '#F6F4EB', '#E5EDDB');
+      b = `<rect width="400" height="200" fill="url(#${u}g)"/><g stroke="#7D6A58" stroke-linecap="round" fill="none"><path d="M-10 64 C60 58 110 40 196 46" stroke-width="3.2"/><path d="M80 52 C96 36 108 30 124 26" stroke-width="2"/><path d="M140 44 C152 56 160 64 176 70" stroke-width="1.8"/></g>${[[40, 60], [96, 46], [124, 26], [160, 42], [176, 70], [196, 46], [64, 56]].map(([x, y], j) => `<g transform="translate(${x} ${y})"><circle r="6.5" fill="${j % 2 ? '#F6CAD6' : '#F2B3C5'}"/><circle r="2" fill="#F5C75B"/></g>`).join('')}${[[56, 66, 30], [110, 52, -30], [150, 56, 40], [186, 60, -20]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="7" ry="2.8" transform="rotate(${r} ${x} ${y})" fill="#8DB07F"/>`).join('')}`; break;
+    case 'paper0': d = grainDef;
+      b = `<rect width="400" height="200" fill="#F5EDDD"/>${grain(.22)}<g stroke="#D7C9AF" stroke-opacity=".7" stroke-width=".8">${Array.from({ length: 9 }, (_, j) => `<path d="M0 ${30 + j * 20} H400"/>`).join('')}</g><path d="M354 0 V200 M358 0 V200" stroke="#DDA595" stroke-opacity=".75" stroke-width="1"/>`; break;
+    case 'paper1': d = grainDef;
+      b = `<rect width="400" height="200" fill="#F5EEE0"/>${grain(.2)}<path d="M38 132 C90 98 160 92 222 104 C272 114 322 98 370 74 C334 110 284 130 222 126 C160 122 100 128 50 146Z" fill="#2F2438" opacity=".86"/><path d="M60 140 C120 118 180 116 240 118" stroke="#2F2438" stroke-opacity=".35" stroke-width="1.2" fill="none"/>${dots(7, [60, 160], ['#2F2438'], .8, 2.4, [.4, .8])}`; break;
+    default: d = grainDef + bl('b', 14);
+      b = `<rect width="400" height="200" fill="#F2EBDD"/><g filter="url(#${u}b)"><ellipse cx="120" cy="90" rx="110" ry="54" fill="#7A6F8E" opacity=".3"/><ellipse cx="270" cy="130" rx="120" ry="48" fill="#A396B6" opacity=".3"/><ellipse cx="330" cy="50" rx="70" ry="34" fill="#C9B8A6" opacity=".35"/></g>${grain(.2)}`;
   }
-  if (time !== 'night' && weather !== 'clear') g += `<g fill="#FFFFFF" opacity="${weather === 'rain' ? .25 : .45}" filter="url(#${u}bl)"><ellipse cx="40" cy="22" rx="40" ry="10"/><ellipse cx="118" cy="14" rx="44" ry="9"/></g>`;
-  let land = '', after = '';
-  if (place === 'sea') {
-    const SEA = { morning: ['#6AA6D0', '#2B6A93'], sunset: ['#D49378', '#4F5384'], night: ['#22305A', '#0C142C'] }[time];
-    land += `<defs><linearGradient id="${u}sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SEA[0]}"/><stop offset="1" stop-color="${SEA[1]}"/></linearGradient></defs>
-      <path d="M0 ${horizon} L0 ${horizon - 6} Q14 ${horizon - 14} 30 ${horizon - 5} Q40 ${horizon - 2} 46 ${horizon}Z" fill="${SEA[1]}" opacity=".7"/>
-      <rect y="${horizon}" width="160" height="${130 - horizon}" fill="url(#${u}sea)"/>`;
-    if (time === 'sunset' && weather !== 'rain') after += `<ellipse cx="78" cy="${horizon + 16}" rx="7" ry="16" fill="#FFD08A" opacity=".45"/><ellipse cx="78" cy="${horizon + 6}" rx="16" ry="2" fill="#FFE0A6" opacity=".5"/>`;
-    if (time === 'night' && weather !== 'rain') after += `<ellipse cx="122" cy="${horizon + 18}" rx="4" ry="16" fill="#F6EDD2" opacity=".25"/>`;
-    for (let i = 0; i < 4; i++) after += `<path class="r-wave" style="animation-delay:${-i * 1.4}s" d="${wavePath(horizon + 8 + i * 9, 1.4 + i * .5, 16 + i * 4)}" stroke="#FFFFFF" stroke-opacity="${(.22 + i * .07).toFixed(2)}" stroke-width="${(.8 + i * .25).toFixed(2)}" fill="none"/>`;
-    const SAND = winter ? '#EDEFF1' : { morning: '#E8D3AE', sunset: '#D9A58A', night: '#4E4559' }[time];
-    after += `<path d="M0 116 Q50 108 100 114 T160 112 V130 H0Z" fill="${SAND}"/><path class="r-wave" style="animation-duration:5s" d="${wavePath(115, 1.2, 22)}" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="1.2" fill="none"/>`;
-  } else if (place === 'garden') {
-    land += `<path d="M0 ${horizon} Q40 ${horizon - 12} 80 ${horizon - 4} T160 ${horizon - 6} V130 H0Z" fill="${winter ? '#DCE3E9' : '#A9CB93'}"/>
-      <rect y="${horizon + 6}" width="160" height="${130 - horizon - 6}" fill="${winter ? '#EEF1F4' : '#86B86E'}"/>
-      <path d="M0 ${horizon + 6} Q80 ${horizon + 1} 160 ${horizon + 6}" stroke="${winter ? '#D8DFE6' : '#76A85E'}" stroke-width="2" fill="none"/>`;
-    const tree = (x, y, sc, d) => {
-      let t = `<g transform="translate(${x} ${y}) scale(${sc})"><path d="M-2 0 L-1.4 -26 Q-6 -34 -12 -38 M-1 -24 Q4 -34 10 -40 M-1.4 -16 Q-8 -20 -14 -20" stroke="${winter ? '#6E5D52' : '#7A5C48'}" stroke-width="3" stroke-linecap="round" fill="none"/><rect x="-3" y="-26" width="4.5" height="26" fill="${winter ? '#6E5D52' : '#7A5C48'}"/>`;
-      if (winter) t += `<g fill="#FFFFFF"><ellipse cx="-11" cy="-39" rx="5" ry="2"/><ellipse cx="9" cy="-41" rx="5" ry="2"/><ellipse cx="-13" cy="-21" rx="4" ry="1.6"/></g>`;
-      else t += `<g class="r-sway" style="animation-delay:${d}s"><circle cx="-10" cy="-38" r="12" fill="#F3B3C6"/><circle cx="6" cy="-42" r="13" fill="#F8CBD8"/><circle cx="-2" cy="-30" r="11" fill="#EFA2B9"/><circle cx="12" cy="-30" r="9" fill="#F6BFCE"/><circle cx="-16" cy="-26" r="8" fill="#F8D3DE"/></g>`;
-      return t + '</g>';
-    };
-    land += tree(34, horizon + 22, 1, 0) + tree(124, horizon + 18, .8, -2);
-    if (!winter) { const cols = ['#F7A8BC', '#F5C75B', '#FFFFFF', '#E58A9A', '#C9A7E2']; for (let i = 0; i < 46; i++) land += `<circle cx="${(R() * 160).toFixed(1)}" cy="${(horizon + 14 + R() * (116 - horizon)).toFixed(1)}" r="${(R() * 1.1 + 1).toFixed(2)}" fill="${cols[i % 5]}"/>`; }
-    else for (let i = 0; i < 6; i++) land += `<ellipse cx="${(R() * 160).toFixed(1)}" cy="${(horizon + 14 + R() * 20).toFixed(1)}" rx="12" ry="2" fill="#FFFFFF" opacity=".8"/>`;
-  } else if (place === 'forest') {
-    const pine = (x, b, h, w, f, cap) => { let p = `<path d="M${x} ${b - h} L${x + w / 2} ${b - h * .45} L${x + w * .3} ${b - h * .45} L${x + w * .58} ${b} L${x - w * .58} ${b} L${x - w * .3} ${b - h * .45} L${x - w / 2} ${b - h * .45}Z" fill="${f}"/>`; if (cap) p += `<path d="M${x} ${b - h} L${x + w * .2} ${b - h * .78} L${x - w * .2} ${b - h * .78}Z" fill="#FFFFFF"/><path d="M${x - w * .45} ${b - h * .47} L${x + w * .45} ${b - h * .47}" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>`; return p; };
-    land += `<rect y="${horizon + 18}" width="160" height="${130 - horizon - 18}" fill="${winter ? '#EEF1F4' : '#58775F'}"/>`;
-    let far = '', mid = '', near = '';
-    for (let i = 0; i < 9; i++) far += pine(i * 19 + 4, horizon + 22, 30 + R() * 14, 16, winter ? '#C7D2DA' : '#86A592', false);
-    for (let i = 0; i < 6; i++) mid += pine(i * 30 + 14, horizon + 34, 40 + R() * 14, 22, winter ? '#5F7D73' : '#4C755F', winter);
-    for (let i = 0; i < 3; i++) near += pine([10, 150, 118][i], 132, 64 + R() * 10, 32, winter ? '#3D5C50' : '#2E5443', winter);
-    land += `<g opacity=".85">${far}</g>${mid}<g class="r-sway" style="animation-duration:7s">${near}</g>`;
-  } else {
-    let farB = '', nearB = '', lit = '';
-    for (let x = -4; x < 160; x += 14 + R() * 8) { const h = 30 + R() * 38; farB += `<rect x="${x.toFixed(1)}" y="${(horizon - h).toFixed(1)}" width="${(12 + R() * 8).toFixed(1)}" height="${h.toFixed(1)}" fill="${winter ? '#B8C0CE' : '#9EA8BE'}"/>`; }
-    for (let x = -6; x < 160; x += 22 + R() * 10) {
-      const h = 22 + R() * 34, w = 18 + R() * 10, y = horizon + 14 - h; nearB += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="#6B7289"/>`;
-      if (winter) nearB += `<rect x="${x.toFixed(1)}" y="${(y - 1.5).toFixed(1)}" width="${w.toFixed(1)}" height="2.5" fill="#FFFFFF"/>`;
-      for (let wy = y + 4; wy < horizon + 8; wy += 6) for (let wx = x + 3; wx < x + w - 3; wx += 5) {
-        const r = R(); const on = time === 'night' ? r < .45 : time === 'sunset' ? r < .14 : false;
-        if (on) lit += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="2.6" height="3" fill="${time === 'night' ? '#FFD98A' : '#FFE6B0'}" opacity="${(.7 + R() * .3).toFixed(2)}"/>`;
-        else if (time === 'morning') nearB += `<rect x="${wx.toFixed(1)}" y="${wy.toFixed(1)}" width="2.6" height="3" fill="#C9D6E6" opacity=".7"/>`;
-      }
-    }
-    land += `<g opacity=".9">${farB}</g>${nearB}<rect y="${horizon + 14}" width="160" height="${116 - horizon}" fill="${winter ? '#E9ECEF' : '#5A5F70'}"/>`;
-    after += lit;
-    if (time === 'night') for (const x of [26, 86, 140]) after += `<rect x="${x}" y="${horizon + 2}" width="1.4" height="14" fill="#2A2D3A"/><circle cx="${x + .7}" cy="${horizon + 2}" r="7" fill="url(#${u}gl)"/><circle cx="${x + .7}" cy="${horizon + 2}" r="1.6" fill="#FFE2A0"/>`;
+  return `<svg class="cover-svg${opt.anim ? ' cv-anim' : ''}" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs>${d}</defs>${b}</svg>`;
+}
+function ornHead(c) {
+  switch (c.theme) {
+    case 'rain': return '<span class="orn orn-glow" aria-hidden="true"></span>';
+    case 'morning': return '<span class="orn orn-win" aria-hidden="true"><svg viewBox="0 0 120 150"><g transform="skewX(-14)" style="fill:#B99A6B" opacity=".14"><rect x="40" y="10" width="34" height="58"/><rect x="80" y="10" width="34" height="58"/><rect x="40" y="74" width="34" height="58"/><rect x="80" y="74" width="34" height="58"/></g></svg></span>';
+    case 'spring': return '<span class="orn orn-sprig" aria-hidden="true"><svg viewBox="0 0 90 120"><path d="M70 118 C62 88 52 58 26 18" style="stroke:var(--acc)" stroke-width="1.6" fill="none" opacity=".55"/>' + [[63, 92, 40], [56, 72, -35], [48, 56, 40], [38, 40, -35], [30, 26, 30]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="9" ry="3.4" transform="rotate(${r} ${x} ${y})" style="fill:var(--acc)" opacity=".32"/>`).join('') + '</svg></span>';
+    case 'paper': return '<span class="orn orn-rule" aria-hidden="true"></span>';
+    default: return '';
   }
-  g += land;
-  if (time === 'night') g += `<rect width="160" height="130" fill="#0A0E2A" opacity=".45"/>`;
-  if (time === 'sunset') g += `<rect width="160" height="130" fill="#FF9A5C" opacity=".14"/>`;
-  g += after;
-  if (weather === 'fog') g += `<g filter="url(#${u}bl)" fill="${time === 'night' ? '#9AA0B2' : '#F4F1EC'}" opacity="${time === 'night' ? .35 : .6}"><ellipse class="r-fog" cx="60" cy="${horizon + 6}" rx="90" ry="9"/><ellipse class="r-fog" style="animation-delay:-6s" cx="110" cy="${horizon + 24}" rx="80" ry="8"/><ellipse class="r-fog" style="animation-delay:-3s" cx="40" cy="${horizon + 40}" rx="70" ry="7"/></g><rect width="160" height="130" fill="${time === 'night' ? '#4A4C5C' : '#ECE9E3'}" opacity=".22"/>`;
-  if (weather === 'rain') { let l = ''; for (let i = 0; i < 70; i++) { const x = R() * 180, y = -130 + R() * 260; l += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l-2.4 9"/>`; } g += `<g class="r-rain" stroke="${time === 'night' ? '#B9C6E0' : '#EEF3FA'}" stroke-opacity="${time === 'night' ? .45 : .6}" stroke-width=".8" stroke-linecap="round">${l}</g>`; }
-  if (weather === 'snow') { let l = ''; for (let i = 0; i < 60; i++) { const x = R() * 170, y = -130 + R() * 260; l += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(R() * .9 + .5).toFixed(2)}"/>`; } g += `<g class="r-snow" fill="#FFFFFF" opacity=".9">${l}</g>`; }
-  return g;
 }
-function viewThumb(v) { return `<svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${viewContent(v, 'v' + (++RUID) + '_')}</svg>`; }
-function plantSvg(kind) {
-  if (kind === 'rose') return `<path d="M-7 0 L-9 -26 Q0 -30 9 -26 L7 0Z" fill="#DCD1EF" opacity=".85"/><path d="M-7 -6 H7" stroke="#C3B6DA" stroke-width="1"/>
-    <g stroke="#5E7F55" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M0 -24 C-2 -40 -8 -50 -10 -60"/><path d="M1 -24 C3 -42 6 -52 9 -66"/><path d="M0 -24 C0 -38 2 -44 1 -52"/></g>
-    <path d="M-6 -44 q-8 -2 -10 -8 q8 0 10 8z M5 -46 q8 -4 12 -2 q-6 6 -12 2z" fill="#6E9A6A"/>
-    <g><circle cx="-10" cy="-62" r="6.5" fill="#D9667A"/><path d="M-13 -62 q3 -4 6 0 q-3 3 -6 0z" fill="#B84E63"/><circle cx="9" cy="-68" r="7" fill="#E58A9A"/><path d="M6 -68 q3 -4 6 0 q-3 3 -6 0z" fill="#C9677C"/><circle cx="1" cy="-54" r="5.5" fill="#EFA3B2"/></g>`;
-  if (kind === 'olive') return `<path d="M-9 0 L-10 -18 H10 L9 0Z" fill="#EAE2D4"/><rect x="-11" y="-20" width="22" height="3.5" rx="1.5" fill="#DDD3C2"/>
-    <g stroke="#6B6B4E" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M0 -19 C-2 -40 -10 -56 -14 -76"/><path d="M0 -22 C4 -42 10 -54 16 -70"/><path d="M-4 -46 C-12 -52 -18 -54 -22 -60"/></g>
-    <g fill="#9AAE8A">${[[-6, -34, 30], [-10, -48, -20], [-13, -64, 25], [-16, -74, -30], [4, -36, -25], [9, -48, 30], [13, -60, -20], [15, -68, 35], [-17, -55, 40], [-21, -59, -10], [2, -28, 20]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="5" ry="1.8" transform="rotate(${r} ${x} ${y})"/>`).join('')}</g>`;
-  return `<path d="M-11 0 L-13 -20 H13 L11 0Z" fill="#C98B6E"/><rect x="-14" y="-22" width="28" height="4" rx="2" fill="#B97A5E"/>
-    <g stroke="#4D7A4B" stroke-width="1.4" fill="none"><path d="M0 -20 C-6 -34 -14 -40 -20 -46"/><path d="M0 -20 C2 -38 4 -48 2 -62"/><path d="M0 -20 C8 -32 16 -38 22 -42"/></g>
-    <g fill="#6E9A6A"><path d="M-20 -46 c-12 -2 -16 -14 -10 -20 c8 2 12 10 10 20z"/><path d="M2 -62 c-10 -6 -8 -20 0 -24 c8 6 8 16 0 24z" fill="#5A8758"/><path d="M22 -42 c4 -12 16 -14 20 -8 c-4 8 -12 10 -20 8z"/><path d="M-6 -30 c-10 0 -16 -8 -14 -14 c8 0 14 6 14 14z" fill="#5A8758"/><path d="M8 -30 c6 -8 16 -8 18 -2 c-6 6 -12 6 -18 2z" fill="#7FA97A"/></g>`;
-}
-function candleSvg(shape) {
-  const flame = `<g class="r-flame"><path d="M0 -4 C-3 -8 -2 -13 0 -17 C2 -13 3 -8 0 -4Z" fill="#FFC870"/><path d="M0 -6 C-1.2 -8 -1 -11 0 -13 C1 -11 1.2 -8 0 -6Z" fill="#FFF3C8"/></g>`;
-  if (shape === 'jar') return `<rect x="-7" y="-14" width="14" height="14" rx="3" fill="#FFFFFF" fill-opacity=".45" stroke="#E5D8C6" stroke-width=".8"/><rect x="-5.5" y="-9" width="11" height="8.5" rx="2" fill="#FBF0DD"/><path d="M0 -9 v-2" stroke="#3A2E2A" stroke-width=".8"/><g transform="translate(0 -7)">${flame}</g>`;
-  return `<rect x="-4.5" y="-18" width="9" height="18" rx="1.5" fill="#FBF4E6"/><rect x="-4.5" y="-18" width="3" height="18" fill="#FFFFFF" opacity=".5"/><path d="M0 -18 v-2.5" stroke="#3A2E2A" stroke-width=".8"/><g transform="translate(0 -16)">${flame}</g>`;
-}
-function hit(name, label, inner, ring, stat) {
-  if (stat) return `<g>${inner}</g>`;
-  return `<g class="r-hit" data-room="${name}" tabindex="0" role="button" aria-label="${esc(label)}"><rect class="hit-ring" x="${ring[0]}" y="${ring[1]}" width="${ring[2]}" height="${ring[3]}" rx="10"/>${inner}</g>`;
-}
-function roomSvg(c, opt = {}) {
-  const u = 'r' + (++RUID) + '_'; const st = !!opt.static; const v = c.view; const t = v.time;
-  const lampOn = opt.lampOn != null ? opt.lampOn : c.lamp.on; const night = t === 'night', sunset = t === 'sunset';
-  const vb = opt.crop ? '96 4 280 216' : '0 14 400 306';
-  const f = c.frame; const arch = f.shape === 'arch';
-  const ALIGN = { top: 'xMidYMin', mid: 'xMidYMid', bot: 'xMidYMax' }[f.crop || 'mid'];
-  let s = `<svg class="room-svg${st ? '' : ' anim'}" viewBox="${vb}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(opt.label || roomDesc(c))}" focusable="false">
-  <defs>
-    <linearGradient id="${u}wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3EBDF"/><stop offset="1" stop-color="#E9DDCC"/></linearGradient>
-    <linearGradient id="${u}floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D3B18D"/><stop offset="1" stop-color="#B98F6A"/></linearGradient>
-    <pattern id="${u}pap" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M8 0 V16" stroke="#E5D7C4" stroke-width="1.2" opacity=".55"/></pattern>
-    <radialGradient id="${u}lamp"><stop offset="0" stop-color="#FFD98A" stop-opacity=".75"/><stop offset=".45" stop-color="#FFC970" stop-opacity=".28"/><stop offset="1" stop-color="#FFC970" stop-opacity="0"/></radialGradient>
-    <radialGradient id="${u}cand"><stop offset="0" stop-color="#FFD27A" stop-opacity=".7"/><stop offset="1" stop-color="#FFD27A" stop-opacity="0"/></radialGradient>
-    <linearGradient id="${u}beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sunset ? '#FFC47E' : '#FFFFFF'}" stop-opacity="${sunset ? .42 : .3}"/><stop offset="1" stop-color="${sunset ? '#FFC47E' : '#FFFFFF'}" stop-opacity="0"/></linearGradient>
-    <linearGradient id="${u}chair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DFA88F"/><stop offset="1" stop-color="#C98C73"/></linearGradient>
-    <mask id="${u}m"><rect x="-10" y="-10" width="420" height="340" fill="#fff"/><rect x="160" y="36" width="160" height="130" fill="#000"/></mask>
-    <clipPath id="${u}fc">${arch ? '<path d="M75 108 V66 a17 17 0 0 1 34 0 V108Z"/>' : '<rect x="74" y="56" width="36" height="52" rx="1"/>'}</clipPath>
-  </defs>
-  <rect x="34" y="0" width="366" height="232" fill="url(#${u}wall)"/><rect x="34" y="0" width="366" height="232" fill="url(#${u}pap)"/>
-  <path d="M0 0 L34 14 L34 232 L0 266Z" fill="#E2D3BF"/><path d="M0 0 L34 14 L34 232 L0 266Z" fill="url(#${u}pap)" opacity=".5"/>
-  <path d="M0 266 L34 232 H400 V320 H0Z" fill="url(#${u}floor)"/>
-  <g stroke="#7A5236" stroke-opacity=".16" stroke-width="1">${[60, 110, 160, 210, 260, 310, 360].map(x => `<path d="M${x} 232 L${((x - 217) * 1.9 + 217).toFixed(0)} 320"/>`).join('')}<path d="M10 258 H400 M0 282 H400 M0 304 H400" stroke-opacity=".1"/></g>
-  <rect x="34" y="226" width="366" height="7" fill="#EFE5D7"/><path d="M34 226 H400" stroke="#D9CAB5" stroke-width="1"/><path d="M0 260 L34 226" stroke="#D9CAB5" stroke-width="1"/>
-  <rect x="150" y="28" width="184" height="156" rx="3" fill="#5B4636" opacity=".1" transform="translate(3 4)"/>
-  <rect x="148" y="24" width="184" height="154" rx="3" fill="#FBF7F0"/>
-  <rect x="155" y="31" width="170" height="140" fill="#E4D8C7"/>
-  <svg x="160" y="36" width="160" height="130" viewBox="0 0 160 130" preserveAspectRatio="none" overflow="hidden">${viewContent(v, u + 'v')}</svg>
-  <path d="M155 31 L160 36 V166 L155 171Z" fill="#D2C3AF"/><path d="M155 31 H325 L320 36 H160Z" fill="#DBCDBA"/>
-  <path d="M160 36 H206 L160 96Z" fill="#FFFFFF" opacity=".07"/><path d="M226 36 H246 L180 166 H160Z" fill="#FFFFFF" opacity=".05"/>`;
-  if (v.weather === 'rain') { let d = ''; const R = rng(91); for (let i = 0; i < 9; i++) { const x = 164 + R() * 152, y = 40 + R() * 70; d += `<g class="r-drip" style="animation-delay:${(-R() * 7).toFixed(2)}s"><path d="M${x.toFixed(1)} ${(y - 7).toFixed(1)} v7" stroke="#FFFFFF" stroke-opacity=".25" stroke-width=".9"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="1.5" fill="#FFFFFF" opacity=".55"/></g>`; } s += `<svg x="160" y="36" width="160" height="130" viewBox="160 36 160 130" overflow="hidden">${d}</svg>`; }
-  s += `<rect x="238" y="36" width="4.5" height="130" fill="#FBF7F0"/><rect x="160" y="98" width="160" height="4" fill="#FBF7F0"/>
-  <path d="M128 17 H352" stroke="#8B6E5A" stroke-width="2.5" stroke-linecap="round"/><circle cx="128" cy="17" r="3" fill="#8B6E5A"/><circle cx="352" cy="17" r="3" fill="#8B6E5A"/>
-  <path d="M132 17 C136 70 128 130 140 200 L160 200 C154 140 160 70 156 17Z" fill="#FFFDF7" opacity=".82"/><path d="M140 22 C143 80 138 140 148 198" stroke="#E9DFD0" stroke-width="1.2" fill="none"/>
-  <path d="M348 17 C344 70 352 130 342 200 L322 200 C328 140 322 70 326 17Z" fill="#FFFDF7" opacity=".82"/><path d="M340 22 C337 80 342 140 334 198" stroke="#E9DFD0" stroke-width="1.2" fill="none"/>
-  <rect x="138" y="176" width="204" height="10" rx="2" fill="#FBF7F0"/><rect x="140" y="186" width="200" height="4" fill="#5B4636" opacity=".12"/>`;
-  // الفريم
-  let fr = arch ? `<path d="M68 114 V66 a24 24 0 0 1 48 0 V114Z" fill="#8A6B52"/><path d="M71 111 V66 a21 21 0 0 1 42 0 V111Z" fill="#FFFEFB"/>`
-                : `<rect x="66" y="48" width="52" height="68" rx="2" fill="#8A6B52"/><rect x="69" y="51" width="46" height="62" fill="#FFFEFB"/>`;
-  if (f.kind === 'image' && f.img) fr += `<image href="${f.img}" x="74" y="${arch ? 49 : 56}" width="36" height="${arch ? 59 : 52}" preserveAspectRatio="${ALIGN} slice" clip-path="url(#${u}fc)"/>`;
-  else fr += `<text x="92" y="${arch ? 80 : 76}" text-anchor="middle" font-size="18" font-weight="800" fill="#C9A46A" font-family="Tajawal, sans-serif">”</text>${f.text ? '<g fill="#B8AEB9">' + [0, 1, 2].map(i => `<rect x="${80 + i * 2}" y="${(arch ? 86 : 84) + i * 6}" width="${24 - i * 4}" height="2" rx="1"/>`).join('') + '</g>' : ''}`;
-  s += `<path d="M92 34 L76 48 M92 34 L108 48" stroke="#8B6E5A" stroke-width=".8" fill="none" opacity="${arch ? 0 : .7}"/><circle cx="92" cy="34" r="1.6" fill="#8B6E5A" opacity="${arch ? 0 : 1}"/>`;
-  s += `<rect x="70" y="116" width="48" height="4" fill="#5B4636" opacity=".08"/>`;
-  s += hit('frame', f.kind === 'image' && f.img ? 'الفريم: كبّر الصورة' : 'الفريم: اقرأ الجملة', fr, [60, 40, 64, 84], st);
-  // الرف
-  const books = [[352, 24, '#8A6B9A'], [361, 20, '#F2B6A0'], [369, 26, '#DDE8D2'], [378, 18, '#F5C75B'], [386, 22, '#DCD1EF']].map(([x, h, col]) => `<rect x="${x}" y="${92 - h}" width="${x === 378 ? 7 : 8}" height="${h}" rx="1" fill="${col}"/><rect x="${x + 1.5}" y="${92 - h + 4}" width="${x === 378 ? 4 : 5}" height="1.4" fill="#FFFFFF" opacity=".5"/>`).join('');
-  s += hit('shelf', 'الرف: كل الكتابات', `<rect x="344" y="92" width="56" height="5" rx="1" fill="#9C7A5E"/><rect x="348" y="97" width="3" height="8" fill="#8A6B52"/><rect x="392" y="97" width="3" height="8" fill="#8A6B52"/>${books}<rect x="347" y="88" width="4" height="4" rx="2" fill="#C98B6E"/><rect x="344" y="128" width="56" height="5" rx="1" fill="#9C7A5E"/><rect x="352" y="112" width="20" height="16" rx="3" fill="#E9DFD1"/><path d="M356 118 h12 M356 122 h9" stroke="#C9B9A4" stroke-width="1.4"/><rect x="380" y="106" width="9" height="22" rx="1" fill="#C3B6DA"/>`, [338, 60, 62, 78], st);
-  // السجادة
-  const rugP = 'M78 268 L322 268 L370 314 L30 314Z';
-  if (c.rug === 'woven') s += `<ellipse cx="200" cy="292" rx="160" ry="24" fill="#F0CFBE"/>${[0, 1, 2].map(i => `<ellipse cx="200" cy="292" rx="${140 - i * 34}" ry="${21 - i * 5}" fill="none" stroke="#D9A48C" stroke-width="2" stroke-dasharray="${i === 1 ? '4 3' : '0'}"/>`).join('')}`;
-  else if (c.rug === 'stripes') s += `<path d="${rugP}" fill="#E3EBDA"/>${[276, 286, 296, 306].map((y, i) => { const k = (y - 268) / 46; return `<path d="M${(78 - 48 * k).toFixed(1)} ${y} L${(322 + 48 * k).toFixed(1)} ${y}" stroke="${i % 2 ? '#B8CDAE' : '#A6BE9B'}" stroke-width="${i % 2 ? 2 : 3.5}"/>`; }).join('')}`;
-  else s += `<path d="${rugP}" fill="#EADCCB"/><path d="M92 273 L308 273 L348 309 L52 309Z" fill="none" stroke="#B98E73" stroke-width="2"/><path d="M104 278 L296 278 L330 304 L70 304Z" fill="none" stroke="#DCC3AD" stroke-width="1.2"/>`;
-  // المصباح
-  const lampLit = lampOn; const shadeCol = lampLit ? '#FFE8B5' : '#EADBC2';
-  let lamp = '';
-  if (c.lamp.shape === 'arc') lamp = `<ellipse cx="24" cy="300" rx="13" ry="3.5" fill="#3F3530"/><path d="M24 299 L28 172 Q34 128 98 136" stroke="#3F3530" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M84 142 Q98 124 112 142Z" fill="${lampLit ? '#E9C887' : '#C9A46A'}"/><ellipse cx="98" cy="142" rx="14" ry="2.6" fill="${shadeCol}"/>`;
-  else lamp = `<ellipse cx="26" cy="300" rx="12" ry="3.2" fill="#3F3530"/><path d="M26 299 V140" stroke="#3F3530" stroke-width="2.4"/><path d="M10 112 H42 L48 142 H4Z" fill="${shadeCol}"/><path d="M10 112 H42" stroke="#D9C7AA" stroke-width="1.2"/>`;
-  const lampC = c.lamp.shape === 'arc' ? [98, 148] : [26, 130];
-  s += hit('lamp', lampOn ? 'المصباح: جرّب إطفاءه' : 'المصباح: جرّب إضاءته', lamp, c.lamp.shape === 'arc' ? [2, 118, 120, 188] : [0, 104, 54, 200], st);
-  // المقعد
-  s += `<ellipse cx="100" cy="286" rx="62" ry="6" fill="#5B4636" opacity=".14"/>
-  <rect x="48" y="272" width="5" height="14" rx="1" fill="#6A4F3E"/><rect x="146" y="272" width="5" height="14" rx="1" fill="#6A4F3E"/>
-  <path d="M58 236 C56 196 62 170 100 168 C138 170 144 196 142 236Z" fill="url(#${u}chair)"/>
-  <path d="M70 230 C70 202 76 184 100 182 C124 184 130 202 130 230Z" fill="#E5B39C" opacity=".55"/>
-  <rect x="50" y="232" width="100" height="40" rx="12" fill="#D59A80"/><rect x="58" y="228" width="84" height="18" rx="9" fill="#E7B7A2"/>
-  <rect x="38" y="214" width="26" height="60" rx="12" fill="#C98A70"/><rect x="136" y="214" width="26" height="60" rx="12" fill="#C98A70"/>
-  <path d="M136 214 C150 210 162 214 162 228 L162 252 C150 250 140 246 136 240Z" fill="#DCD1EF" opacity=".95"/><path d="M142 222 L158 220 M142 232 L158 231 M142 242 L158 242" stroke="#C3B6DA" stroke-width="1.2"/>`;
-  // الطاولة والدفتر
-  s += `<ellipse cx="200" cy="288" rx="16" ry="3.5" fill="#5B4636" opacity=".2"/><rect x="197" y="238" width="6" height="48" fill="#8A6B52"/><ellipse cx="200" cy="287" rx="13" ry="3" fill="#8A6B52"/>
-  <ellipse cx="200" cy="238" rx="30" ry="8" fill="#9C7A5E"/><ellipse cx="200" cy="236" rx="30" ry="8" fill="#B08D6E"/>`;
-  s += hit('notebook', 'الدفتر: اقرأ آخر نص', `<path d="M178 234 L204 230 L212 235 L186 239Z" fill="#F5C75B"/><path d="M178 234 L186 239 V241 L178 236Z" fill="#D9AA3E"/><path d="M186 239 L212 235 V237 L186 241Z" fill="#E7B84A"/><path d="M200 232 L206 236" stroke="#9C6A3E" stroke-width="1.4"/><path d="M190 230 L210 227" stroke="#2F2438" stroke-width="1.4" stroke-linecap="round"/>`, [168, 216, 52, 32], st);
-  if (c.candle.on) s += `<g transform="translate(${c.candle.spot === 'sill' ? '172 177' : '219 236'})">${candleSvg(c.candle.shape)}</g>`;
-  s += `<g transform="translate(${c.plant.spot === 'sill' ? '304 177) scale(.6' : '268 304'})">${c.plant.spot === 'floor' ? '<ellipse cx="0" cy="1" rx="16" ry="3" fill="#5B4636" opacity=".18"/>' : ''}${plantSvg(c.plant.kind)}</g>`;
-  // الضوء
-  s += '<g pointer-events="none">';
-  if (t === 'morning') s += `<path d="M160 166 L320 166 L372 318 L176 318Z" fill="url(#${u}beam)"/><rect x="0" y="0" width="400" height="320" fill="#FFFFFF" opacity=".04" mask="url(#${u}m)"/>`;
-  if (sunset) s += `<path d="M160 166 L320 166 L296 318 L96 318Z" fill="url(#${u}beam)"/><rect x="0" y="0" width="400" height="320" fill="#FF9F5E" opacity=".13" mask="url(#${u}m)"/>`;
-  if (night) s += `<rect x="0" y="0" width="400" height="320" fill="#1E1533" opacity="${lampOn ? .36 : .5}" mask="url(#${u}m)"/><path d="M160 166 L320 166 L344 318 L170 318Z" fill="#B8C8FF" opacity=".05"/>`;
-  if (v.weather === 'rain' && !night) s += `<rect x="0" y="0" width="400" height="320" fill="#5A6476" opacity=".08" mask="url(#${u}m)"/>`;
-  if (lampOn) s += `<circle cx="${lampC[0]}" cy="${lampC[1]}" r="${night ? 150 : 110}" fill="url(#${u}lamp)" opacity="${night ? 1 : sunset ? .6 : .4}"/>${c.lamp.shape === 'arc' ? `<path d="M85 143 L60 290 L150 290 L111 143Z" fill="#FFD98A" opacity="${night ? .1 : .05}"/><ellipse cx="98" cy="142" rx="14" ry="2.6" fill="#FFF3D0"/>` : `<path d="M10 112 H42 L48 142 H4Z" fill="#FFEDC2" opacity=".9"/>`}`;
-  if (c.candle.on && t !== 'morning') { const cp = c.candle.spot === 'sill' ? [172, 160] : [219, 220]; s += `<circle cx="${cp[0]}" cy="${cp[1]}" r="${night ? 46 : 30}" fill="url(#${u}cand)" opacity="${night ? 1 : .6}"/>`; }
-  return s + '</g></svg>';
-}
-function roomGlimpse(p, cls = '') { return `<span class="glimpse ${cls}" aria-hidden="true">${roomSvg(roomOf(p.id), { static: true, crop: true })}</span>`; }
+const waveLine = () => `<svg class="orn-wave" viewBox="0 0 400 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6 Q12.5 0 25 6 T50 6 T75 6 T100 6 T125 6 T150 6 T175 6 T200 6 T225 6 T250 6 T275 6 T300 6 T325 6 T350 6 T375 6 T400 6" style="stroke:var(--acc)" stroke-opacity=".55" stroke-width="1.4" fill="none" vector-effect="non-scaling-stroke"/></svg>`;
+function tchip(p, cls = '') { const c = spaceOf(p.id); return `<span class="tchip ${cls}" aria-hidden="true">${coverSvg(c.theme, c.cover)}</span>`; }
 
-/* ---------- الأصوات المولّدة (اختيارية) ---------- */
-const AUD = { ctx: null, nodes: null, owner: null };
-const soundKind = v => v.weather === 'rain' ? 'rain' : v.place === 'sea' ? 'sea' : null;
-function startAmbient(kind, owner) {
-  try {
-    const C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
-    AUD.ctx = AUD.ctx || new C(); const ctx = AUD.ctx; if (ctx.resume) ctx.resume();
-    const len = 2 * ctx.sampleRate; const buf = ctx.createBuffer(1, len, ctx.sampleRate); const d = buf.getChannelData(0);
-    if (kind === 'rain') for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
-    else { let last = 0; for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; } }
-    const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
-    const fl = ctx.createBiquadFilter(); fl.type = kind === 'rain' ? 'bandpass' : 'lowpass'; fl.frequency.value = kind === 'rain' ? 1500 : 520; fl.Q.value = kind === 'rain' ? .5 : .7;
-    const g = ctx.createGain(); g.gain.value = 0; src.connect(fl); fl.connect(g); g.connect(ctx.destination); src.start();
-    g.gain.linearRampToValueAtTime(kind === 'rain' ? .14 : .3, ctx.currentTime + 1.2);
-    let lfo = null; if (kind === 'sea') { lfo = ctx.createOscillator(); lfo.frequency.value = .11; const lg = ctx.createGain(); lg.gain.value = .16; lfo.connect(lg); lg.connect(g.gain); lfo.start(); }
-    AUD.nodes = { src, g, lfo }; AUD.owner = owner; return true;
-  } catch (e) { return false; }
+/* ---------- لوحة «خصّص مساحتك» ---------- */
+function spDirty() { const m = me(); return !!(m && ui.spaceDraft && JSON.stringify(ui.spaceDraft) !== JSON.stringify((S.themes && S.themes[m.id]) || SPACE_BASE)); }
+function spSeg(label, key, opts, cur) {
+  return `<p class="re-lbl" id="sl-${key}">${label}</p><div class="re-seg" role="group" aria-labelledby="sl-${key}">${opts.map(o => `<button type="button" data-sp="${key}" data-v="${o[0]}" aria-pressed="${cur === o[0]}">${o[1]}</button>`).join('')}</div>`;
 }
-function stopAmbient() {
-  if (!AUD.nodes) return; const { src, g, lfo } = AUD.nodes; AUD.nodes = null; AUD.owner = null;
-  try { g.gain.cancelScheduledValues(AUD.ctx.currentTime); g.gain.setTargetAtTime(0, AUD.ctx.currentTime, .15); setTimeout(() => { try { src.stop(); lfo && lfo.stop(); } catch (e) {} }, 700); } catch (e) {}
+function spPanelHtml() {
+  const d = ui.spaceDraft; const T = THEMES[d.theme]; const pk = d.personal.kind;
+  return `<div class="spp-head"><h2 id="spp-t">خصّص مساحتك</h2><span class="re-dirty">${spDirty() ? 'تغييرات غير محفوظة' : 'محفوظ'}</span></div>
+  <div class="spp-body" id="sppBody">
+    <p class="re-lbl">الثيم</p>
+    <div class="spp-themes">${THEME_KEYS.map(k => `<button type="button" data-sp="theme" data-v="${k}" aria-pressed="${d.theme === k}"><span class="spp-thumb">${coverSvg(k, 0)}</span><b>${THEMES[k].name}</b></button>`).join('')}</div>
+    <p class="spp-note">${T.note}</p>
+    <p class="re-lbl">الغلاف</p>
+    <div class="spp-covers">${T.covers.map((nm, i) => `<button type="button" data-sp="cover" data-v="${i}" aria-pressed="${d.cover === i}"><span class="spp-thumb">${coverSvg(d.theme, i)}</span><span>${nm}</span></button>`).join('')}</div>
+    <p class="re-lbl">لون التمييز</p>
+    <div class="spp-acc" role="group" aria-label="لون التمييز">${T.accents.map(([c, nm], i) => `<button type="button" data-sp="accent" data-v="${i}" aria-pressed="${d.accent === i}"><i style="background:${c}"></i>${nm}</button>`).join('')}</div>
+    ${spSeg('التفصيل: ' + T.orn, 'orn', [['1', 'ظاهر'], ['0', 'مخفي']], d.orn ? '1' : '0')}
+    ${spSeg('لمستك في مقدمة الصفحة', 'pkind', [['none', 'لا شيء'], ['quote', 'جملة قصيرة'], ['image', 'صورة']], pk)}
+    ${pk === 'quote' ? `<label class="field"><span class="sr">جملتك</span><input class="input" data-sp-in="ptext" maxlength="80" value="${esc(d.personal.text || '')}" placeholder="جملة تحب أن يراها زوّارك أولًا"></label><p class="re-note">تظهر علنًا في مقدمة صفحتك. لا نضع مقتبساتك الخاصة هنا تلقائيًا.</p>` : ''}
+    ${pk === 'image' ? `<div class="re-img">${d.personal.img ? `<span class="spp-imgprev"><img src="${d.personal.img}" alt=""></span>` : ''}<button type="button" class="btn btn-ghost btn-sm" data-sp="pick">${d.personal.img ? 'اختر صورة أخرى' : 'اختر صورة من جهازك'}</button></div>
+      <div class="demo-note">الصورة للمعاينة فقط: تُصغَّر وتُحفظ في متصفحك، ولا تُرفع إلى أي خدمة فعلية.</div><div id="sp-img-err"></div>` : ''}
+  </div>
+  <div class="re-foot"><button type="button" class="btn btn-ghost" data-sp="cancel">إلغاء</button><button type="button" class="btn btn-primary" data-sp="save">حفظ</button></div>
+  <input type="file" accept="image/*" id="spFile" class="sr" tabindex="-1" aria-hidden="true">`;
 }
-
-/* ---------- تفاعل الأثاث ---------- */
-function roomAction(name, ownerId) {
-  const p = person(ownerId); if (!p) return; const c = roomOf(p.id);
-  const texts = sortedTexts().filter(t => t.author === p.id); const own = me() && me().id === p.id;
-  if (name === 'notebook') { if (texts[0]) go('read', { id: texts[0].id }); else toast(own ? 'هنا ستبدأ أولى كتاباتك' : 'هنا ستبدأ أولى كتابات' + verb(p, 'ه', 'ها')); }
-  else if (name === 'shelf') scrollToWritings(p);
-  else if (name === 'frame') openFrame(p);
-  else if (name === 'lamp') toggleRoomLamp(p);
+function spPanelRender() {
+  const el = $('.sp-panel'); if (!el) return; const bd = $('#sppBody'); const y = bd ? bd.scrollTop : 0; const tx = $('.spp-themes'); const ty = tx ? tx.scrollLeft : 0;
+  el.innerHTML = spPanelHtml(); $('#sppBody').scrollTop = y; const tx2 = $('.spp-themes'); if (tx2) tx2.scrollLeft = ty;
+  $('#spFile').addEventListener('change', spFile);
 }
-function scrollToWritings(p) {
-  const el = $('#writings') || $('#latest'); if (!el) return;
-  el.scrollIntoView({ block: 'start', behavior: reduceMotion() ? 'auto' : 'smooth' });
-  if (!sortedTexts().some(t => t.author === p.id)) toast('لا كتابات بعد — ' + (me() && me().id === p.id ? 'رفّك ينتظر نصّك الأول' : 'الرف ينتظر أول نص'));
+function openSpaceEditor() {
+  const m = me(); if (!m) return; closePop(); $$('.toast').forEach(t => t.remove());
+  if (!(view.name === 'profile' && view.p.id === m.id)) { hist.push(view); view = { name: 'profile', p: { id: m.id } }; }
+  ui.spaceDraft = clone((S.themes && S.themes[m.id]) || SPACE_BASE);
+  render(true);
+  let el = $('.sp-panel'); if (!el) { el = document.createElement('div'); el.className = 'sp-panel'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-labelledby', 'spp-t'); document.body.appendChild(el); el.addEventListener('click', spClick); el.addEventListener('input', spInput); }
+  document.documentElement.classList.add('sp-editing'); spPanelRender();
+  setTimeout(() => { const f = $('.sp-panel [data-sp=theme][aria-pressed=true]'); f && f.focus({ preventScroll: true }); }, 60);
 }
-function toggleRoomLamp(p) {
-  const c = roomOf(p.id); const T = ui.roomTemp[p.id] || (ui.roomTemp[p.id] = {});
-  const cur = T.lamp != null ? T.lamp : c.lamp.on; T.lamp = !cur; if (T.lamp === c.lamp.on) delete T.lamp;
-  refreshSoft();
-  const own = me() && me().id === p.id;
-  toast(own ? 'معاينة فقط — غيّري الإعداد من «رتّب ركنك»' : 'معاينة لك فقط؛ لا يتغيّر ركن ' + p.name.split(' ')[0]);
-}
-function openFrame(p) {
-  const f = roomOf(p.id).frame; const first = p.name.split(' ')[0];
-  if (f.kind === 'image' && f.img) openSheet(`<div class="sheet-h"><div><h2>على جدار ${esc(first)}</h2><p>صورة اختار${verb(p, 'ها', 'تها')} لركن${verb(p, 'ه', 'ها')}.</p></div>${closeBtn()}</div><img class="frame-big" src="${f.img}" alt="الصورة المعلّقة في ركن ${esc(p.name)}"><div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة إلى الركن</button></div>`);
-  else openSheet(`<div class="sheet-h"><div><h2>على جدار ${esc(first)}</h2><p>جملة ${verb(p, 'اختارها', 'اختارتها')} لتبقى معلّقة هنا.</p></div>${closeBtn()}</div><blockquote class="frame-quote">${f.text ? '«' + esc(f.text) + '»' : 'الفريم ما زال فارغًا.'}</blockquote><div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة إلى الركن</button></div>`);
-}
-
-/* ---------- محرّر الركن ---------- */
-const clone = o => JSON.parse(JSON.stringify(o));
-const sameView = (a, b) => a.place === b.place && a.weather === b.weather && a.time === b.time;
-function reDirty() { const m = me(); return m && JSON.stringify(ui.roomDraft) !== JSON.stringify(roomOf(m.id)); }
-function seg(label, key, opts, cur) {
-  return `<div class="re-group"><p class="re-lbl" id="lb-${key}">${label}</p><div class="re-seg" role="group" aria-labelledby="lb-${key}">${opts.map(o => `<button type="button" data-re="${key}" data-v="${o[0]}" aria-pressed="${cur === o[0]}">${o[1]}</button>`).join('')}</div></div>`;
-}
-function reBody() {
-  const d = ui.roomDraft; const tab = ui.reTab;
-  if (tab === 'view') return `<p class="re-lbl">مشاهد جاهزة</p><div class="re-presets">${PRESETS.map((p, i) => `<button type="button" class="re-preset" data-re="preset" data-v="${i}" aria-pressed="${sameView(p.view, d.view)}"><span class="re-thumb">${viewThumb(p.view)}</span><span>${p.name}</span></button>`).join('')}</div>
-    <p class="re-sub">أو خصّص الإطلالة بنفسك — يمكنك الجمع بينها:</p>
-    ${seg('المكان', 'place', PLACES, d.view.place)}${seg('الأجواء', 'weather', WEATHERS, d.view.weather)}${seg('الوقت', 'time', TIMES, d.view.time)}`;
-  if (tab === 'items') return `
-    ${seg('الشمعة', 'candle-on', [['1', 'ظاهرة'], ['0', 'مخفية']], d.candle.on ? '1' : '0')}
-    ${d.candle.on ? seg('شكل الشمعة', 'candle-shape', [['pillar', 'عمودية'], ['jar', 'في برطمان']], d.candle.shape) + seg('مكان الشمعة', 'candle-spot', [['table', 'على الطاولة'], ['sill', 'حافة النافذة']], d.candle.spot) : ''}
-    ${seg('نبتة أو وردة', 'plant', PLANTS, d.plant.kind)}${seg('مكانها', 'plant-spot', [['floor', 'على الأرض'], ['sill', 'حافة النافذة']], d.plant.spot)}
-    ${seg('السجادة', 'rug', RUGS, d.rug)}
-    ${seg('المصباح الأرضي', 'lamp-shape', [['straight', 'مستقيم'], ['arc', 'مقوّس']], d.lamp.shape)}${seg('ضوء المصباح', 'lamp-on', [['1', 'مضاء'], ['0', 'مطفأ']], d.lamp.on ? '1' : '0')}
-    <p class="re-note">الدفتر والرف جزء ثابت من ركنك: الدفتر يفتح آخر نص، والرف يقود إلى كتاباتك.</p>`;
-  const f = d.frame;
-  return `${seg('شكل الفريم', 'frame-shape', [['rect', 'مستطيل'], ['arch', 'مقوّس']], f.shape)}
-    ${seg('ماذا يعرض الفريم؟', 'frame-kind', [['quote', 'جملة أكتبها'], ['image', 'صورة أختارها']], f.kind)}
-    ${f.kind === 'quote' ? `<label class="field"><span>جملتك على الجدار</span><textarea class="input" data-re-in="frame-text" maxlength="90" rows="2" placeholder="جملة قصيرة تحب أن يراها زوّارك">${esc(f.text || '')}</textarea></label>
-      <p class="re-note">تظهر للجميع. لا نضع مقتبساتك الخاصة هنا تلقائيًا.</p>`
-    : `<div class="re-img">${f.img ? `<span class="re-imgprev"><img src="${f.img}" alt="" style="object-position:${{ top: 'top', mid: 'center', bot: 'bottom' }[f.crop || 'mid']}"></span>` : ''}
-        <button type="button" class="btn btn-ghost btn-sm" data-re="pick-img">${f.img ? 'اختر صورة أخرى' : 'اختر صورة من جهازك'}</button></div>
-      ${f.img ? seg('قص الصورة داخل الفريم', 'crop', [['top', 'الأعلى'], ['mid', 'الوسط'], ['bot', 'الأسفل']], f.crop || 'mid') : ''}
-      <div class="demo-note">رفع الصورة هنا للمعاينة فقط: تُصغَّر وتُحفظ في متصفحك، ولا تُرفع إلى أي خدمة فعلية.</div><div id="re-img-err"></div>`}
-    <label class="field"><span>عبارتك الشخصية <span class="muted" style="font-weight:400">(اختيارية، تظهر تحت الركن)</span></span><input class="input" data-re-in="motto" maxlength="80" value="${esc(d.motto || '')}" placeholder="مثل: أكتب هنا حين تمطر."></label>`;
-}
-function openRoomEditor() {
-  const m = me(); if (!m) return;
-  ui.roomDraft = clone(roomOf(m.id)); ui.reTab = 'view'; closePop(); $$('.toast').forEach(t => t.remove());
-  const el = document.createElement('div'); el.className = 'room-editor'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-labelledby', 're-title');
-  document.body.appendChild(el); document.documentElement.classList.add('intro-open'); $('#app').setAttribute('aria-hidden', 'true'); $('#nav').setAttribute('aria-hidden', 'true');
-  el.innerHTML = `<div class="re-preview" id="rePrev"></div><div class="re-panel"><div class="re-head"><h2 id="re-title">رتّب ركنك</h2><span class="re-dirty" id="reDirty"></span></div>
-    <div class="re-tabs" role="tablist">${[['view', 'الإطلالة'], ['items', 'تفاصيل الركن'], ['wall', 'على الجدار']].map(([k, l]) => `<button type="button" role="tab" data-re="tab" data-v="${k}" id="ret-${k}" aria-controls="reBody"></button>`).join('')}</div>
-    <div class="re-body" id="reBody" role="tabpanel"></div>
-    <div class="re-foot"><button type="button" class="btn btn-ghost" data-re="cancel">إلغاء التغييرات</button><button type="button" class="btn btn-primary" data-re="save">احفظ الركن</button></div></div>
-    <input type="file" accept="image/*" id="reFile" class="sr" tabindex="-1" aria-hidden="true">`;
-  el.addEventListener('click', reClick); el.addEventListener('input', reInput); $('#reFile').addEventListener('change', reFile);
-  reRender(true); setTimeout(() => { const t = $('#ret-view'); t && t.focus({ preventScroll: true }); }, 60);
-}
-function reRender(body) {
-  const d = ui.roomDraft; const m = me();
-  $('#rePrev').innerHTML = roomSvg(d, { label: 'معاينة ركنك: ' + roomDesc(d), static: ui.roomStill }) + `<span class="re-cap">${esc(roomCaption(d))}</span>`;
-  $$('[data-re=tab]').forEach(b => { const k = b.dataset.v; b.textContent = { view: 'الإطلالة', items: 'تفاصيل الركن', wall: 'على الجدار' }[k]; b.setAttribute('aria-selected', String(k === ui.reTab)); });
-  if (body) { const bd = $('#reBody'); const y = bd.scrollTop; bd.innerHTML = reBody(); bd.scrollTop = y; bd.setAttribute('aria-labelledby', 'ret-' + ui.reTab); }
-  $('#reDirty').textContent = reDirty() ? 'تغييرات غير محفوظة' : 'محفوظ';
-}
-function closeRoomEditor() {
-  const el = $('.room-editor'); if (!el) return; el.remove(); ui.roomDraft = null;
-  document.documentElement.classList.remove('intro-open'); $('#app').removeAttribute('aria-hidden'); $('#nav').removeAttribute('aria-hidden');
-}
-function reClick(e) {
-  const b = e.target.closest('[data-re]'); if (!b) return; const d = ui.roomDraft; const v = b.dataset.v;
-  switch (b.dataset.re) {
-    case 'tab': ui.reTab = v; reRender(true); $('#reBody').scrollTop = 0; return;
-    case 'preset': d.view = clone(PRESETS[+v].view); break;
-    case 'place': case 'weather': case 'time': d.view[b.dataset.re] = v; break;
-    case 'candle-on': d.candle.on = v === '1'; break;
-    case 'candle-shape': d.candle.shape = v; break;
-    case 'candle-spot': d.candle.spot = v; if (v === 'sill' && d.plant.spot === 'sill' && d.plant.kind) {} break;
-    case 'plant': d.plant.kind = v; break;
-    case 'plant-spot': d.plant.spot = v; break;
-    case 'rug': d.rug = v; break;
-    case 'lamp-shape': d.lamp.shape = v; break;
-    case 'lamp-on': d.lamp.on = v === '1'; break;
-    case 'frame-shape': d.frame.shape = v; break;
-    case 'frame-kind': d.frame.kind = v; break;
-    case 'crop': d.frame.crop = v; break;
-    case 'pick-img': $('#reFile').click(); return;
-    case 'save': { const m = me(); S.rooms = S.rooms || {}; S.rooms[m.id] = clone(d); save(); delete ui.roomTemp[m.id]; closeRoomEditor(); refreshSoft(); toast('حُفظ ركنك'); return; }
-    case 'cancel': { const dirty = reDirty(); closeRoomEditor(); refreshSoft(); if (dirty) toast('عاد ركنك كما حفظته آخر مرة'); return; }
+function closeSpacePanel() { const el = $('.sp-panel'); if (el) el.remove(); ui.spaceDraft = null; document.documentElement.classList.remove('sp-editing'); }
+function spApply() { const y = scrollY; render(false); scrollTo(0, y); spPanelRender(); }
+function spClick(e) {
+  const b = e.target.closest('[data-sp]'); if (!b) return; const d = ui.spaceDraft; const v = b.dataset.v;
+  switch (b.dataset.sp) {
+    case 'theme': if (d.theme !== v) { d.theme = v; d.cover = 0; d.accent = 0; } break;
+    case 'cover': d.cover = +v; break;
+    case 'accent': d.accent = +v; break;
+    case 'orn': d.orn = v === '1'; break;
+    case 'pkind': d.personal.kind = v; break;
+    case 'pick': $('#spFile').click(); return;
+    case 'save': { const m = me(); S.themes = S.themes || {}; S.themes[m.id] = clone(d); save(); closeSpacePanel(); refreshSoft(); toast('حُفظت مساحتك'); return; }
+    case 'cancel': { const dirty = spDirty(); closeSpacePanel(); refreshSoft(); if (dirty) toast('عادت مساحتك كما حفظتها'); return; }
     default: return;
   }
-  reRender(true);
-  const again = $(`#reBody [data-re="${b.dataset.re}"][data-v="${v}"]`); again && again.focus({ preventScroll: true });
+  spApply();
+  const again = $(`.sp-panel [data-sp="${b.dataset.sp}"][data-v="${v}"]`); again && again.focus({ preventScroll: true });
 }
-function reInput(e) {
-  const k = e.target.dataset.reIn; if (!k) return;
-  if (k === 'frame-text') ui.roomDraft.frame.text = e.target.value.trim() ? e.target.value : '';
-  if (k === 'motto') ui.roomDraft.motto = e.target.value;
-  reRender(false);
+function spInput(e) {
+  if (e.target.dataset.spIn !== 'ptext') return;
+  ui.spaceDraft.personal.text = e.target.value; const y = scrollY; render(false); scrollTo(0, y);
+  const h = $('.sp-panel .re-dirty'); if (h) h.textContent = spDirty() ? 'تغييرات غير محفوظة' : 'محفوظ';
 }
-function reFile(e) {
+function spFile(e) {
   const file = e.target.files && e.target.files[0]; e.target.value = ''; if (!file) return;
-  const err = m => { const box = $('#re-img-err'); if (box) box.innerHTML = errBox(m); };
+  const err = m => { const box = $('#sp-img-err'); if (box) box.innerHTML = errBox(m); };
   if (!/^image\//.test(file.type)) { err('اختر ملف صورة (JPG أو PNG).'); return; }
-  const fr = new FileReader();
-  fr.onerror = () => err('تعذّرت قراءة الصورة.');
+  const fr = new FileReader(); fr.onerror = () => err('تعذّرت قراءة الصورة.');
   fr.onload = () => { const img = new Image(); img.onerror = () => err('تعذّر فتح الصورة.'); img.onload = () => {
-    try { const max = 520; const sc = Math.min(1, max / Math.max(img.width, img.height)); const cv = document.createElement('canvas'); cv.width = Math.round(img.width * sc); cv.height = Math.round(img.height * sc);
-      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); ui.roomDraft.frame.img = cv.toDataURL('image/jpeg', .82); ui.roomDraft.frame.kind = 'image'; ui.roomDraft.frame.crop = 'mid'; reRender(true);
+    try { const max = 420; const sc = Math.min(1, max / Math.max(img.width, img.height)); const cv = document.createElement('canvas'); cv.width = Math.round(img.width * sc); cv.height = Math.round(img.height * sc);
+      cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); ui.spaceDraft.personal.img = cv.toDataURL('image/jpeg', .82); ui.spaceDraft.personal.kind = 'image'; spApply();
     } catch (x) { err('تعذّر تجهيز الصورة للمعاينة.'); } }; img.src = fr.result; };
   fr.readAsDataURL(file);
 }
+function openPhoto(p) {
+  const c = spaceOf(p.id); if (!c.personal.img) return;
+  openSheet(`<div class="sheet-h"><div><h2>من ذائقة ${esc(p.name.split(' ')[0])}</h2><p>صورة ${verb(p, 'اختارها', 'اختارتها')} لمقدمة ${verb(p, 'مساحته', 'مساحتها')}.</p></div>${closeBtn()}</div><img class="frame-big" src="${c.personal.img}" alt="الصورة التي اختارها ${esc(p.name)}"><div class="btn-row"><button class="btn btn-ghost" data-act="sheet-close">العودة</button></div>`);
+}
 document.addEventListener('keydown', e => {
-  if (!$('.room-editor')) return;
-  if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); const dirty = reDirty(); closeRoomEditor(); refreshSoft(); if (dirty) toast('عاد ركنك كما حفظته آخر مرة'); return; }
-  if (e.key === 'Tab') { const ed = $('.room-editor'); const f = $$('button,input,textarea', ed).filter(x => x.offsetParent !== null && x.id !== 'reFile'); if (!f.length) return; const a = f[0], z = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
-    e.stopImmediatePropagation(); }
-}, true);
-document.addEventListener('keydown', e => {
-  const h = e.target.closest && e.target.closest('.r-hit');
-  if (h && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); e.stopImmediatePropagation(); const o = h.closest('[data-room-owner]'); o && roomAction(h.dataset.room, o.dataset.roomOwner); }
+  if (!$('.sp-panel') || $('.overlay')) return;
+  if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); const dirty = spDirty(); closeSpacePanel(); refreshSoft(); if (dirty) toast('عادت مساحتك كما حفظتها'); }
 }, true);
 
 /* ================= الشاشات ================= */
@@ -1632,11 +1454,11 @@ function vRead() {
   const a = person(t.author); const first = a.name.split(' ')[0];
   const more = sortedTexts().filter(x => x.author === t.author && x.id !== t.id);
   return `${subbar(t.title || 'بلا عنوان', `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/t/${t.id}" aria-label="نسخ رابط النص">${ic('share', 19)}</button>`)}
-  <article class="reader">
-    ${t.mood ? `<div class="mood banner">${moodSvg(t.mood)}</div>` : ''}
+  <article class="reader rd-themed" style="${themeStyle(spaceOf(a.id))}">
+    <div class="rd-cover" aria-hidden="true">${coverSvg(spaceOf(a.id).theme, spaceOf(a.id).cover)}</div>
     <header class="reader-head"><span class="tag">${esc(t.cat)}</span>
       <h1>${esc(t.title || 'بلا عنوان')}</h1>
-      <button class="by-line big" data-act="profile" data-id="${a.id}"><span class="swatch" aria-hidden="true">${viewThumb(roomOf(a.id).view)}</span><span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span><span class="tl rk" style="display:inline-flex;align-items:center;gap:2px;white-space:nowrap">${verb(a, 'ركنه', 'ركنها')} ${ic('fwd', 16)}</span></button>
+      <button class="by-line big" data-act="profile" data-id="${a.id}"><span class="swatch" aria-hidden="true">${coverSvg(spaceOf(a.id).theme, spaceOf(a.id).cover)}</span><span><b>${esc(a.name)}</b><span class="tl">${esc(a.tagline || '')}</span></span><span class="tl rk" style="display:inline-flex;align-items:center;gap:2px;white-space:nowrap">${verb(a, 'مساحته', 'مساحتها')} ${ic('fwd', 16)}</span></button>
       <div class="legend"><span class="s-demo">✦ مظلّلة</span><span>جمل توقّف عندها كثيرون. اضغط أي جملة لتحتفظ بها.</span></div>
     </header>
     <div class="paper"><span class="ribbon" aria-hidden="true"></span><div class="read-body" lang="ar">${sentencesHtml(t)}</div>
@@ -1645,7 +1467,7 @@ function vRead() {
       <section class="about" style="--tint:${tintOf(a)}"><div class="eyebrow">عن ${esc(first)}، ${verb(a, 'بصوته', 'بصوتها')}</div>
         <div class="w-top">${blob(a, 'sm')}<div><h3 style="font-size:19px">${esc(a.name)}</h3><span class="tl">${esc(a.tagline || '')}</span></div></div>
         <p class="voice-bio" style="font-size:17px">«${esc(a.bio)}»</p>
-        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${a.id}">ارجع إلى ${verb(a, 'ركنه', 'ركنها')}</button>${more.length ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${more[0].id}">${verb(a, 'نصّه', 'نصّها')}: «${esc(more[0].title)}»</button>` : ''}</div></section>
+        <div class="btn-row" style="margin-top:14px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${a.id}">ارجع إلى ${verb(a, 'مساحته', 'مساحتها')}</button>${more.length ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${more[0].id}">${verb(a, 'نصّه', 'نصّها')}: «${esc(more[0].title)}»</button>` : ''}</div></section>
       ${letterBlock()}
     </div>
   </article>`;
@@ -1690,7 +1512,7 @@ function statusBlock(p, own) {
   if (!isApproved(p)) {
     const left = NEEDED - n;
     return `<div class="status wait"><h3>${ic('clock', 20)} ${own ? 'مساحتك تنتظر ترحيب القرّاء' : 'صوت جديد ينتظر الترحيب'}</h3>${progress(n)}
-      <p>${own ? (n ? 'رحّب بك ' + readersWord(n) + ' حتى الآن. ' : '') + 'بقي ' + endorseWord(left) + ' لتُفتح مساحة النشر. شارك ركنك مع من يعرف كتابتك.' : 'رحّب ' + readersWord(n) + ' بهذا الصوت حتى الآن. حين يكتمل ' + ar(NEEDED) + ' تُفتح ' + verb(p, 'مساحته', 'مساحتها') + ' للكتابة. التأييد ترحيب، لا تقييم.'}</p></div>`;
+      <p>${own ? (n ? 'رحّب بك ' + readersWord(n) + ' حتى الآن. ' : '') + 'بقي ' + endorseWord(left) + ' لتُفتح مساحة النشر. شارك صفحتك مع من يعرف كتابتك.' : 'رحّب ' + readersWord(n) + ' بهذا الصوت حتى الآن. حين يكتمل ' + ar(NEEDED) + ' تُفتح ' + verb(p, 'مساحته', 'مساحتها') + ' للكتابة. التأييد ترحيب، لا تقييم.'}</p></div>`;
   }
   if (canPublishNow(p)) return `<div class="status ok"><h3>${ic('check', 20)} ${own ? (p.justApproved ? 'أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.' : 'صفحتك البيضاء لهذا الأسبوع جاهزة') : verb(p, 'يكتب معنا', 'تكتب معنا')}</h3>
       ${own ? `<p>نص واحد كل أسبوع، حتى ${ar(LIMIT)} حرف. خذ وقتك.</p><div class="btn-row"><button class="btn btn-primary btn-sm" data-act="tab" data-v="write">${ic('pen', 18)} افتح المحرر</button></div>` : ''}</div>`;
@@ -1698,43 +1520,56 @@ function statusBlock(p, own) {
   return `<div class="status later"><h3>${ic('clock', 20)} ${own ? 'نصّك لهذا الأسبوع وصل إلى القرّاء' : verb(p, 'يكتب معنا', 'تكتب معنا')}</h3>
     ${own ? `<p>موعدك القادم مع الصفحة البيضاء <b>${fmtDay(nx)}</b>، بعد ${daysWord(d)}. حتى ذلك الحين، مسوداتك بانتظارك.</p>` : ''}</div>`;
 }
+function statusCompact(p, own) {
+  if (!p.member) return '';
+  const n = endorsements(p.id).length; const m = me();
+  if (!isApproved(p)) {
+    const left = NEEDED - n; const already = m && !own && endorsements(p.id).includes(normEmail(m.email));
+    return `<div class="sp-status"><div class="sp-st-row">${progress(n)}<span>${own ? 'بانتظار ترحيب القرّاء' : 'صوت جديد ينتظر الترحيب'}</span></div>
+      <p>${own ? 'بقي ' + endorseWord(left) + ' ليُفتح النشر. شارك صفحتك مع من يعرف كتابتك.' : 'بقي ' + endorseWord(left) + '. التأييد ترحيب لا تقييم، ولا ينشئ حسابًا أو اشتراكًا.'}</p>
+      ${own ? `<button class="btn btn-ghost btn-sm" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}">${ic('share', 16)} انسخ رابط صفحتك</button>`
+        : `<button class="btn btn-primary btn-sm" data-act="endorse" data-id="${p.id}">${ic('heart', 17)} ${verb(p, 'أؤيد انضمامه', 'أؤيد انضمامها')}</button>${already ? `<p class="sp-already">${ic('check', 14)} سبق أن رحّبت${verb(m, '', 'ِ')} بإيميلك الموثق.</p>` : ''}`}</div>`;
+  }
+  if (!own) return '';
+  if (canPublishNow(p)) return `<p class="sp-line">${ic('check', 16)} ${p.justApproved ? 'أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.' : 'صفحتك البيضاء لهذا الأسبوع جاهزة.'} <button class="link" data-act="tab" data-v="write">اكتب</button></p>`;
+  return `<p class="sp-line">${ic('clock', 16)} موعدك القادم مع الصفحة البيضاء ${fmtDay(nextPubAt(p))}. <button class="link" data-act="tab" data-v="write">المسودات</button></p>`;
+}
+function spText(t, first) {
+  return `<article class="sp-text${first ? ' first' : ''}" data-act="open" data-id="${t.id}">
+    ${first ? '<span class="sp-badge">الأحدث</span>' : ''}<h3>${esc(t.title || 'بلا عنوان')}</h3>
+    <p class="${t.poem ? 'poem' : ''}">${esc(first ? sentences(t).slice(0, 4).map(x => x.text).join(t.poem ? '\n' : ' ') : excerpt(t))}</p>
+    <div class="meta"><span>${esc(t.cat)} · ${rel(t.createdAt)}</span><button class="go" data-act="open" data-id="${t.id}">اقرأ</button></div></article>`;
+}
 function vProfile() {
-  const p = person(view.p.id); if (!p) return subbar('ركن') + '<div class="empty"><h3>هذه الصفحة غير موجودة</h3></div>';
-  const m = me(); const own = m && m.id === p.id; const appr = isApproved(p); const first = p.name.split(' ')[0];
-  const texts = sortedTexts().filter(t => t.author === p.id); const latest = texts[0];
-  const myEmail = m && normEmail(m.email); const already = myEmail && endorsements(p.id).includes(myEmail);
-  const cta = verb(p, 'أؤيد انضمامه', 'أؤيد انضمامها');
-  const c = roomOf(p.id); const T = ui.roomTemp[p.id] || {}; const lampOn = T.lamp != null ? T.lamp : c.lamp.on;
-  const snd = soundKind(c.view); const playing = !!(AUD.nodes && AUD.owner === p.id);
-  return `${subbar(own ? 'ركني' : 'ركن ' + first, `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}" aria-label="نسخ رابط الركن">${ic('share', 19)}</button>`)}
-  <div class="reader room-page">
-  <header class="rp-head">${blob(p, '', false)}<div style="min-width:0"><h1>${esc(p.name)}</h1><span class="tl">${esc(p.tagline || '')}</span></div></header>
-  <p class="rp-bio">${esc(p.bio || '')}${own ? ` <button class="link" data-act="edit-profile" style="font-size:13px">عدّل نبذتك</button>` : ''}</p>
-  <figure class="room-wrap" id="room-${p.id}" data-room-owner="${p.id}">${roomSvg(c, { lampOn, static: ui.roomStill, label: 'ركن ' + p.name + ': ' + roomDesc(Object.assign({}, c, { lamp: { ...c.lamp, on: lampOn } })) })}
-    ${T.lamp != null ? `<figcaption class="room-temp">${ic('info', 14)} معاينة الضوء لك فقط</figcaption>` : ''}</figure>
-  <p class="room-cap">${esc(roomCaption(c))}</p>
-  ${c.motto ? `<p class="motto">«${esc(c.motto)}»</p>` : ''}
-  <div class="room-acts">
-    ${own ? `<button class="btn btn-primary btn-sm" data-act="room-edit">${ic('edit', 17)} رتّب ركنك</button>` : ''}
-    ${latest ? `<button class="btn btn-ghost btn-sm" data-act="open" data-id="${latest.id}">اقرأ آخر نص</button>` : ''}
-    ${texts.length ? `<button class="btn btn-ghost btn-sm" data-act="room-shelf" data-id="${p.id}">كل الكتابات</button>` : ''}
-    <button class="btn btn-ghost btn-sm" data-act="room-lamp" data-id="${p.id}" aria-pressed="${lampOn}">${lampOn ? 'أطفئ المصباح' : 'أضئ المصباح'}</button>
-    <button class="btn btn-ghost btn-sm" data-act="room-still" aria-pressed="${ui.roomStill}">${ui.roomStill ? 'شغّل الحركة' : 'أوقف الحركة'}</button>
-    ${snd ? `<button class="btn btn-ghost btn-sm" data-act="room-sound" data-id="${p.id}" aria-pressed="${playing}">${playing ? 'أوقف الصوت' : (snd === 'rain' ? 'صوت المطر' : 'صوت البحر')}</button>` : ''}
-  </div>
-  <section class="section" id="latest"><div class="sec-head"><h2>${own ? 'آخر ما كتبت' : 'آخر ما ' + verb(p, 'كتب', 'كتبت')}</h2></div>
-    ${latest ? textCard(latest) : `<div class="first-note">${ic('pen', 22)}<div><b>هنا ستبدأ ${own ? 'أولى كتاباتك' : 'أولى كتابات' + verb(p, 'ه', 'ها')}</b><p>${own ? (appr ? 'صفحتك البيضاء جاهزة متى شئت.' : 'رتّب ركنك وجهّز مسودتك؛ يُفتح النشر حين يكتمل ترحيب القرّاء.') : 'الدفتر على الطاولة ما زال فارغًا.'}</p></div></div>`}</section>
-  ${p.member && !appr ? `<section class="section"><div class="eyebrow">ساعد هذا الصوت على الوصول</div>${statusBlock(p, own)}
-    ${own ? `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}">${ic('share', 19)} شارك ركنك</button></div>
-        <p class="muted" style="font-size:13px;margin-top:8px">الترحيب يأتي من قرّائك؛ لا يمكنك تأييد نفسك.</p>`
-      : `<div class="btn-row" style="margin-top:14px"><button class="btn btn-primary btn-block" data-act="endorse" data-id="${p.id}">${ic('heart', 19)} ${cta}</button></div>
-        ${already ? `<p class="msg info">${ic('info', 18)}<span>سبق أن رحّبت${verb(m, '', 'ِ')} بـ${esc(first)} بإيميلك الموثق. يمكنك الترحيب بإيميل آخر تملكه.</span></p>` : `<p class="muted" style="font-size:13px;margin-top:8px">التأييد لا ينشئ حسابًا ولا يشترك بك في أي بريد.</p>`}`}</section>` : ''}
-  ${own && appr ? `<section class="section">${statusBlock(p, true)}</section>` : ''}
-  ${p.sample ? `<section class="section"><div class="sec-head"><h2>عينة كتابة</h2><span class="tag peach">للتعارف والترحيب</span></div>
-    <div class="sample-box"><span class="ribbon" aria-hidden="true"></span><h3 style="font-size:19px;font-weight:800;margin-bottom:6px">${esc(p.sample.title)}</h3><p class="read-body">${esc(p.sample.body)}</p>
-    <p class="muted" style="font-size:13px;margin-top:10px">العينة للتعارف فقط؛ ليست منشورًا عامًا ولا تُحتسب ضمن نص الأسبوع.</p></div></section>` : ''}
-  ${texts.length > 1 ? `<section class="section" id="writings"><div class="sec-head"><h2>كل الكتابات</h2></div><div class="grid">${texts.slice(1).map(textCard).join('')}</div></section>` : ''}
-  <section class="section">${letterBlock()}</section></div>`;
+  const p = person(view.p.id); if (!p) return subbar('مساحة') + '<div class="empty"><h3>هذه الصفحة غير موجودة</h3></div>';
+  const m = me(); const own = !!(m && m.id === p.id); const first = p.name.split(' ')[0];
+  const texts = sortedTexts().filter(t => t.author === p.id);
+  const c = spaceOf(p.id); const pers = c.personal || {};
+  const ints = p.interests || [];
+  return `${subbar(own ? 'مساحتي' : first, `<button class="icon-btn" data-act="copy-link" data-v="${DEMO_HOST}/@${p.id}" aria-label="نسخ رابط الصفحة">${ic('share', 19)}</button>`)}
+  <div class="space th-${c.theme}" style="${themeStyle(c)}">
+    <div class="sp-cover">${coverSvg(c.theme, c.cover, { anim: true })}</div>
+    <header class="sp-head">
+      ${c.orn ? ornHead(c) : ''}
+      <div class="sp-id"><span class="sp-av" aria-hidden="true">${esc(p.name.trim()[0])}</span>
+        ${pers.kind === 'image' && pers.img ? `<button class="sp-photo" data-act="sp-photo" data-id="${p.id}" aria-label="كبّر الصورة التي ${verb(p, 'اختارها', 'اختارتها')}"><img src="${pers.img}" alt=""></button>` : ''}</div>
+      <h1 class="sp-name">${esc(p.name)}</h1>
+      ${p.tagline ? `<p class="sp-tag">${esc(p.tagline)}</p>` : ''}
+      ${p.bio ? `<p class="sp-bio">${esc(p.bio)}</p>` : ''}
+      ${pers.kind === 'quote' && (pers.text || '').trim() ? `<p class="sp-note"><span class="sp-qm" aria-hidden="true">”</span>${esc(pers.text)}</p>` : ''}
+      ${ints.length ? `<p class="sp-ints">${own ? 'أكتب عن' : verb(p, 'يكتب عن', 'تكتب عن')} ${ints.map(i => `<span>${esc(i)}</span>`).join('<i aria-hidden="true">·</i>')}</p>` : ''}
+      ${own ? `<div class="sp-acts"><button class="btn btn-primary btn-sm" data-act="space-edit">${ic('spark', 17)} خصّص مساحتك</button><button class="btn btn-ghost btn-sm" data-act="edit-profile">${ic('edit', 16)} النبذة والاهتمامات</button></div>` : ''}
+      ${statusCompact(p, own)}
+    </header>
+    ${c.orn && c.theme === 'sea' ? waveLine() : ''}
+    <section class="sp-sec" id="writings">
+      <h2 class="sp-h2">${own ? 'كتاباتي' : verb(p, 'كتاباته', 'كتاباتها')}</h2>
+      ${texts.length ? `<div class="sp-list">${texts.map((t, i) => spText(t, i === 0)).join('')}</div>`
+        : p.sample ? '' : `<div class="first-note">${ic('pen', 22)}<div><b>هنا ستبدأ ${own ? 'أولى كتاباتك' : 'أولى كتابات' + verb(p, 'ه', 'ها')}</b><p>${own ? (isApproved(p) ? 'صفحتك البيضاء جاهزة متى شئت.' : 'جهّز مسودتك ومساحتك؛ يُفتح النشر حين يكتمل ترحيب القرّاء.') : 'لم ' + verb(p, 'ينشر', 'تنشر') + ' بعد.'}</p></div></div>`}
+      ${p.sample ? `<div class="sp-sample"><span class="sp-badge">عينة كتابة · للتعارف</span><h3>${esc(p.sample.title)}</h3><p>${esc(p.sample.body)}</p><small>العينة ليست منشورًا عامًا ولا تُحتسب ضمن نص الأسبوع.</small></div>` : ''}
+    </section>
+    <section class="sp-sec">${letterBlock()}</section>
+  </div>`;
 }
 function vMe() {
   const m = me();
@@ -1752,10 +1587,8 @@ function vMe() {
   return `${topbar()}
   <section class="profile" style="margin-top:6px"><div class="top">${av(m, 'lg')}<div style="flex:1;min-width:0"><h1>${esc(m.name)}</h1><div class="muted" style="font-size:14px">${roleLbl}</div></div>
     <button class="icon-btn" data-act="edit-profile" aria-label="تعديل النبذة والاهتمامات">${ic('edit', 19)}</button></div>
-    <p class="bio">${esc(m.bio || 'لم تُضف نبذة بعد.')}</p>
-    <div class="tags">${(m.interests || []).map(c => `<span class="tag">${esc(c)}</span>`).join('') || '<span class="muted" style="font-size:14px">بلا اهتمامات محددة</span>'}</div>
-    ${statusBlock(m, true)}
-    ${!appr ? `<div class="btn-row" style="margin-top:12px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${m.id}">ركني</button><button class="btn btn-ghost btn-sm" data-act="copy-link" data-v="${DEMO_HOST}/@${m.id}">${ic('share', 17)} نسخ رابطها</button></div>` : ''}
+    <div class="btn-row" style="margin-top:14px"><button class="btn btn-primary btn-sm" data-act="profile" data-id="${m.id}">${ic('eye', 17)} اعرض صفحتي العامة</button><button class="btn btn-ghost btn-sm" data-act="space-edit">${ic('spark', 17)} خصّص مساحتك</button></div>
+    ${statusCompact(m, true)}
   </section>
   ${myTexts.length ? `<section class="section"><div class="sec-head"><h2>نصّي المنشور</h2></div><div class="grid">${myTexts.slice(0, 2).map(textCard).join('')}</div></section>` : ''}
   <section class="section"><div class="sec-head"><h2>المسودات</h2></div>
@@ -1781,8 +1614,8 @@ function inspireHtml() {
 function vWrite() {
   const m = me();
   if (!m) return `${topbar()}<h1 class="prompt-h">ما الفكرة التي بقيت معك هذا الأسبوع؟</h1>
-    <div class="empty" style="margin-top:16px"><div class="empty-art" aria-hidden="true"><i></i><i></i><i></i></div><h3>الكتابة تبدأ بركن صغير</h3>
-    <p>أنشئ حسابًا ونبذة بصوتك، ثم شارك ركنك. تُفتح مساحة النشر بعد ترحيب ${ar(NEEDED)} قرّاء بإيميلات موثقة ومختلفة.</p>
+    <div class="empty" style="margin-top:16px"><div class="empty-art" aria-hidden="true"><i></i><i></i><i></i></div><h3>الكتابة تبدأ بمساحة صغيرة</h3>
+    <p>أنشئ حسابًا ونبذة بصوتك، ثم شارك صفحتك. تُفتح مساحة النشر بعد ترحيب ${ar(NEEDED)} قرّاء بإيميلات موثقة ومختلفة.</p>
     <div class="btn-row" style="justify-content:center;margin-top:16px"><button class="btn btn-primary" data-act="signup">إنشاء حساب</button><button class="btn btn-ghost" data-act="login">دخول تجريبي</button></div></div>`;
   const b = buf(); const appr = isApproved(m); const can = canPublishNow(m);
   const n = glen(b.title) + glen(b.body); const over = n > LIMIT;
@@ -1790,7 +1623,7 @@ function vWrite() {
   <h1 class="prompt-h">ما الفكرة التي بقيت معك هذا الأسبوع؟</h1>
   <p class="page-sub">اكتبها كما جاءت. لا أحد يستعجلك. <span class="dirty" id="dirty">${dirtyLabel()}</span></p>
   ${statusBlock(m, true).replace(/<div class="btn-row">.*?<\/div>/s, '')}
-  ${!appr ? `<div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${m.id}">ركني — شاركه مع قرّائك</button></div>` : ''}
+  ${!appr ? `<div class="btn-row" style="margin-top:10px"><button class="btn btn-ghost btn-sm" data-act="profile" data-id="${m.id}">صفحتي — شاركها مع قرّائك</button></div>` : ''}
   ${ui.promptHidden ? `<button class="link" style="margin-top:12px" data-act="prompt-show">${ic('spark', 16)} أحتاج سؤالًا للإلهام</button>` : `<div class="inspire" id="inspire">${inspireHtml()}</div>`}
   <div class="editor roomy">
     <div class="chips" role="radiogroup" aria-label="التخصص" style="margin:0 -20px 4px;padding:0 20px 8px">${CATS.map(c => `<button class="chip" role="radio" data-act="wcat" data-v="${c}" aria-pressed="${b.cat === c}" aria-checked="${b.cat === c}"><span class="ck">${ic('check', 15)}</span>${esc(c)}</button>`).join('')}</div>
@@ -1873,7 +1706,7 @@ function vNewsletter() {
       <p class="l-intro">هذا ما بقي معنا من الأسبوع. جمل قصيرة توقّف عندها كثيرون، وأصحابها ينتظرون من يقرأ لهم أكثر. خذها على مهل، ومع قهوتك إن أمكن.</p>
       <div class="week" style="margin-top:18px"><h4 style="margin:0 0 8px;font-size:13px;color:var(--muted)">جملة الأسبوع</h4><button class="lq" style="border:0;padding:0" data-act="open" data-id="${ft.id}" data-sid="${fs.sid}"><q style="font-size:19px;font-weight:700">${esc(fs.text)}</q><small><b>${esc(person(ft.author).name)}</b> · ${esc(person(ft.author).tagline || '')} — <span style="text-decoration:underline">اقرأ النص</span></small></button></div>
       ${qs.map(x => `<button class="lq" data-act="open" data-id="${x.t.id}" data-sid="${x.sid}"><q>${esc(x.text.replace(/\n/g, ' / '))}</q><small><b>${esc(x.a.name)}</b> — من «${esc(x.t.title)}» · <span style="text-decoration:underline">إلى النص</span></small></button>`).join('')}
-      ${voice ? `<div class="sample-mini" style="margin-top:16px"><b>صوت جديد هذا الأسبوع: ${esc(voice.name)}</b><p>«${esc(voice.bio)}»</p><button class="link" data-act="profile" data-id="${voice.id}">${isApproved(voice) ? 'ادخل ركنه' : 'اقرأ عينته، وساعده على الوصول'}</button></div>` : ''}
+      ${voice ? `<div class="sample-mini" style="margin-top:16px"><b>صوت جديد هذا الأسبوع: ${esc(voice.name)}</b><p>«${esc(voice.bio)}»</p><button class="link" data-act="profile" data-id="${voice.id}">${isApproved(voice) ? 'زُر صفحته' : 'اقرأ عينته، وساعده على الوصول'}</button></div>` : ''}
       <p class="sign">إلى الأسبوع القادم،<br>— محررو ${BRAND}، ومعهم كل من كتب وقرأ</p>
       <p class="muted" style="font-size:12.5px;margin-top:16px;border-top:1px solid var(--border);padding-top:12px">تصلك هذه الرسالة لأنك وافقت على الاشتراك، ويمكنك إلغاؤه في أي وقت. (معاينة داخل النموذج — لا تُرسل رسائل فعلية.)</p>
     </div></section></div>`;
@@ -1887,7 +1720,9 @@ function nlChips(all, ints, kind) {
 const VIEWS = { home: vHome, discover: vDiscover, read: vRead, quotes: vQuotes, me: vMe, write: vWrite, profile: vProfile, newsletter: vNewsletter };
 function render(scrollTop) {
   closePop();
-  if (AUD.nodes && !(view.name === 'profile' && view.p.id === AUD.owner)) stopAmbient();
+  if (ui.spaceDraft && !(view.name === 'profile' && me() && view.p.id === me().id)) closeSpacePanel();
+  const pb = view.name === 'profile' && person(view.p.id) ? (THEMES[spaceOf(view.p.id).theme] || THEMES.paper).bg : '';
+  if (pb) document.documentElement.style.setProperty('--pagebg', pb); else document.documentElement.style.removeProperty('--pagebg');
   const main = $('#main');
   main.innerHTML = `<div class="view">${VIEWS[view.name]()}</div>`;
   renderNav();
@@ -2080,7 +1915,7 @@ function renderEndorse() {
     const n = endorsements(p.id).length; const reached = E.reached;
     const sub = subOf(E.email);
     openSheet(`<div class="sheet-h"><div><div class="success-burst">${ic('check', 30)}</div><h2>${reached ? 'اكتمل الترحيب بصوت ' + esc(fn) : 'شكرًا لترحيبك'}</h2>
-      <p>${reached ? 'كان ترحيبك العاشر. سيجد ' + esc(fn) + ' في ' + verb(p, 'ركنه', 'ركنها') + ': «أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.»' : 'احتُسب تأييدك لـ' + esc(fn) + '. بقي ' + endorseWord(NEEDED - n) + ' ليكتمل الترحيب.'}</p></div>${closeBtn()}</div>
+      <p>${reached ? 'كان ترحيبك العاشر. سيجد ' + esc(fn) + ' في ' + verb(p, 'مساحته', 'مساحتها') + ': «أهلًا بصوتك. مساحتك للكتابة أصبحت جاهزة.»' : 'احتُسب تأييدك لـ' + esc(fn) + '. بقي ' + endorseWord(NEEDED - n) + ' ليكتمل الترحيب.'}</p></div>${closeBtn()}</div>
       <div class="status ${reached ? 'ok' : 'wait'}" style="margin-top:14px">${progress(n)}</div>
       <div class="msg info">${ic('info', 18)}<span>${E.mktDone ? 'اشتركت في النشرة الأسبوعية بموافقتك. يمكنك الإلغاء في أي وقت دون أن يتأثر تأييدك.' : 'لم نشترك بك في أي بريد. التأييد وحده لا يعني اشتراكًا.'}</span></div>
       <div class="btn-row" style="flex-direction:column">
@@ -2153,8 +1988,6 @@ function announce(s) { $('#live').textContent = s; }
 /* ================= الأحداث ================= */
 document.addEventListener('click', e => {
   const sel = window.getSelection && String(window.getSelection());
-  const rh = e.target.closest('.r-hit');
-  if (rh) { const o = rh.closest('[data-room-owner]'); if (o) { roomAction(rh.dataset.room, o.dataset.roomOwner); return; } }
   const a = e.target.closest('[data-act]');
   if (a && a.getAttribute('aria-disabled') === 'true' && a.dataset.act !== 'wpublish') return;
   if (!a) {
@@ -2192,11 +2025,8 @@ document.addEventListener('click', e => {
       const ts = myLikes()[sid]; setLike(sid, false); refreshSoft();
       toast('أُزيلت من مقتبساتك', 'تراجع', () => { S.likes[S.current][sid] = ts; save(); refreshSoft(); }); break; }
     case 'states': openStates(); break;
-    case 'room-edit': openRoomEditor(); break;
-    case 'room-shelf': scrollToWritings(person(id)); break;
-    case 'room-lamp': toggleRoomLamp(person(id)); break;
-    case 'room-still': ui.roomStill = !ui.roomStill; refreshSoft(); announce(ui.roomStill ? 'أُوقفت الحركة' : 'عادت الحركة'); break;
-    case 'room-sound': if (AUD.nodes && AUD.owner === id) { stopAmbient(); refreshSoft(); } else { stopAmbient(); if (startAmbient(soundKind(roomOf(id).view), id)) { refreshSoft(); toast('صوت مولَّد داخل المتصفح — أوقفه متى شئت'); } else toast('تعذّر تشغيل الصوت في هذا المتصفح'); } break;
+    case 'space-edit': openSpaceEditor(); break;
+    case 'sp-photo': openPhoto(person(id)); break;
     case 'replay-intro': closeSheet(); openIntro(); break;
     case 'theme': setTheme(isDark() ? 'light' : 'dark'); break;
     case 'switch': switchTo(v); break;
@@ -2402,7 +2232,7 @@ function introHtml() {
     <section class="scene s-voices">
       <p class="kicker a a1">أصوات قد تشعر بالقرب منها</p>
       <div class="i-voices">${vs.map((p, k) => `<div class="i-v" style="--tint:${tintOf(p)};--dl:${(.45 + k * .3).toFixed(2)}s">${blob(p, 'sm')}<div><b>${esc(p.name)}</b><span class="tl">${esc(p.tagline || '')}</span></div></div>`).join('')}</div>
-      <h2 class="a a5">نبرات مختلفة،<br>ولكل كاتب ركنه.</h2>
+      <h2 class="a a5">نبرات مختلفة،<br>ولكل كاتب مساحته.</h2>
     </section>
     <section class="scene s-welcome">
       <p class="kicker a a1">لكل صوت جديد بداية</p>
