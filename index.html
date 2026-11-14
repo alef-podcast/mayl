@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F7F4EE">
+<script>
+(function(){var t=null;try{t=localStorage.getItem('mayl-theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'}
+document.documentElement.setAttribute('data-theme',t);
+var m=document.querySelector('meta[name=theme-color]');if(m)m.content=t==='dark'?'#1C1720':'#F7F4EE';})();
+</script>
 <title>مَيل — نموذج تفاعلي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -265,7 +271,7 @@ h1,h2,h3,p{margin:0}
 /* ===== النماذج والنوافذ ===== */
 .field{display:block;margin-top:14px}
 .field > span{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
-.input{width:100%;min-height:52px;border:1px solid var(--border);border-radius:16px;background:#fff;padding:0 16px;outline:none;font-size:16px}
+.input{width:100%;min-height:52px;border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:0 16px;outline:none;font-size:16px}
 textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical}
 .input:focus{border-color:var(--ink)}
 .input.email{direction:ltr;text-align:left}
@@ -486,6 +492,52 @@ textarea.input{padding:12px 16px;min-height:96px;line-height:1.8;resize:vertical
 .lq small{display:block;color:var(--muted);font-size:13.5px;margin-top:4px}
 .lq small b{color:var(--ink)}
 @media (max-width:380px){.b-full.poemish{margin-inline-start:12px}.qwrap{padding-left:10px}.b-quote blockquote{font-size:21px}}
+
+/* ================= الوضع الداكن ================= */
+:root{--on-honey:#2F2438;color-scheme:light}
+.top-actions .theme-btn{width:42px;height:42px}
+body{transition:background-color .3s ease,color .3s ease}
+html[data-theme=dark]{
+  color-scheme:dark;
+  --paper:#1C1720; --surface:#27202C; --ink:#F1EAE3; --muted:#B5A9B7;
+  --honey:#F2C25A; --lavender:#463C55; --peach:#7E5247; --sage:#343C31;
+  --highlight:rgba(242,194,90,.2); --border:#3B3242;
+  --honey-soft:#45391F; --lav-soft:#322A3C; --peach-soft:#41302C; --sage-soft:#2B3428;
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 12px 30px -16px rgba(0,0,0,.6);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.3),0 20px 44px -18px rgba(0,0,0,.7);
+}
+html[data-theme=dark] body{background:var(--paper)}
+html[data-theme=dark] .btn-primary,html[data-theme=dark] .chip[aria-pressed=true],html[data-theme=dark] .nav .wr,
+html[data-theme=dark] .pop .like.on,html[data-theme=dark] .toast .ta,html[data-theme=dark] .qcard .qm{color:var(--on-honey)}
+html[data-theme=dark] .chip[aria-pressed=true]{border-color:var(--honey)}
+html[data-theme=dark] .btn-primary{box-shadow:0 8px 18px -10px rgba(0,0,0,.8)}
+html[data-theme=dark] .btn-ink{background:var(--ink);color:#1C1720}
+html[data-theme=dark] .toast{background:#F1EAE3;color:#1C1720}
+html[data-theme=dark] .s.hot,html[data-theme=dark] .mark,html[data-theme=dark] .legend .s-demo{background:linear-gradient(100deg,rgba(242,194,90,0) .4%,rgba(242,194,90,.26) 1.8%,rgba(242,194,90,.34) 55%,rgba(242,194,90,.26) 98%,rgba(242,194,90,0) 99.6%) 0 92%/100% 62% no-repeat}
+html[data-theme=dark] .s.sel{background:var(--lavender);box-shadow:inset 0 -3px 0 var(--honey)}
+html[data-theme=dark] .s:focus-visible{box-shadow:inset 0 -3px 0 var(--honey),0 0 0 2px var(--honey)}
+html[data-theme=dark] .s .hm,html[data-theme=dark] .pop-meta .hottag,html[data-theme=dark] .pop .hottag{color:var(--honey)}
+html[data-theme=dark] .tcard .ex{color:#D6CDD3}
+html[data-theme=dark] .eyebrow,html[data-theme=dark] .corner-label{color:#D3C7D6}
+html[data-theme=dark] .nav button[aria-current=page]{background:var(--lavender)}
+html[data-theme=dark] .nl-card,html[data-theme=dark] .b-letter,html[data-theme=dark] .nl-hero{background:linear-gradient(150deg,#3A2F47 0%,#3A2C38 55%,#4A3029 100%);border-color:transparent}
+html[data-theme=dark] .nl-hero::before,html[data-theme=dark] .nl-card::after{background:radial-gradient(circle,rgba(242,194,90,.14),rgba(242,194,90,0) 68%)}
+html[data-theme=dark] .b-writer::after,html[data-theme=dark] .corner::after,html[data-theme=dark] .about::after{background:rgba(255,255,255,.04)}
+html[data-theme=dark] .tape{background:rgba(241,234,227,.14)!important;border-color:rgba(241,234,227,.08)}
+html[data-theme=dark] .blob{box-shadow:0 0 0 4px rgba(255,255,255,.05)}
+html[data-theme=dark] .b-writer .tag,html[data-theme=dark] .corner .tag{background:rgba(28,23,32,.45)}
+html[data-theme=dark] .b-voice{border-color:#4A3F52}
+html[data-theme=dark] .demo-note{border-color:#5A4C6A}
+html[data-theme=dark] .folder .pp{background-image:repeating-linear-gradient(to bottom,transparent 0 9px,#3B3242 9px 10px)}
+html[data-theme=dark] .empty-art i:nth-child(3){background-image:repeating-linear-gradient(to bottom,transparent 0 11px,#3B3242 11px 12px)}
+html[data-theme=dark] .mood svg{filter:brightness(.78) saturate(.85)}
+html[data-theme=dark] .stamp{color:var(--peach);outline-color:var(--peach)}
+html[data-theme=dark] .scallop path{fill:var(--lavender)}
+html[data-theme=dark] .overlay{background:rgba(0,0,0,.55)}
+html[data-theme=dark] .week{background:rgba(242,194,90,.12)}
+html[data-theme=dark] .tag.honey{color:var(--ink)}
+html[data-theme=dark] :focus-visible{outline-color:var(--honey)}
+@media (prefers-reduced-motion:reduce){body{transition:none}}
 </style>
 </head>
 <body>
@@ -730,6 +782,8 @@ const IC = {
   spark:'<path d="M12 3.5 13.8 10.2 20.5 12 13.8 13.8 12 20.5 10.2 13.8 3.5 12 10.2 10.2z"/>',
   logout:'<path d="M14 5h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-4"/><path d="M10 8l-4 4 4 4M6 12h9"/>',
   edit:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/>',
+  moon:'<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>',
 };
 function ic(n, size = 22, fill = false) {
   return `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
@@ -798,12 +852,26 @@ function renderNav() {
 }
 
 /* ---------- عناصر مشتركة ---------- */
+const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+function themeBtn() {
+  const d = isDark();
+  return `<button class="icon-btn theme-btn" data-act="theme" aria-pressed="${d}" aria-label="${d ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن'}" title="${d ? 'الوضع الفاتح' : 'الوضع الداكن'}">${ic(d ? 'sun' : 'moon', 20)}</button>`;
+}
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('mayl-theme', t); } catch (e) {}
+  const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t === 'dark' ? '#1C1720' : '#F7F4EE';
+  $$('.theme-btn').forEach(b => b.outerHTML = themeBtn());
+  const nb = $('.theme-btn'); nb && nb.focus({ preventScroll: true });
+  announce(t === 'dark' ? 'الوضع الداكن مفعّل' : 'الوضع الفاتح مفعّل');
+}
 function topbar() {
   return `<header class="topbar">
     <button class="brand" data-act="tab" data-v="home" aria-label="${BRAND} — الرئيسية">
       <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F2438" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 8h14M5 16h9"/><path d="M8 12h11" stroke-dasharray="1.5 3"/></svg></span>
       <span>${BRAND}</span></button>
     <div class="top-actions">
+      ${themeBtn()}
       <button class="pill-sm" data-act="states" aria-label="تجربة الحالات">${ic('sliders', 18)}<span class="lbl">تجربة الحالات</span></button>
     </div></header>`;
 }
@@ -1277,6 +1345,9 @@ function refreshSoft() { const y = window.scrollY; const sel = ui.sel; render(fa
 
 /* ---------- شريط الجملة ---------- */
 let popEl = null;
+let kbNav = false;
+document.addEventListener('keydown', () => { kbNav = true; }, true);
+document.addEventListener('pointerdown', () => { kbNav = false; }, true);
 function closePop() {
   if (popEl) { popEl.remove(); popEl = null; }
   $$('.s.sel').forEach(e => { e.classList.remove('sel'); e.setAttribute('aria-expanded', 'false'); });
@@ -1298,7 +1369,7 @@ function openPop(sid, el, keepFocus) {
   popEl = document.createElement('div'); popEl.className = 'pop'; popEl.setAttribute('role', 'toolbar'); popEl.setAttribute('aria-label', 'خيارات الجملة');
   popEl.innerHTML = popInner(sid); document.body.appendChild(popEl);
   positionPop(el);
-  if (!keepFocus) { const b = popEl.querySelector('.like'); b && b.focus({ preventScroll: true }); }
+  if (!keepFocus && kbNav) { const b = popEl.querySelector('.like'); b && b.focus({ preventScroll: true }); }
 }
 function positionPop(el) {
   if (!popEl) return;
@@ -1321,7 +1392,7 @@ function updateSentence(sid, beat) {
     if (liked) el.insertAdjacentHTML('beforeend', `<span class="mm" aria-hidden="true">${ic('heart', 13, true)}</span><span class="sr"> (في مقتبساتك)</span>`);
   });
   const el = $(`.s[data-sid="${sid}"].sel`) || $(`.s[data-sid="${sid}"]`);
-  if (popEl && ui.sel === sid && el) { popEl.innerHTML = popInner(sid, beat); positionPop(el); popEl.querySelector('.like').focus({ preventScroll: true }); }
+  if (popEl && ui.sel === sid && el) { popEl.innerHTML = popInner(sid, beat); positionPop(el); if (kbNav) popEl.querySelector('.like').focus({ preventScroll: true }); }
 }
 /* ---------- الإعجاب والحفظ ---------- */
 function setLike(sid, on) {
@@ -1555,6 +1626,7 @@ document.addEventListener('click', e => {
       const ts = myLikes()[sid]; setLike(sid, false); refreshSoft();
       toast('أُزيلت من مقتبساتك', 'تراجع', () => { S.likes[S.current][sid] = ts; save(); refreshSoft(); }); break; }
     case 'states': openStates(); break;
+    case 'theme': setTheme(isDark() ? 'light' : 'dark'); break;
     case 'switch': switchTo(v); break;
     case 'switch-write': switchTo(v); tab('write'); break;
     case 'reset':
